@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.ChavesController">
+    <children>
+        <Pane prefHeight="211.0" prefWidth="1069.0" style="-fx-background-color: #4f4f4f;" AnchorPane.bottomAnchor="345.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <TextField fx:id="labelSala" layoutX="123.0" layoutY="102.0" prefHeight="25.0" prefWidth="248.0" />
+                <TextField fx:id="labelDescricao" layoutX="448.0" layoutY="102.0" prefHeight="25.0" prefWidth="239.0" />
+                <JFXButton fx:id="btnSalvar" layoutX="754.0" layoutY="99.0" onAction="#ONSalvar" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #00BFFF;" text="Salvar" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </JFXButton>
+                <Label layoutX="123.0" layoutY="74.0" prefHeight="21.0" prefWidth="31.0" text="Sala" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label layoutX="448.0" layoutY="71.0" text="Descrição" textFill="#fffdfd">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <JFXButton fx:id="btnVoltar" layoutX="12.0" layoutY="14.0" onAction="#ONVoltar" prefHeight="31.0" prefWidth="97.0" text="Voltar" textFill="#fcfcfc">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </JFXButton>
+                <ImageView fitHeight="25.0" fitWidth="31.0" layoutX="14.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@circled-left-2.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="imgExcluir" fitHeight="70.0" fitWidth="78.0" layoutX="981.0" layoutY="7.0" onDragDropped="#DroppedExcluir" onDragOver="#OverExcluir" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/delete_4219.png" />
+               </image></ImageView>
+                <ImageView fx:id="imgEditar" fitHeight="70.0" fitWidth="70.0" layoutX="984.0" layoutY="95.0" onDragDropped="#DroppedEditar" onDragOver="#OverEditar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/edit-property.png" />
+               </image></ImageView>
+            </children>
+        </Pane>
+          <TableView fx:id="tabelaChave" layoutY="210.0" onDragDetected="#Detectar" prefHeight="346.0" prefWidth="1069.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="210.0">
+              <columns>
+                  <TableColumn fx:id="colsala" prefWidth="325.0" text="Sala" />
+                  <TableColumn fx:id="colDescricao" minWidth="0.0" prefWidth="509.0" text="Descrição" />
+                  <TableColumn fx:id="colID" prefWidth="234.0" text="Ocupada" />
+              </columns>
+          </TableView>
+    </children>
+</AnchorPane>

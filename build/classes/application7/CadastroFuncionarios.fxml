@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="553.0" prefWidth="1069.0" style="-fx-background-color: #4f4f4f;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.CadastroFuncionariosController">
+    <stylesheets>
+        <URL value="@cadastrofuncionarios.css" />
+    </stylesheets>
+   <children>
+      <TableView fx:id="tabelaUsers" layoutY="231.0" onDragDetected="#detectar" prefHeight="342.0" prefWidth="1069.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="211.0">
+        <columns>
+          <TableColumn fx:id="colNome" prefWidth="406.0" text="Nome" />
+          <TableColumn fx:id="colCodigo" prefWidth="510.0" text="CPF/SIAPE" />
+            <TableColumn fx:id="colID" prefWidth="152.0" text="ID" />
+        </columns>
+      </TableView>
+      <Label layoutX="122.0" layoutY="92.0" text="Nome" textFill="WHITE" AnchorPane.rightAnchor="903.0">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="labelNome" layoutX="122.0" layoutY="124.0" prefHeight="25.0" prefWidth="211.0" AnchorPane.rightAnchor="736.0" />
+      <TextField fx:id="labelCPF" layoutX="363.0" layoutY="124.0" prefHeight="25.0" prefWidth="211.0" AnchorPane.rightAnchor="495.0" />
+      <Label layoutX="363.0" layoutY="92.0" text="CPF/SIAPE" textFill="#fcfcfc" AnchorPane.rightAnchor="632.0">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="labelSenha" layoutX="597.0" layoutY="124.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.rightAnchor="298.0" />
+      <Label layoutX="597.0" layoutY="92.0" text="Senha" textFill="WHITE" AnchorPane.rightAnchor="428.0">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="img_cadFunVoltar" fitHeight="32.0" fitWidth="28.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@circled-left-2.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnVoltar" layoutX="8.0" layoutY="9.0" onAction="#voltarbtn" prefHeight="32.0" prefWidth="115.0" text="Voltar" textFill="#ddd9d9">
+         <font>
+            <Font name="Calibri Bold" size="17.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="imgExcluir" fitHeight="74.0" fitWidth="67.0" layoutX="981.0" layoutY="14.0" onDragDropped="#DroppedExcluir" onDragOver="#OverExcluir" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="21.0">
+         <image>
+            <Image url="@../imagens/delete_4219.png" />
+         </image></ImageView>
+      <ImageView fx:id="imgEditar" fitHeight="67.0" fitWidth="67.0" layoutX="988.0" layoutY="89.0" onDragDropped="#DroppedEdit" onDragOver="#OverEdit" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="14.0">
+         <image>
+            <Image url="@../imagens/edit-property.png" />
+         </image></ImageView>
+      <JFXButton fx:id="btnAdicionar" layoutX="794.0" layoutY="122.0" onAction="#add" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #00BFFF;" text="Adicionar" textFill="#f2f2f2" AnchorPane.rightAnchor="147.0">
+         <font>
+            <Font name="Calibri Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="14.0" layoutY="48.0" text="Usuários " textFill="#fff0f0">
+         <font>
+            <Font name="Calibri Bold" size="23.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

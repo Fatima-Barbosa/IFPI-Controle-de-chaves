@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox prefHeight="553.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.FXML1Controller">
+   <children>
+      <Pane prefHeight="506.0" prefWidth="137.0" style="-fx-background-color: #4f4f4f;">
+         <children>
+            <ImageView fx:id="imagen" fitHeight="73.0" fitWidth="137.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXButton fx:id="BTN1" onAction="#ONKeys" prefHeight="80.0" prefWidth="124.0" text="Chaves" textFill="#fffdfd">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="BTNUsers" layoutY="82.0" onAction="#ONusuarios" prefHeight="80.0" prefWidth="124.0" text="Usuários" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnRelatorio" layoutY="166.0" onAction="#onRelatorios" prefHeight="80.0" prefWidth="124.0" text="Relatórios" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="BTNsobre" layoutY="247.0" onAction="#ONsobre" prefHeight="80.0" prefWidth="124.0" text="Configurações" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnSair" layoutY="326.0" onAction="#onSair" prefHeight="80.0" prefWidth="124.0" text="Sair" textFill="#eeebeb">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #4f4f4f;">
+         <children>
+            <TabPane layoutY="19.0" prefHeight="534.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f; -fx-border-color: #4f4f4f;" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Salas ocupadas">
+                     <content>
+                        <TableView fx:id="tabelaChavesUsadas" prefHeight="496.0" prefWidth="819.0">
+                           <columns>
+                              <TableColumn fx:id="colUser" minWidth="0.0" prefWidth="287.0" text="Usuário" />
+                              <TableColumn fx:id="colSalaP" prefWidth="221.0" text="Sala" />
+                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="221.0" text="Aluno" />
+                              <TableColumn fx:id="colHora" prefWidth="202.0" text="Horário de devolução" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab text="Todas as Salas">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tabelaChaves" prefHeight="448.0" prefWidth="931.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="colSala" prefWidth="274.0" text="Sala" />
+                                    <TableColumn fx:id="colDescricao" prefWidth="516.0" text="Descrição" />
+                                    <TableColumn fx:id="colID" prefWidth="140.0" text="ID" />
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="623.0" layoutY="457.0" text="Pesquisar" textFill="#e1dfdf" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="241.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="buscKey" layoutX="711.0" layoutY="457.0" onKeyPressed="#buscKey" prefHeight="25.0" prefWidth="163.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="71.0" />
+                              <Button fx:id="BTNbuscKey" layoutX="873.0" layoutY="457.0" mnemonicParsing="false" onAction="#busckey" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #76C7FC;" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Usuários">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="UserBusc" layoutX="697.0" layoutY="459.0" onKeyPressed="#BuscUser" prefHeight="25.0" prefWidth="167.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="71.0" />
+                              <Label layoutX="622.0" layoutY="461.0" text="Pesquisar" textFill="#e8e8e8" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="246.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnBuscUser" layoutX="870.0" layoutY="459.0" mnemonicParsing="false" onAction="#BTNBuscUser" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #76C7FC;" text="OK" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="19.0" />
+                              <TableView fx:id="tabelaUsuarios" prefHeight="448.0" prefWidth="931.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="collNome" prefWidth="289.0" text="Nome" />
+                                    <TableColumn fx:id="collCode" prefWidth="548.0" text="CPF/SIAPE" />
+                                    <TableColumn fx:id="collID" prefWidth="93.0" text="ID" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

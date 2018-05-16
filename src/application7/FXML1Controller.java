@@ -1,0 +1,311 @@
+package application7;
+
+import Classes.ChavePega;
+import Classes.Users;
+import Classes.keys;
+import ModelDAO.ChavePegaDAO;
+import ModelDAO.ChavesDAO;
+import ModelDAO.UsersDAO;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.jfoenix.controls.JFXButton;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+/**
+ * FXML Controller class
+ *
+ * @author Fátima
+ */
+public class FXML1Controller extends BaseController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
+    private final ChavesDAO keysDao = new ChavesDAO();
+    private final UsersDAO userDao = new UsersDAO();
+    private final ChavePegaDAO cdao = new ChavePegaDAO();
+
+
+    @FXML
+    private TableView<ChavePega> tabelaChavesUsadas;
+
+    @FXML
+    private TableView<keys> tabelaChaves;
+
+    @FXML
+    private TableColumn<keys, String> colSala;
+
+    @FXML
+    private TableColumn<keys, String> colDescricao;
+
+    @FXML
+    private TableColumn<keys, Boolean> colID;
+
+    //Tabela dos Usuários**********
+    @FXML
+    private TableView<Users> tabelaUsuarios;
+
+    @FXML
+    private TableColumn<Users, String> collNome;
+
+    @FXML
+    private TableColumn<Users, String> collCode;
+
+    @FXML
+    private TableColumn<Users, String> collID;
+    //*****************************
+    @FXML
+    private JFXButton BTNsobre;
+
+    @FXML
+    private ImageView imagen;
+
+    @FXML
+    private JFXButton BTN1;
+
+    @FXML
+    private JFXButton BTNUsers;
+
+    @FXML
+    private JFXButton btnRelatorio;
+
+    @FXML
+    private JFXButton btnSair;
+
+    @FXML
+    private TextField buscKey;
+
+    @FXML
+    private Button BTNbuscKey;
+
+    @FXML
+    private TextField UserBusc;
+
+    @FXML
+    private Button btnBuscUser;
+
+    private ObservableList<keys> Data
+            = FXCollections.observableArrayList();
+
+    private ObservableList<Users> Data2
+            = FXCollections.observableArrayList();
+    
+    private ObservableList<ChavePega> Datacp
+            = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<ChavePega, String> colUser;
+    @FXML
+    private TableColumn<ChavePega, String> colAluno;
+    @FXML
+    private TableColumn<ChavePega, String> colHora;
+    @FXML
+    private TableColumn<ChavePega, String> colSalaP;
+    
+    @FXML
+    void buscKey(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Data = keysDao.filtrarList(buscKey.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            tabelaChaves.setItems(Data);
+        }
+    }
+
+    @FXML
+    void busckey(ActionEvent event) {
+        try {
+            Data = keysDao.filtrarList(buscKey.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tabelaChaves.setItems(Data);
+    }
+
+    @FXML
+    void onRelatorios(ActionEvent event) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String Dataformatada = dateFormat.format(date);
+        Document doc = new Document(PageSize.A4, 30f, 10f, 10f, 10f);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        Date hora = Calendar.getInstance().getTime();
+        String horaformatada = sdf.format(hora);
+        Font fontDeLink = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
+
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio2.pdf"));
+            doc.open();
+            List<ChavePega> cp = new ChavePegaDAO().RelatorioList();
+            
+            doc.add(new Paragraph("                                                           Relatório de Chaves usadas\n       ", fontDeLink));
+
+            for(int i=0; i < cp.size(); i++){
+                doc.add(new Paragraph("Usuario:-----------------------------------------------------"+cp.get(i).getUser().getValue(), fontDeLink));
+                doc.add(new Paragraph("Chave:-------------------------------------------------------"+cp.get(i).getChave().getValue(), fontDeLink));
+                doc.add(new Paragraph("Aluno:-------------------------------------------------------"+cp.get(i).getAluno().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data:--------------------------------------------------------"+cp.get(i).getDia().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora:--------------------------------------------------------"+cp.get(i).getHorap().getValue(), fontDeLink));
+                doc.add(new Paragraph("Devolução:------------------------------------------------"+cp.get(i).getHorad().getValue(), fontDeLink));
+                doc.add(new Paragraph("                                                "));
+            }
+            doc.close();
+            Alert a = new Alert(AlertType.CONFIRMATION);
+            a.setHeaderText("Relatorio gerado em: C:/Users/Public/");
+            a.show();
+            
+        } catch (DocumentException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void BTNBuscUser(ActionEvent event) {
+        try {
+            Data2 = userDao.FiltrarList(UserBusc.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tabelaUsuarios.setItems(Data2);
+    }
+
+    @FXML
+    void BuscUser(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Data2 = userDao.FiltrarList(UserBusc.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            tabelaUsuarios.setItems(Data2);
+        }
+    }
+
+    @FXML
+    void ONKeys(ActionEvent event) throws IOException {
+        navigate(event, FXMLLoader.load(getClass().getResource("Chaves.fxml")));
+    }
+
+    void ONconfig(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ONsobre(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ONusuarios(ActionEvent event) throws IOException {
+        navigate(event, FXMLLoader.load(getClass().getResource("CadastroFuncionarios.fxml")));
+    }
+
+    @FXML
+    void onSair(ActionEvent event) throws IOException {
+        navigate(event, FXMLLoader.load(getClass().getResource("login.fxml")));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //Tabela chaves*****************************
+        colSala.setCellValueFactory(collData -> collData.getValue().getSala());
+        colDescricao.setCellValueFactory(collData -> collData.getValue().getDescricao());
+        colID.setCellValueFactory(collData -> collData.getValue().getPega());
+
+        try {
+            Data = keysDao.gerarLista();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tabelaChaves.setItems(Data);
+        //*****************************************
+        //Tabela Users*****************************
+        collNome.setCellValueFactory(cellData -> cellData.getValue().getNomeUser());
+        collCode.setCellValueFactory(cellData -> cellData.getValue().getCpf());
+        collID.setCellValueFactory(cellData -> cellData.getValue().getId().asString());
+
+        try {
+            Data2 = userDao.gerarLista();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tabelaUsuarios.setItems(Data2);
+        //*****************************************
+        //Tabela Chaves em uso*********************
+        colAluno.setCellValueFactory(cellData -> cellData.getValue().getAluno());
+        colHora.setCellValueFactory(cellData -> cellData.getValue().getHorad());
+        colUser.setCellValueFactory(cellData -> cellData.getValue().getUser());
+        colSalaP.setCellValueFactory(cellData -> cellData.getValue().getChave());
+        
+        try {
+            Datacp = cdao.gerarLista();
+        } catch (SQLException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        tabelaChavesUsadas.setItems(Datacp);
+        // TODO        
+        assert tabelaChavesUsadas != null : "fx:id=\"tabelaChavesUsadas\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colUser != null : "fx:id=\"colUser\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colSalaP != null : "fx:id=\"colSalaP\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colAluno != null : "fx:id=\"colAluno\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colHora != null : "fx:id=\"colHora\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert tabelaChaves != null : "fx:id=\"tabelaChaves\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colSala != null : "fx:id=\"colSala\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colDescricao != null : "fx:id=\"colDescricao\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert colID != null : "fx:id=\"colID\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert buscKey != null : "fx:id=\"buscKey\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTNbuscKey != null : "fx:id=\"BTNbuscKey\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert UserBusc != null : "fx:id=\"UserBusc\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert btnBuscUser != null : "fx:id=\"btnBuscUser\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert tabelaUsuarios != null : "fx:id=\"tabelaUsuarios\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert collNome != null : "fx:id=\"collNome\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert collCode != null : "fx:id=\"collCode\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert collID != null : "fx:id=\"collID\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert imagen != null : "fx:id=\"imagen\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTN1 != null : "fx:id=\"BTN1\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTNUsers != null : "fx:id=\"BTNUsers\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert btnRelatorio != null : "fx:id=\"btnRelatorio\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTNsobre != null : "fx:id=\"BTNsobre\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert btnSair != null : "fx:id=\"btnSair\" was not injected: check your FXML file 'FXML1.fxml'.";
+
+
+    }
+
+}
