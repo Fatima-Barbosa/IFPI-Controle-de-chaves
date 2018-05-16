@@ -46,7 +46,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #4f4f4f;">
+      <AnchorPane prefHeight="539.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;">
          <children>
             <TabPane layoutY="19.0" prefHeight="534.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f; -fx-border-color: #4f4f4f;" tabClosingPolicy="UNAVAILABLE">
                <tabs>

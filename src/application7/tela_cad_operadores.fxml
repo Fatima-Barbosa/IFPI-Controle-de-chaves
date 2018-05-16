@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="739.0" style="-fx-background-color: #4f4f4f;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="application7.Tela_cad_operadores_Controller">
+   <children>
+      <TableView prefHeight="471.0" prefWidth="380.0">
+        <columns>
+          <TableColumn prefWidth="180.0" text="Usuário" />
+          <TableColumn prefWidth="112.0" text="Nível" />
+            <TableColumn prefWidth="87.0" text="ID" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
