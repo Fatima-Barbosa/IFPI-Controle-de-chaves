@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="739.0" style="-fx-background-color: #4f4f4f;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="application7.Tela_cad_operadores_Controller">
+<AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="739.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.Tela_cad_operadores_Controller">
    <children>
       <TableView prefHeight="471.0" prefWidth="380.0">
         <columns>
@@ -14,5 +19,44 @@
             <TableColumn prefWidth="87.0" text="ID" />
         </columns>
       </TableView>
+      <TextField layoutX="407.0" layoutY="123.0" />
+      <TextField layoutX="410.0" layoutY="185.0" />
+      <Label layoutX="407.0" layoutY="95.0" text="Nome completo" textFill="#e8dede">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="410.0" layoutY="159.0" text="Login" textFill="#f5eaea">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="582.0" layoutY="223.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="143.0" style="-fx-background-color: #0D9CFA;" text="Salvar" textFill="#e7f0ff">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Button>
+      <PasswordField layoutX="582.0" layoutY="185.0" prefHeight="25.0" prefWidth="143.0" />
+      <Label layoutX="582.0" layoutY="159.0" text="Senha" textFill="#f5eaea">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="406.0" layoutY="21.0" text="Operadores" textFill="#f2e2e2">
+         <font>
+            <Font name="Calibri Bold" size="22.0" />
+         </font>
+      </Label>
+      <ComboBox layoutX="582.0" layoutY="123.0" prefHeight="25.0" prefWidth="143.0" />
+      <Label layoutX="582.0" layoutY="95.0" text="Nivel de visão" textFill="#e8dede">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button layoutX="689.0" layoutY="432.0" mnemonicParsing="false" style="-fx-background-color: #AB0909;" text="Sair" textFill="#1b0a0a">
+         <font>
+            <Font name="Calibri Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
