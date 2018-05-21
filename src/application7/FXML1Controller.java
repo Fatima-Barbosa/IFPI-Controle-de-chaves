@@ -41,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -86,7 +87,7 @@ public class FXML1Controller extends BaseController implements Initializable {
     private TableColumn<Users, String> collID;
     //*****************************
     @FXML
-    private JFXButton BTNsobre;
+    private JFXButton BTNoperadores;
 
     @FXML
     private ImageView imagen;
@@ -131,6 +132,8 @@ public class FXML1Controller extends BaseController implements Initializable {
     private TableColumn<ChavePega, String> colHora;
     @FXML
     private TableColumn<ChavePega, String> colSalaP;
+    @FXML
+    private AnchorPane anchorPane;
     
     @FXML
     void buscKey(KeyEvent event) {
@@ -227,8 +230,9 @@ public class FXML1Controller extends BaseController implements Initializable {
     }
 
     @FXML
-    void ONsobre(ActionEvent event) {
-
+    void ONoperadores() throws IOException {
+        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml"));
+        anchorPane.getChildren().setAll(a);
     }
 
     @FXML
@@ -302,7 +306,7 @@ public class FXML1Controller extends BaseController implements Initializable {
         assert BTN1 != null : "fx:id=\"BTN1\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert BTNUsers != null : "fx:id=\"BTNUsers\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert btnRelatorio != null : "fx:id=\"btnRelatorio\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert BTNsobre != null : "fx:id=\"BTNsobre\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTNoperadores != null : "fx:id=\"BTNsobre\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert btnSair != null : "fx:id=\"btnSair\" was not injected: check your FXML file 'FXML1.fxml'.";
 
 
