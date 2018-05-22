@@ -5,13 +5,9 @@ import ModelDAO.OperadorDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -63,6 +60,10 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
 
     String n[] = {"1", "2"};
     //private List<String> nivel = new ArrayList<>(n);
+    @FXML
+    private MenuItem CtextExcluir;
+    @FXML
+    private MenuItem ctextEditar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,7 +88,6 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
 
     }
 
-    @FXML
     public void encherCombobox() {
         ObservableList<String> obs;
         obs = FXCollections.observableArrayList(n);
@@ -121,6 +121,24 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
     @FXML
     private void OnSair(ActionEvent event) throws IOException {
         navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+    }
+
+    @FXML
+    private void ConTextEcluir(ActionEvent event) {
+        int id = tabelaOperadores.getSelectionModel().getSelectedItem().getId().intValue();
+        try {
+            dao.remover(id);
+            atualizarTabel();
+        } catch (SQLException ex) {
+            Logger.getLogger(Tela_cad_operadores_Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void ConTextEditar(ActionEvent event) {
+        txtNome.setText(tabelaOperadores.getSelectionModel().getSelectedItem().getNome().getValue());
+        txtLogin.setText(tabelaOperadores.getSelectionModel().getSelectedItem().getLogin().getValue());
+        
     }
 
 }
