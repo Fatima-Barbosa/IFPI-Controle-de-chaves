@@ -1,6 +1,7 @@
 package application7;
 
 import ModelDAO.ChavePegaDAO;
+import ModelDAO.OperadorDAO;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +23,7 @@ import javafx.scene.control.TextField;
 public class LoginController extends BaseController implements Initializable {
 
     ChavePegaDAO daoCP = new ChavePegaDAO();
+    OperadorDAO odao = new OperadorDAO();
 
     @FXML
     private TextField labelLogin;
@@ -65,10 +67,25 @@ public class LoginController extends BaseController implements Initializable {
 
     @FXML
     private void entrar(ActionEvent event) throws IOException {
-        if (labelLogin.getText().equals("root") && labelSenha.getText().equals("root")) {
-            navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
-        } else if (labelLogin.getText().equals("root1") && labelSenha.getText().equals("root1")) {
-            navigate(event, FXMLLoader.load(getClass().getResource("teste.fxml")));
+        //String v = 
+        // if (odao.VerificaLogin(labelLogin.getText(), labelSenha.getText())) {
+        switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
+            case "1":
+                navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+                break;
+            case "2":
+                navigate(event, FXMLLoader.load(getClass().getResource("teste.fxml")));
+                break;
+            case "sn":
+                Alert dialogo1 = new Alert(Alert.AlertType.WARNING);
+                dialogo1.setTitle("Usuário invalido");
+                dialogo1.setContentText("Usuário invalido");
+                dialogo1.showAndWait();
+                break;
+            default:
+                Alert dialogo2 = new Alert(Alert.AlertType.WARNING);
+                dialogo2.setTitle("Usuário invalido");
+                break;
         }
 
     }

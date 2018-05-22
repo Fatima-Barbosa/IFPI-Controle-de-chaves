@@ -64,6 +64,7 @@ public class UsersDAO {
 
             stmt.executeUpdate();
             connection.close();
+            stmt.close();
             System.out.println("Usuário atualizado!\n");
         } catch (SQLException ex) {
             Logger.getLogger(ChavesDAO.class.getName()).log(Level.SEVERE, null, ex);

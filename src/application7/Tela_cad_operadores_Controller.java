@@ -2,6 +2,7 @@ package application7;
 
 import Classes.Operador;
 import ModelDAO.OperadorDAO;
+import static java.awt.Color.GREEN;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,6 +23,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -54,7 +57,7 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
     private ComboBox<String> BoxNivel;
     @FXML
     private Button btnSair;
-    
+
     private ObservableList<Operador> Data
             = FXCollections.observableArrayList();
 
@@ -103,13 +106,22 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
             dialogo1.setContentText("Campos vazios!");
             dialogo1.showAndWait();
         } else {
-            Operador o = new Operador(txtNome.getText(), txtLogin.getText(), txtSenha.getText(), BoxNivel.getValue());
-            dao.adicionar(o);
-            atualizarTabel();
+            if (btnSalvar.getText().equals("Salvar")) {
+                Operador o = new Operador(txtNome.getText(), txtLogin.getText(), txtSenha.getText(), BoxNivel.getValue());
+                dao.adicionar(o);
+                atualizarTabel();
+            } else {
+                Operador o = new Operador(txtNome.getText(), txtLogin.getText(), txtSenha.getText(), BoxNivel.getValue(), tabelaOperadores.getSelectionModel().getSelectedItem().getId().longValue());
+                dao.update(o);
+                btnSalvar.setText("Salvar");
+                atualizarTabel();
+                encherCombobox();
+            }
         }
+
     }
 
-    public void atualizarTabel(){
+    public void atualizarTabel() {
         try {
             Data = dao.gerarLista();
             tabelaOperadores.setItems(Data);
@@ -117,7 +129,7 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
             Logger.getLogger(Tela_cad_operadores_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void OnSair(ActionEvent event) throws IOException {
         navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
@@ -136,9 +148,18 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
 
     @FXML
     private void ConTextEditar(ActionEvent event) {
+        String nivel = tabelaOperadores.getSelectionModel().getSelectedItem().getTipo().getValue();
+        ObservableList<String> obs;
+        obs = FXCollections.observableArrayList(nivel);
+
         txtNome.setText(tabelaOperadores.getSelectionModel().getSelectedItem().getNome().getValue());
         txtLogin.setText(tabelaOperadores.getSelectionModel().getSelectedItem().getLogin().getValue());
-        
+        txtSenha.setText(dao.senha(tabelaOperadores.getSelectionModel().getSelectedItem().getId().getValue()));
+        BoxNivel.setAccessibleText(nivel);
+        //Items(obs);
+        btnSalvar.setText("Editar");
+        // btnSalvar.setBackground(GREEN);
+
     }
 
 }

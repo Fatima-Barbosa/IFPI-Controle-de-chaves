@@ -25,7 +25,7 @@
             <ContextMenu>
               <items>
                 <MenuItem fx:id="CtextExcluir" mnemonicParsing="false" onAction="#ConTextEcluir" text="Excluir" />
-                  <MenuItem mnemonicParsing="false" text="Editar" />
+                  <MenuItem fx:id="ctextEditar" mnemonicParsing="false" onAction="#ConTextEditar" text="Editar" />
               </items>
             </ContextMenu>
          </contextMenu>
