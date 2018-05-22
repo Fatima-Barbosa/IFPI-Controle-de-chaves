@@ -12,18 +12,30 @@ public class Operador {
     private SimpleStringProperty nome;    
     private SimpleStringProperty login;
     private SimpleStringProperty senha;
-    private int tipo;
+    private SimpleStringProperty tipo;
     private SimpleLongProperty id;
 
-    public Operador(String nome, String login, String senha, int tipo, Long id) {
+    public Operador(String nome, String login, String senha, String tipo, Long id) {
         this.nome = new SimpleStringProperty(nome);
         this.login = new SimpleStringProperty(login);
         this.senha = new SimpleStringProperty(senha);
-        this.tipo = tipo;
+        this.tipo = new SimpleStringProperty(tipo);
         this.id = new ReadOnlyLongWrapper(id);
     }
 
+    public Operador(String nome, String login, String senha, String tipo) {
+        this.nome = new SimpleStringProperty(nome);
+        this.login = new SimpleStringProperty(login);
+        this.senha = new SimpleStringProperty(senha);
+        this.tipo = new SimpleStringProperty(tipo);
+    }
     
+    public Operador(String nome, String login, String tipo, Long id) {
+        this.nome = new SimpleStringProperty(nome);
+        this.login = new SimpleStringProperty(login);
+        this.tipo = new SimpleStringProperty(tipo);        
+        this.id = new ReadOnlyLongWrapper(id);
+    }
     
     public SimpleStringProperty getNome() {
         return nome;
@@ -48,21 +60,21 @@ public class Operador {
     public void setSenha(SimpleStringProperty senha) {
         this.senha = senha;
     }
-
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
+    
     public SimpleLongProperty getId() {
         return id;
     }
 
     public void setId(SimpleLongProperty id) {
         this.id = id;
+    }
+
+    public SimpleStringProperty getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(SimpleStringProperty tipo) {
+        this.tipo = tipo;
     }
 
     

@@ -1,11 +1,15 @@
 package ModelDAO;
 
 import Classes.Operador;
+import Classes.Users;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -32,7 +36,7 @@ public class OperadorDAO {
             stmt.setString(1, o.getNome().getValue());
             stmt.setString(2, o.getLogin().getValue());
             stmt.setString(3, o.getSenha().getValue());
-            stmt.setInt(4, o.getTipo());
+            stmt.setString(4, o.getTipo().getValue());
             stmt.execute();
             System.out.println("Adicionado com sucesso! ;>");
             stmt.close();
@@ -43,6 +47,42 @@ public class OperadorDAO {
             System.out.println("erro no adicionar, caiu no catch!");
         }
         
+    }
+    
+    public final ObservableList<Operador> gerarLista() throws SQLException {
+        connection = new ConnectionFactory().getConnection();
+        ObservableList<Operador> Lista
+                = FXCollections.observableArrayList();
+        stmt = connection.prepareStatement("select * from keycontroll.operador order by nomeCompleto;");
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Lista.add(new Operador(
+                    rs.getString("nomeCompleto"),
+                    rs.getString("login"),
+                    rs.getString("nivel"),
+                    rs.getLong("id")
+            )
+            );
+        }
+        stmt.close();
+        connection.close();
+        return Lista;
+    }
+    
+    public void remover(long nome) throws SQLException {
+        connection = new ConnectionFactory().getConnection();
+
+        sql = "delete from operador where id = ?";
+        stmt = connection.prepareStatement(sql);
+        // seta os valores
+        stmt.setLong(1, nome);
+        // executa
+        stmt.execute();
+        System.out.println("Excluido com sucesso!");
+        stmt.close();
+        connection.close();
+
     }
 
     public Connection getConnection() {

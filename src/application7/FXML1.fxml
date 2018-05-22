@@ -56,8 +56,8 @@
                            <columns>
                               <TableColumn fx:id="colUser" minWidth="0.0" prefWidth="287.0" text="Usuário" />
                               <TableColumn fx:id="colSalaP" prefWidth="221.0" text="Sala" />
-                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="221.0" text="Aluno" />
-                              <TableColumn fx:id="colHora" prefWidth="202.0" text="Horário de devolução" />
+                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="253.0" text="Aluno" />
+                              <TableColumn fx:id="colHora" prefWidth="182.0" text="Horário de devolução" />
                            </columns>
                         </TableView>
                      </content>

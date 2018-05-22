@@ -34,7 +34,7 @@
                   <Font size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="BTNsobre" layoutY="247.0" onAction="#ONsobre" prefHeight="80.0" prefWidth="124.0" text="Configurações" textFill="WHITE">
+            <JFXButton fx:id="BTNoperadores" layoutY="247.0" onAction="#ONoperadores" prefHeight="80.0" prefWidth="124.0" text="Operadores" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -46,7 +46,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #4f4f4f;">
+      <AnchorPane fx:id="anchorPane" prefHeight="539.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;">
          <children>
             <TabPane layoutY="19.0" prefHeight="534.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f; -fx-border-color: #4f4f4f;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
@@ -56,8 +56,8 @@
                            <columns>
                               <TableColumn fx:id="colUser" minWidth="0.0" prefWidth="287.0" text="Usuário" />
                               <TableColumn fx:id="colSalaP" prefWidth="221.0" text="Sala" />
-                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="221.0" text="Aluno" />
-                              <TableColumn fx:id="colHora" prefWidth="202.0" text="Horário de devolução" />
+                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="253.0" text="Aluno" />
+                              <TableColumn fx:id="colHora" prefWidth="182.0" text="Horário de devolução" />
                            </columns>
                         </TableView>
                      </content>

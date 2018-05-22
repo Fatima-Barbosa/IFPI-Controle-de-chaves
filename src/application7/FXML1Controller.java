@@ -230,9 +230,10 @@ public class FXML1Controller extends BaseController implements Initializable {
     }
 
     @FXML
-    void ONoperadores() throws IOException {
-        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml"));
-        anchorPane.getChildren().setAll(a);
+    void ONoperadores(ActionEvent event) throws IOException {
+//        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml"));
+//        anchorPane.getChildren().setAll(a);
+        navigate(event, FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml")));
     }
 
     @FXML
@@ -285,6 +286,13 @@ public class FXML1Controller extends BaseController implements Initializable {
         
         tabelaChavesUsadas.setItems(Datacp);
         // TODO        
+        assert imagen != null : "fx:id=\"imagen\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTN1 != null : "fx:id=\"BTN1\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTNUsers != null : "fx:id=\"BTNUsers\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert btnRelatorio != null : "fx:id=\"btnRelatorio\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert BTNoperadores != null : "fx:id=\"BTNoperadores\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert btnSair != null : "fx:id=\"btnSair\" was not injected: check your FXML file 'FXML1.fxml'.";
+        assert anchorPane != null : "fx:id=\"anchorPane\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert tabelaChavesUsadas != null : "fx:id=\"tabelaChavesUsadas\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert colUser != null : "fx:id=\"colUser\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert colSalaP != null : "fx:id=\"colSalaP\" was not injected: check your FXML file 'FXML1.fxml'.";
@@ -302,14 +310,6 @@ public class FXML1Controller extends BaseController implements Initializable {
         assert collNome != null : "fx:id=\"collNome\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert collCode != null : "fx:id=\"collCode\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert collID != null : "fx:id=\"collID\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert imagen != null : "fx:id=\"imagen\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert BTN1 != null : "fx:id=\"BTN1\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert BTNUsers != null : "fx:id=\"BTNUsers\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert btnRelatorio != null : "fx:id=\"btnRelatorio\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert BTNoperadores != null : "fx:id=\"BTNsobre\" was not injected: check your FXML file 'FXML1.fxml'.";
-        assert btnSair != null : "fx:id=\"btnSair\" was not injected: check your FXML file 'FXML1.fxml'.";
-
-
     }
 
 }
