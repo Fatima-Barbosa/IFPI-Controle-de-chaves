@@ -161,18 +161,18 @@ public class FXML1Controller extends BaseController implements Initializable {
 
     @FXML
     void onRelatorios(ActionEvent event) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy");
         Date date = new Date();
         String Dataformatada = dateFormat.format(date);
         Document doc = new Document(PageSize.A4, 30f, 10f, 10f, 10f);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
         Date hora = Calendar.getInstance().getTime();
         String horaformatada = sdf.format(hora);
         System.out.println("" + horaformatada);
         Font fontDeLink = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
 
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio"+Dataformatada+horaformatada+".pdf"));
             doc.open();
             List<ChavePega> cp = new ChavePegaDAO().RelatorioList();
 
