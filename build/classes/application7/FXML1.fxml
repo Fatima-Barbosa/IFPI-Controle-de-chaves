@@ -81,8 +81,8 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="buscKey" layoutX="711.0" layoutY="457.0" onKeyPressed="#buscKey" prefHeight="25.0" prefWidth="163.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="71.0" />
-                              <Button fx:id="BTNbuscKey" layoutX="873.0" layoutY="457.0" mnemonicParsing="false" onAction="#busckey" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #76C7FC;" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
+                              <TextField fx:id="buscKey" layoutX="710.0" layoutY="464.0" onKeyPressed="#buscKey" prefHeight="25.0" prefWidth="165.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="70.0" />
+                              <Button fx:id="BTNbuscKey" layoutX="873.0" layoutY="457.0" mnemonicParsing="false" onAction="#busckey" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #76C7FC;" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -91,13 +91,13 @@
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="UserBusc" layoutX="697.0" layoutY="459.0" onKeyPressed="#BuscUser" prefHeight="25.0" prefWidth="167.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="71.0" />
-                              <Label layoutX="622.0" layoutY="461.0" text="Pesquisar" textFill="#e8e8e8" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="246.0">
+                              <TextField fx:id="UserBusc" layoutX="704.0" layoutY="464.0" onKeyPressed="#BuscUser" prefHeight="25.0" prefWidth="165.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="70.0" />
+                              <Label layoutX="622.0" layoutY="461.0" text="Pesquisar" textFill="#e8e8e8" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="241.0">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="btnBuscUser" layoutX="870.0" layoutY="459.0" mnemonicParsing="false" onAction="#BTNBuscUser" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #76C7FC;" text="OK" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="19.0" />
+                              <Button fx:id="btnBuscUser" layoutX="880.0" layoutY="464.0" mnemonicParsing="false" onAction="#BTNBuscUser" prefHeight="25.0" prefWidth="42.0" style="-fx-background-color: #76C7FC;" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
                               <TableView fx:id="tabelaUsuarios" prefHeight="448.0" prefWidth="931.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn fx:id="collNome" prefWidth="289.0" text="Nome" />

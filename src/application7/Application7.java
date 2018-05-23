@@ -23,9 +23,13 @@ public class Application7 extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
+        stage.setTitle("Sistema de Cotrole de chaves");
+        stage.setResizable(false);
         stage.show();
-        //Image imageIcon = new Image(getClass().getResourceAsStream("Application7_1\\src\\imagens\\padlock_77917.png"));
-        //stage.getIcons().add(imageIcon);
+        //..\imagens\edit-property.png
+        
+        Image imageIcon = new Image(getClass().getResourceAsStream("/imagens/padlock_77917.png"));
+        stage.getIcons().add(imageIcon);
     }
 
     /**
