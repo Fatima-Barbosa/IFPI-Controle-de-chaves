@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -91,6 +92,8 @@ public class UserPadraoController extends BaseController implements Initializabl
     private ImageView imgDevolver;
     @FXML
     private Button btnSair;
+    @FXML
+    private MenuItem conDevolver;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -280,5 +283,17 @@ public class UserPadraoController extends BaseController implements Initializabl
         txtAluno.setText("");
         txtUser.setText("");
         txtSenha.setText("");
+    }
+
+    @FXML
+    private void devolver(ActionEvent event) {
+        try {
+            cdao.devolver(tabelaChavesEmUso.getSelectionModel().getSelectedItem().getChave().getValue());
+            DataChaves = cdao.gerarLista();
+            tabelaChavesEmUso.setItems(DataChaves);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

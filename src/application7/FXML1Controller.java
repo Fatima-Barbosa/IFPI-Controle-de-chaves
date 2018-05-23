@@ -35,6 +35,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -56,7 +58,6 @@ public class FXML1Controller extends BaseController implements Initializable {
     private final ChavesDAO keysDao = new ChavesDAO();
     private final UsersDAO userDao = new UsersDAO();
     private final ChavePegaDAO cdao = new ChavePegaDAO();
-
 
     @FXML
     private TableView<ChavePega> tabelaChavesUsadas;
@@ -89,7 +90,6 @@ public class FXML1Controller extends BaseController implements Initializable {
     @FXML
     private JFXButton BTNoperadores;
 
-    @FXML
     private ImageView imagen;
 
     @FXML
@@ -121,7 +121,7 @@ public class FXML1Controller extends BaseController implements Initializable {
 
     private ObservableList<Users> Data2
             = FXCollections.observableArrayList();
-    
+
     private ObservableList<ChavePega> Datacp
             = FXCollections.observableArrayList();
     @FXML
@@ -134,7 +134,9 @@ public class FXML1Controller extends BaseController implements Initializable {
     private TableColumn<ChavePega, String> colSalaP;
     @FXML
     private AnchorPane anchorPane;
-    
+    @FXML
+    private JFXButton btnApagarDados;
+
     @FXML
     void buscKey(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -159,36 +161,37 @@ public class FXML1Controller extends BaseController implements Initializable {
 
     @FXML
     void onRelatorios(ActionEvent event) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         Date date = new Date();
         String Dataformatada = dateFormat.format(date);
         Document doc = new Document(PageSize.A4, 30f, 10f, 10f, 10f);
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         Date hora = Calendar.getInstance().getTime();
         String horaformatada = sdf.format(hora);
+        System.out.println("" + horaformatada);
         Font fontDeLink = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
 
         try {
-            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio2.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio.pdf"));
             doc.open();
             List<ChavePega> cp = new ChavePegaDAO().RelatorioList();
-            
+
             doc.add(new Paragraph("                                                           Relatório de Chaves usadas\n       ", fontDeLink));
 
-            for(int i=0; i < cp.size(); i++){
-                doc.add(new Paragraph("Usuario:-----------------------------------------------------"+cp.get(i).getUser().getValue(), fontDeLink));
-                doc.add(new Paragraph("Chave:-------------------------------------------------------"+cp.get(i).getChave().getValue(), fontDeLink));
-                doc.add(new Paragraph("Aluno:-------------------------------------------------------"+cp.get(i).getAluno().getValue(), fontDeLink));
-                doc.add(new Paragraph("Data:--------------------------------------------------------"+cp.get(i).getDia().getValue(), fontDeLink));
-                doc.add(new Paragraph("Hora:--------------------------------------------------------"+cp.get(i).getHorap().getValue(), fontDeLink));
-                doc.add(new Paragraph("Devolução:------------------------------------------------"+cp.get(i).getHorad().getValue(), fontDeLink));
+            for (int i = 0; i < cp.size(); i++) {
+                doc.add(new Paragraph("Usuario:-----------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
+                doc.add(new Paragraph("Chave:-------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
+                doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data:--------------------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora:--------------------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
+                doc.add(new Paragraph("Devolução:------------------------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
             doc.close();
             Alert a = new Alert(AlertType.CONFIRMATION);
             a.setHeaderText("Relatorio gerado em: C:/Users/Public/");
             a.show();
-            
+
         } catch (DocumentException ex) {
             Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FileNotFoundException ex) {
@@ -277,13 +280,13 @@ public class FXML1Controller extends BaseController implements Initializable {
         colHora.setCellValueFactory(cellData -> cellData.getValue().getHorad());
         colUser.setCellValueFactory(cellData -> cellData.getValue().getUser());
         colSalaP.setCellValueFactory(cellData -> cellData.getValue().getChave());
-        
+
         try {
             Datacp = cdao.gerarLista();
         } catch (SQLException ex) {
             Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         tabelaChavesUsadas.setItems(Datacp);
         // TODO        
         assert imagen != null : "fx:id=\"imagen\" was not injected: check your FXML file 'FXML1.fxml'.";
@@ -310,6 +313,40 @@ public class FXML1Controller extends BaseController implements Initializable {
         assert collNome != null : "fx:id=\"collNome\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert collCode != null : "fx:id=\"collCode\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert collID != null : "fx:id=\"collID\" was not injected: check your FXML file 'FXML1.fxml'.";
+    }
+
+    @FXML
+    private void onApagarDados(ActionEvent event) {
+        boolean r = false;
+        String n;
+
+        Alert dialogo1 = new Alert(AlertType.CONFIRMATION);
+        dialogo1.setTitle("Atenção");
+        dialogo1.setHeaderText("Deseja realmente apagar todo o historico?");
+        dialogo1.getButtonTypes().add(ButtonType.YES);
+        ButtonType btn = new ButtonType("Sim", ButtonBar.ButtonData.YES);
+        ButtonType btn1 = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialogo1.getButtonTypes().setAll(btn, btn1);
+//        dialogo1.showAndWait().ifPresent(b -> {
+//            if(b == btn){
+//                //r = true;
+////                n = "";
+//            }
+//        });
+        r = dialogo1.showAndWait().get().equals(btn);
+        System.out.println(""+r);
+        //.getClass().equals(btn);
+        //System.out.println(""+n);
+        if (r == true) {
+            cdao.removerDados();
+            Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
+
+            dialogo.setTitle("Dados excluidos");
+            dialogo.setHeaderText("Operaçao bem sucedida!");
+            dialogo.setContentText("Todos os registros de chaves pegas foram excluidos!");
+            dialogo.showAndWait();
+        }
+
     }
 
 }

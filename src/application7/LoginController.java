@@ -40,30 +40,30 @@ public class LoginController extends BaseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        verificar();
+    //    verificar();
         assert labelLogin != null : "fx:id=\"labelLoguin\" was not injected: check your FXML file 'loguinSuperUser.fxml'.";
         assert labelSenha != null : "fx:id=\"labelSenha\" was not injected: check your FXML file 'loguinSuperUser.fxml'.";
         assert btnEntrarSuper != null : "fx:id=\"btnEntrarSuper\" was not injected: check your FXML file 'loguinSuperUser.fxml'.";
     }
 
-    String loginp = null;
-    String senhap = null;
-//    Date d = new Data.
-//    
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-    Date date = new Date();
-
-    private void verificar() {
-        if (dateFormat.format(date).equals("01")) {
-            daoCP.removerDados();
-            Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
-
-            dialogo.setTitle("Dados excluidos");
-            dialogo.setHeaderText("Operaçao bem sucedida!");
-            dialogo.setContentText("Todos os registros de chaves pegas foram excluidos!");
-            dialogo.showAndWait();
-        }
-    }
+//    String loginp = null;
+//    String senhap = null;
+////    Date d = new Data.
+////    
+//    SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+//    Date date = new Date();
+//
+//    private void verificar() {
+//        if (dateFormat.format(date).equals("01")) {
+//            daoCP.removerDados();
+//            Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
+//
+//            dialogo.setTitle("Dados excluidos");
+//            dialogo.setHeaderText("Operaçao bem sucedida!");
+//            dialogo.setContentText("Todos os registros de chaves pegas foram excluidos!");
+//            dialogo.showAndWait();
+//        }
+//    }
 
     @FXML
     private void entrar(ActionEvent event) throws IOException {

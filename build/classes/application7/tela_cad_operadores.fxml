@@ -58,18 +58,16 @@
          </font>
       </Label>
       <ComboBox fx:id="BoxNivel" layoutX="749.0" layoutY="136.0" prefHeight="25.0" prefWidth="169.0" AnchorPane.rightAnchor="27.0" />
-      <Label layoutX="749.0" layoutY="102.0" text="Nivel de visão" textFill="#fff9f9" AnchorPane.rightAnchor="92.0">
+      <Label layoutX="749.0" layoutY="102.0" text="Nível de visão" textFill="#fff9f9" AnchorPane.rightAnchor="92.0">
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnSair" layoutX="892.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnSair" style="-fx-background-color: #AB0909;" text="Sair" textFill="#1b0a0a" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnSair" layoutX="892.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnSair" prefHeight="30.0" prefWidth="46.0" style="-fx-background-color: #AB0909;" text="Sair" textFill="#1b0a0a" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
             <Font name="Calibri Bold" size="13.0" />
          </font>
       </Button>
       <PasswordField fx:id="txtSenha" layoutX="749.0" layoutY="198.0" prefHeight="25.0" prefWidth="169.0" />
-      <Button layoutX="848.0" layoutY="289.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #299b4d;" text="Editar" />
-      <Button layoutX="749.0" layoutY="289.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" style="-fx-background-color: #c23333;" text="Excluir" textFill="#140707" />
    </children>
 </AnchorPane>

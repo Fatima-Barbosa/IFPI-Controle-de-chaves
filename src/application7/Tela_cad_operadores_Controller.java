@@ -110,12 +110,14 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
                 Operador o = new Operador(txtNome.getText(), txtLogin.getText(), txtSenha.getText(), BoxNivel.getValue());
                 dao.adicionar(o);
                 atualizarTabel();
+                limparCampos();
             } else {
                 Operador o = new Operador(txtNome.getText(), txtLogin.getText(), txtSenha.getText(), BoxNivel.getValue(), tabelaOperadores.getSelectionModel().getSelectedItem().getId().longValue());
                 dao.update(o);
                 btnSalvar.setText("Salvar");
                 atualizarTabel();
                 encherCombobox();
+                limparCampos();
             }
         }
 
@@ -155,11 +157,18 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
         txtNome.setText(tabelaOperadores.getSelectionModel().getSelectedItem().getNome().getValue());
         txtLogin.setText(tabelaOperadores.getSelectionModel().getSelectedItem().getLogin().getValue());
         txtSenha.setText(dao.senha(tabelaOperadores.getSelectionModel().getSelectedItem().getId().getValue()));
-        BoxNivel.setAccessibleText(nivel);
+        BoxNivel.setValue(nivel);
         //Items(obs);
         btnSalvar.setText("Editar");
         // btnSalvar.setBackground(GREEN);
 
+    }
+    
+    public void limparCampos(){
+        txtNome.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");
+        BoxNivel.setValue("");
     }
 
 }

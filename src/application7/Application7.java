@@ -1,10 +1,14 @@
 package application7;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconName;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,6 +24,8 @@ public class Application7 extends Application {
 
         stage.setScene(scene);
         stage.show();
+        //Image imageIcon = new Image(getClass().getResourceAsStream("Application7_1\\src\\imagens\\padlock_77917.png"));
+        //stage.getIcons().add(imageIcon);
     }
 
     /**
