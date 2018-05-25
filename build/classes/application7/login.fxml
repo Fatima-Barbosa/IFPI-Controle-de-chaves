@@ -26,7 +26,7 @@
             <Font size="17.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="labelLogin" layoutX="71.0" layoutY="252.0" prefHeight="30.0" prefWidth="268.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="55.0">
+      <TextField fx:id="labelLogin" layoutX="71.0" layoutY="252.0" onKeyPressed="#mover" prefHeight="30.0" prefWidth="268.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="55.0">
          <font>
             <Font size="14.0" />
          </font></TextField>

@@ -12,8 +12,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -88,6 +91,15 @@ public class LoginController extends BaseController implements Initializable {
                 break;
         }
 
+    }
+
+    @FXML
+    private void mover(KeyEvent event) {
+        if(event.getCode() == KeyCode.ENTER ){
+            System.out.println("aqui");
+            labelSenha.requestFocus();
+        
+        }
     }
 
 }
