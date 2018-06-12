@@ -160,45 +160,8 @@ public class FXML1Controller extends BaseController implements Initializable {
     }
 
     @FXML
-    void onRelatorios(ActionEvent event) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy");
-        Date date = new Date();
-        String Dataformatada = dateFormat.format(date);
-        Document doc = new Document(PageSize.A4, 30f, 10f, 10f, 10f);
-        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
-        Date hora = Calendar.getInstance().getTime();
-        String horaformatada = sdf.format(hora);
-        System.out.println("" + horaformatada);
-        Font fontDeLink = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
-
-        try {
-            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio"+Dataformatada+horaformatada+".pdf"));
-            doc.open();
-            List<ChavePega> cp = new ChavePegaDAO().RelatorioList();
-
-            doc.add(new Paragraph("                                                           Relatório de Chaves usadas\n       ", fontDeLink));
-
-            for (int i = 0; i < cp.size(); i++) {
-                doc.add(new Paragraph("Usuario:-----------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
-                doc.add(new Paragraph("Chave:-------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
-                doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
-                doc.add(new Paragraph("Data:--------------------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
-                doc.add(new Paragraph("Hora:--------------------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
-                doc.add(new Paragraph("Devolução:------------------------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
-                doc.add(new Paragraph("                                                "));
-            }
-            doc.close();
-            Alert a = new Alert(AlertType.CONFIRMATION);
-            a.setHeaderText("Relatorio gerado em: C:/Users/Public/");
-            a.show();
-
-        } catch (DocumentException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    void onRelatorios(ActionEvent event) throws IOException {
+        navigate(event, FXMLLoader.load(getClass().getResource("EspelhoRelatorio.fxml")));
     }
 
     @FXML

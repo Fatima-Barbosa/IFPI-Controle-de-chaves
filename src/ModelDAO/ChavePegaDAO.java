@@ -143,6 +143,31 @@ public class ChavePegaDAO {
         return Lista;
     }
 
+        public final List<ChavePega> RelatorioPorSala() throws SQLException {
+        connection = new ConnectionFactory().getConnection();
+        List<ChavePega> Lista = new ArrayList<>();
+
+        stmt = connection.prepareStatement("select * from keycontroll.chavepega where chavepega = ?;");
+
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            ChavePega c = new ChavePega(
+                    rs.getString("chavePega"),
+                    rs.getString("usuario"),
+                    rs.getString("aluno"),
+                    rs.getString("horap"),
+                    rs.getString("horad"),
+                    rs.getString("datap"),
+                    rs.getLong("id"),
+                    rs.getBoolean("ocupado")
+            );
+            Lista.add(c);
+        }
+        stmt.close();
+        connection.close();
+        return Lista;
+    }
+    
     public final ObservableList<String> FiltrarList() throws SQLException {
         connection = new ConnectionFactory().getConnection();
         ObservableList<String> Lista
