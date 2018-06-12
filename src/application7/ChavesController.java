@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -68,6 +69,10 @@ public class ChavesController extends BaseController implements Initializable {
     private ObservableList<keys> Data
             = FXCollections.observableArrayList();
     int op = 0;
+    @FXML
+    private MenuItem contextEditar;
+    @FXML
+    private MenuItem contextExcluir;
 
     private void limparCampos() {
         labelSala.setText("");
@@ -103,8 +108,8 @@ public class ChavesController extends BaseController implements Initializable {
             keys k = new keys(
                     labelSala.getText(),
                     labelDescricao.getText(),
-                    false
-            // tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
+//                    false
+                    tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
             );
             dao.update(k);
             try {
@@ -148,6 +153,7 @@ public class ChavesController extends BaseController implements Initializable {
             dao.remover(db.getString());
             sucess = true;
         }
+        atualizarTabela();
         event.setDropCompleted(sucess);
         event.consume();
     }
@@ -219,6 +225,38 @@ public class ChavesController extends BaseController implements Initializable {
             btnSalvar.setText("Editar");
             op = 1;
         }
+        atualizarTabela();
     }
 
+    @FXML
+    private void ContextEdit(ActionEvent event) {
+        keys k = new keys(
+                    labelSala.getText(),
+                    labelDescricao.getText(),
+//                    false
+                    tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
+            );
+            dao.update(k);
+    }
+
+    @FXML
+    private void ContextExclui(ActionEvent event) {
+        try {
+            dao.remover(tabelaChave.getSelectionModel().getSelectedItem().getSala().getValue());
+            atualizarTabela();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    
+    public void atualizarTabela(){
+        try {
+            Data = dao.gerarLista();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        tabelaChave.setItems(Data);
+    }
 }

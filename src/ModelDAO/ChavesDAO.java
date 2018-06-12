@@ -96,7 +96,6 @@ public class ChavesDAO {
             stmt = connection.prepareStatement("UPDATE keycontroll.chaves SET ocupada = false WHERE sala = ?;");
             stmt.setString(1, c);
             //  stmt.setBoolean(1, c.getPega().getValue());
-
             stmt.executeUpdate();
             connection.close();
             stmt.close();

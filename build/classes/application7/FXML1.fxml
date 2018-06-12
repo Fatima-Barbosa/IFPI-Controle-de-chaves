@@ -15,7 +15,7 @@
 
 <HBox prefHeight="553.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.FXML1Controller">
    <children>
-      <Pane prefHeight="506.0" prefWidth="137.0" style="-fx-background-color: #4f4f4f;">
+      <Pane prefHeight="553.0" prefWidth="126.0" style="-fx-background-color: #4f4f4f;">
          <children>
             <JFXButton fx:id="BTN1" onAction="#ONKeys" prefHeight="80.0" prefWidth="124.0" text="Chaves" textFill="#fffdfd">
                <font>
@@ -32,7 +32,7 @@
                   <Font size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="BTNoperadores" layoutY="247.0" onAction="#ONoperadores" prefHeight="80.0" prefWidth="124.0" text="Operadores" textFill="WHITE">
+            <JFXButton fx:id="BTNoperadores" layoutY="247.0" onAction="#ONoperadores" prefHeight="80.0" prefWidth="125.0" text="Operadores" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -49,7 +49,7 @@
             </JFXButton>
          </children>
       </Pane>
-      <AnchorPane fx:id="anchorPane" prefHeight="539.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;">
+      <AnchorPane fx:id="anchorPane" prefHeight="553.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;">
          <children>
             <TabPane layoutY="19.0" prefHeight="534.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f; -fx-border-color: #4f4f4f;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
@@ -67,13 +67,13 @@
                   </Tab>
                   <Tab text="Todas as Salas">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="503.0" prefWidth="908.0">
                            <children>
-                              <TableView fx:id="tabelaChaves" prefHeight="448.0" prefWidth="931.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tabelaChaves" prefHeight="448.0" prefWidth="945.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn fx:id="colSala" prefWidth="274.0" text="Sala" />
                                     <TableColumn fx:id="colDescricao" prefWidth="516.0" text="Descrição" />
-                                    <TableColumn fx:id="colID" prefWidth="140.0" text="ID" />
+                                    <TableColumn fx:id="colID" prefWidth="152.0" text="Ocupada" />
                                  </columns>
                               </TableView>
                               <Label layoutX="623.0" layoutY="457.0" text="Pesquisar" textFill="#e1dfdf" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="241.0">
@@ -89,7 +89,7 @@
                   </Tab>
                   <Tab text="Usuários">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="503.0" prefWidth="945.0">
                            <children>
                               <TextField fx:id="UserBusc" layoutX="704.0" layoutY="464.0" onKeyPressed="#BuscUser" prefHeight="25.0" prefWidth="165.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="70.0" />
                               <Label layoutX="622.0" layoutY="461.0" text="Pesquisar" textFill="#e8e8e8" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="241.0">
@@ -101,8 +101,8 @@
                               <TableView fx:id="tabelaUsuarios" prefHeight="448.0" prefWidth="931.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn fx:id="collNome" prefWidth="289.0" text="Nome" />
-                                    <TableColumn fx:id="collCode" prefWidth="548.0" text="CPF/SIAPE" />
-                                    <TableColumn fx:id="collID" prefWidth="93.0" text="ID" />
+                                    <TableColumn fx:id="collCode" prefWidth="540.0" text="CPF/SIAPE" />
+                                    <TableColumn fx:id="collID" prefWidth="113.0" text="ID" />
                                  </columns>
                               </TableView>
                            </children>

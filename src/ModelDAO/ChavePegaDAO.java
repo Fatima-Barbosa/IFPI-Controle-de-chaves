@@ -58,16 +58,21 @@ public class ChavePegaDAO {
         }
     }
 
-    public void devolver(String c) throws SQLException {
+    public void devolver(String c) {
         connection = new ConnectionFactory().getConnection();
 
         sql = "UPDATE chavepega set ocupado = false where chavepega=?;";
 
-        stmt = connection.prepareStatement(sql);
-        stmt.setString(1, c);
-        stmt.execute();
-        stmt.close();
-        connection.close();
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, c);
+            stmt.execute();
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavePegaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         chave.DevolverChave(c);
         System.out.println("devolvida");
     }
@@ -112,7 +117,7 @@ public class ChavePegaDAO {
         connection.close();
         return Lista;
     }
-    
+
     public final List<ChavePega> RelatorioList() throws SQLException {
         connection = new ConnectionFactory().getConnection();
         List<ChavePega> Lista = new ArrayList<>();

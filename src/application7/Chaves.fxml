@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -58,6 +60,14 @@
                   <TableColumn fx:id="colDescricao" minWidth="0.0" prefWidth="509.0" text="Descrição" />
                   <TableColumn fx:id="colID" prefWidth="234.0" text="Ocupada" />
               </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="contextEditar" mnemonicParsing="false" onAction="#ContextEdit" text="Editar" />
+                  <MenuItem fx:id="contextExcluir" mnemonicParsing="false" onAction="#ContextExclui" text="Excluir" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
           </TableView>
     </children>
 </AnchorPane>

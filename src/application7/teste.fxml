@@ -68,7 +68,7 @@
                               <Font name="Calibri" size="16.0" />
                            </font></Button>
                         <ComboBox fx:id="labs" layoutX="686.0" layoutY="112.0" prefHeight="25.0" prefWidth="178.0" AnchorPane.rightAnchor="205.0" />
-                        <JFXTimePicker fx:id="txtHora" layoutX="880.0" layoutY="111.0" prefHeight="27.0" prefWidth="176.0" style="-fx-background-color: #FFFF;" AnchorPane.rightAnchor="13.0" />
+                        <JFXTimePicker fx:id="txtHora" layoutX="880.0" layoutY="111.0" prefHeight="27.0" prefWidth="175.0" style="-fx-background-color: #FFFF;" AnchorPane.rightAnchor="13.0" />
                         <ImageView fx:id="imgDevolver" fitHeight="132.0" fitWidth="138.0" layoutX="814.0" layoutY="315.0" onDragDropped="#imgDroppDevolver" onDragOver="#imgOverDevolver" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="123.0">
                            <image>
                               <Image url="@../imagens/square-cut_icon-icons.com_56037.png" />
