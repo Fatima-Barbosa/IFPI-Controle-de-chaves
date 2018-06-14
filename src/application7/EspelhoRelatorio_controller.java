@@ -11,6 +11,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -34,7 +36,7 @@ import javafx.scene.control.TextArea;
  *
  * @author Fátima
  */
-public class EspelhoRelatorio_controller implements Initializable {
+public class EspelhoRelatorio_controller extends BaseController implements Initializable {
 
     @FXML
     private TextArea txtRelatorio;
@@ -51,6 +53,8 @@ public class EspelhoRelatorio_controller implements Initializable {
     @FXML
     private Button bntSair;
 
+    ChavePegaDAO dao = new ChavePegaDAO();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -67,6 +71,9 @@ public class EspelhoRelatorio_controller implements Initializable {
 
     @FXML
     private void on_Vizualizar(ActionEvent event) {
+        String n = null;
+        //            n = ;
+        txtRelatorio.setText(n);
         
     }
 
@@ -110,7 +117,9 @@ public class EspelhoRelatorio_controller implements Initializable {
                 doc.add(new Paragraph("Devolução:------------------------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
+            
             doc.close();
+            
             Alert a = new Alert(Alert.AlertType.CONFIRMATION);
             a.setHeaderText("Relatorio gerado em: C:/Users/Public/");
             a.show();
@@ -124,8 +133,11 @@ public class EspelhoRelatorio_controller implements Initializable {
         }
     }
 
+    
+    
     @FXML
-    private void on_Sair(ActionEvent event) {
+    private void on_Sair(ActionEvent event) throws IOException {
+         navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
     }
 
 }

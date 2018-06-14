@@ -276,7 +276,7 @@ public class UserPadraoController extends BaseController implements Initializabl
 
     @FXML
     private void onSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("login.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("Login.fxml")));
     }
 
     public void limparCampos() {

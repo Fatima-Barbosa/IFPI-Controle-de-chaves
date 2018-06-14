@@ -77,7 +77,7 @@ public class LoginController extends BaseController implements Initializable {
                 navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
                 break;
             case "2":
-                navigate(event, FXMLLoader.load(getClass().getResource("teste.fxml")));
+                navigate(event, FXMLLoader.load(getClass().getResource("UserPadrao.fxml")));
                 break;
             case "sn":
                 Alert dialogo1 = new Alert(Alert.AlertType.WARNING);

@@ -59,7 +59,7 @@
                            </font></Label>
                                 <Label layoutX="772.0" layoutY="240.0" text="Opcional" textFill="#d35858" AnchorPane.rightAnchor="244.0">
                                 </Label>
-                                <Label layoutX="880.0" layoutY="79.0" text="Horário de devolução*" textFill="#d0cfcf" AnchorPane.rightAnchor="22.0">
+                                <Label layoutX="880.0" layoutY="79.0" text="Devolução prevista*" textFill="#d0cfcf" AnchorPane.rightAnchor="40.0">
                            <font>
                               <Font name="Calibri" size="18.0" />
                            </font></Label>

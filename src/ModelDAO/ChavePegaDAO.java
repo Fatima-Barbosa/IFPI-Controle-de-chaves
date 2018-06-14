@@ -143,11 +143,11 @@ public class ChavePegaDAO {
         return Lista;
     }
 
-        public final List<ChavePega> RelatorioPorSala() throws SQLException {
+        public final List<ChavePega> RelatorioFiltrado() throws SQLException {
         connection = new ConnectionFactory().getConnection();
         List<ChavePega> Lista = new ArrayList<>();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chavepega where chavepega = ?;");
+        stmt = connection.prepareStatement("select * from keycontroll.chavepega where chavepega = ? and datap = ? and datap=?;");
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {

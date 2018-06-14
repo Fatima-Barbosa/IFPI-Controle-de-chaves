@@ -199,7 +199,7 @@ public class FXML1Controller extends BaseController implements Initializable {
     void ONoperadores(ActionEvent event) throws IOException {
 //        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml"));
 //        anchorPane.getChildren().setAll(a);
-        navigate(event, FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("Tela_cad_operadores.fxml")));
     }
 
     @FXML
@@ -209,7 +209,7 @@ public class FXML1Controller extends BaseController implements Initializable {
 
     @FXML
     void onSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("login.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("Login.fxml")));
     }
 
     @Override
