@@ -32,7 +32,7 @@ public class ChavePegaDAO {
     public void adicionar(ChavePega c) {
         connection = new ConnectionFactory().getConnection();
 
-        sql = "insert into chavepega (aluno,chavePega,usuario,horap,horad,datap,ocupado) values (?,?,?,?,?,?,?);";
+        sql = "insert into chavepega (aluno,chavePega,usuario,horap,horad,datap,ocupado,dataEfetivaD) values (?,?,?,?,?,?,?,?);";
         try {
             // prepared statement para inserção
             stmt = connection.prepareStatement(sql);
@@ -44,6 +44,7 @@ public class ChavePegaDAO {
             stmt.setString(5, c.getHorad().getValue());
             stmt.setString(6, c.getDia().getValue());
             stmt.setBoolean(7, true);
+            stmt.setString(8, c.getDataEfetiva().getValue());
 
             stmt.execute();
 //            stmt.executeQuery();
@@ -58,14 +59,15 @@ public class ChavePegaDAO {
         }
     }
 
-    public void devolver(String c) {
+    public void devolver(String c, String dataD) {
         connection = new ConnectionFactory().getConnection();
 
-        sql = "UPDATE chavepega set ocupado = false where chavepega=?;";
+        sql = "UPDATE chavepega set ocupado = false, dataEfetivaD = ? where chavepega=?;";
 
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, c);
+            stmt.setString(1, dataD);
+            stmt.setString(2, c);
             stmt.execute();
             stmt.close();
             connection.close();
@@ -109,7 +111,8 @@ public class ChavePegaDAO {
                     rs.getString("horad"),
                     rs.getString("datap"),
                     rs.getLong("id"),
-                    rs.getBoolean("ocupado")
+                    rs.getBoolean("ocupado"),
+                    rs.getString("dataEfetivaD")
             );
             Lista.add(c);
         }
@@ -134,21 +137,25 @@ public class ChavePegaDAO {
                     rs.getString("horad"),
                     rs.getString("datap"),
                     rs.getLong("id"),
-                    rs.getBoolean("ocupado")
+                    rs.getBoolean("ocupado"),
+                    rs.getString("dataEfetivaD")
             );
             Lista.add(c);
         }
         stmt.close();
         connection.close();
+
         return Lista;
     }
 
-        public final List<ChavePega> RelatorioFiltrado() throws SQLException {
+    public final List<ChavePega> RelatorioFiltrado(String sala, String data, String dataD) throws SQLException {
         connection = new ConnectionFactory().getConnection();
         List<ChavePega> Lista = new ArrayList<>();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chavepega where chavepega = ? and datap = ? and datap=?;");
-
+        stmt = connection.prepareStatement("select * from keycontroll.chavepega where chavepega = ? and datap = ? and dataEfetivaD=?;");
+        stmt.setString(1, sala);
+        stmt.setString(2, dataD);
+        stmt.setString(3, dataD);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             ChavePega c = new ChavePega(
@@ -159,7 +166,8 @@ public class ChavePegaDAO {
                     rs.getString("horad"),
                     rs.getString("datap"),
                     rs.getLong("id"),
-                    rs.getBoolean("ocupado")
+                    rs.getBoolean("ocupado"),
+                    rs.getString("dataEfetivaD")
             );
             Lista.add(c);
         }
@@ -167,7 +175,7 @@ public class ChavePegaDAO {
         connection.close();
         return Lista;
     }
-    
+
     public final ObservableList<String> FiltrarList() throws SQLException {
         connection = new ConnectionFactory().getConnection();
         ObservableList<String> Lista

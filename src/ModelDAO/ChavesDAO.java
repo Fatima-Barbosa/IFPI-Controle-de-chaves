@@ -105,7 +105,7 @@ public class ChavesDAO {
             Logger.getLogger(ChavesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void remover(String sala) throws SQLException {
         connection = new ConnectionFactory().getConnection();
 
@@ -139,8 +139,25 @@ public class ChavesDAO {
         connection.close();
         return Lista;
     }
-    
-        public final ObservableList<keys> filtrarList(String n) throws SQLException {
+
+    public final ObservableList<String> carregarChaves() throws SQLException {
+        connection = new ConnectionFactory().getConnection();
+        ObservableList<String> Lista
+                = FXCollections.observableArrayList();
+
+        stmt = connection.prepareStatement("select * from keycontroll.chaves;");
+//
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            keys k = new keys(rs.getString("sala"));
+            Lista.add(k.getSala().getValue());
+        }
+//        stmt.close();
+        connection.close();
+        return Lista;
+    }
+
+    public final ObservableList<keys> filtrarList(String n) throws SQLException {
         connection = new ConnectionFactory().getConnection();
         ObservableList<keys> Lista
                 = FXCollections.observableArrayList();

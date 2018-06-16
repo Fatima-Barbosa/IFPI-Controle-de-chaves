@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -193,7 +194,8 @@ public class UserPadraoController extends BaseController implements Initializabl
                         horaformatada,
                         txtHora.getValue().toString(),
                         dateFormat.format(date),
-                        true
+                        true,
+                        dateFormat.format(date)
                 );
 
                 try {
@@ -242,10 +244,13 @@ public class UserPadraoController extends BaseController implements Initializabl
         Dragboard db = event.getDragboard();
         System.out.println("Arrastando chave: " + db.getString());
         boolean sucess = false;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        String dataFormatada = dateFormat.format(data);
         if (db.hasString()) {
             System.out.println("Devolvendo o chave: " + db.getString());
             //DataChaves.remove(linha);
-            cdao.devolver(db.getString());
+            cdao.devolver(db.getString(), dataFormatada);
             sucess = true;
             DataChaves = cdao.gerarLista();
             tabelaChavesEmUso.setItems(DataChaves);
@@ -287,8 +292,11 @@ public class UserPadraoController extends BaseController implements Initializabl
 
     @FXML
     private void devolver(ActionEvent event) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = new Date();
+        String dataFormatada = dateFormat.format(data);
         try {
-            cdao.devolver(tabelaChavesEmUso.getSelectionModel().getSelectedItem().getChave().getValue());
+            cdao.devolver(tabelaChavesEmUso.getSelectionModel().getSelectedItem().getChave().getValue(), dataFormatada);
             DataChaves = cdao.gerarLista();
             tabelaChavesEmUso.setItems(DataChaves);
 

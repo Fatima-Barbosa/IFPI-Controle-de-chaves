@@ -19,11 +19,12 @@ public class ChavePega {
     private SimpleStringProperty horad;
     private SimpleBooleanProperty ocupada;
     private SimpleStringProperty dia;
+    private SimpleStringProperty dataEfetiva;
     
 
     private SimpleLongProperty id;
 
-    public ChavePega(keys k, Users u, String aluno, String horap, String horad, String dia, long id) {
+    public ChavePega(keys k, Users u, String aluno, String horap, String horad, String dia, long id, String dataEfetiva) {
         this.k = new keys();
         this.u = new Users();
         this.aluno = new SimpleStringProperty(aluno);
@@ -31,10 +32,11 @@ public class ChavePega {
         this.horad = new SimpleStringProperty(horad);
         this.dia = new SimpleStringProperty(dia);
         this.id = new SimpleLongProperty(id);
+        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
 
 
-    public ChavePega(String chave, String user,  String aluno, String horap, String horad, String dia, long id, Boolean ocupada) {
+    public ChavePega(String chave, String user,  String aluno, String horap, String horad, String dia, long id, Boolean ocupada, String dataEfetiva) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
         this.aluno = new SimpleStringProperty(aluno);
@@ -43,9 +45,10 @@ public class ChavePega {
         this.dia = new SimpleStringProperty(dia);
         this.id = new SimpleLongProperty(id);
         this.ocupada = new SimpleBooleanProperty(ocupada);
+        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
 
-        public ChavePega(String chave, String user,  String aluno, String horap, String horad, String dia, Boolean ocupada) {
+        public ChavePega(String chave, String user,  String aluno, String horap, String horad, String dia, Boolean ocupada, String dataEfetiva) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
         this.aluno = new SimpleStringProperty(aluno);
@@ -53,6 +56,7 @@ public class ChavePega {
         this.horad = new SimpleStringProperty(horad);
         this.dia = new SimpleStringProperty(dia);
         this.ocupada = new SimpleBooleanProperty(ocupada);
+        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
     public ChavePega() {
 
@@ -142,4 +146,25 @@ public class ChavePega {
     public void setOcupada(SimpleBooleanProperty ocupada) {
         this.ocupada = ocupada;
     }
+
+    public SimpleStringProperty getDataEfetiva() {
+        return dataEfetiva;
+    }
+
+    public void setDataEfetiva(SimpleStringProperty dataEfetiva) {
+        this.dataEfetiva = dataEfetiva;
+    }
+ 
+    public String totring(){
+        return "\n                                                                               \n       "
+              +"\nChave:------------------------------------------------------------------------------------------"+getChave().getValue()
+              +"\nUsuario:----------------------------------------------------------------------------------------"+getUser().getValue()
+              +"\nAluno:------------------------------------------------------------------------------------------"+getAluno().getValue()
+              +"\nData:-------------------------------------------------------------------------------------------"+getDia().getValue()
+              +"\nData da devolucao:------------------------------------------------------------------------"+getDataEfetiva().getValue()
+              +"\nHora do emprestimo:-----------------------------------------------------------------------"+getHorap().getValue()
+              +"\nHora da devolução:-------------------------------------------------------------------------"+getHorad().getValue()
+              ;
+    }
+    
 }
