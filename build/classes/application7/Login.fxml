@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="504.0" prefWidth="394.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.LoginController">
+   <children>
+      <Label layoutX="71.0" layoutY="220.0" prefHeight="21.0" prefWidth="50.0" text="Login" textFill="#d0cdcd">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="71.0" layoutY="290.0" text="Senha" textFill="#c6c0c0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnEntrarSuper" layoutX="136.0" layoutY="385.0" onAction="#entrar" prefHeight="32.0" prefWidth="126.0" text="Entrar" textFill="#11b53d" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="123.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </JFXButton>
+      <TextField fx:id="labelLogin" layoutX="71.0" layoutY="252.0" onKeyPressed="#mover" prefHeight="30.0" prefWidth="268.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="55.0">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Label layoutX="123.0" layoutY="177.0" text="Controle de chaves" textFill="#f2f2f2" AnchorPane.leftAnchor="123.0" AnchorPane.rightAnchor="110.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="labelSenha" layoutX="71.0" layoutY="320.0" prefHeight="30.0" prefWidth="268.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="55.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </PasswordField>
+      <ImageView fitHeight="102.0" fitWidth="114.0" layoutX="142.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="129.0">
+         <image>
+            <Image url="@../imagens/topo_ifpi.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -152,9 +152,9 @@ public class ChavePegaDAO {
         connection = new ConnectionFactory().getConnection();
         List<ChavePega> Lista = new ArrayList<>();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chavepega where chavepega = ? and datap = ? and dataEfetivaD=?;");
+        stmt = connection.prepareStatement("select * from chavepega where chavePega = ? and datap > ? and dataEfetivaD < ?;");
         stmt.setString(1, sala);
-        stmt.setString(2, dataD);
+        stmt.setString(2, data);
         stmt.setString(3, dataD);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {

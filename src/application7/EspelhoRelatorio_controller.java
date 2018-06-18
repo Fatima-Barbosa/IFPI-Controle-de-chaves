@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +59,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
     private Button bntSair;
 
     ChavePegaDAO dao = new ChavePegaDAO();
-    
+
     ChavesDAO cdao = new ChavesDAO();
 
     @Override
@@ -78,30 +79,33 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
 
     @FXML
     private void on_Vizualizar(ActionEvent event) {
-        List<ChavePega> Lista = new ArrayList<>();
+        List<ChavePega> Listsa = new ArrayList<>();
         String n = null;
-        if (dataInicio.getValue().toString().equals("") && dataFinal.getValue().toString().equals("")) {
-//            try {
-//                for (int j = 0; j < dao.RelatorioList().size(); j++) {
-//                    System.out.println("Lista: " + j);
-//                    n += dao.RelatorioList().get(j).totring();
-//                }
-//                txtRelatorio.setText(n);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+//        dataFinal.getValue().toString().isEmpty() && dataInicio.getValue().toString().isEmpty() && 
+        if (Box_salas.getSelectionModel().isEmpty()) {
+            System.out.println("entrou no if");
+            try {
+                for (int j = 0; j < dao.RelatorioList().size(); j++) {
+                    System.out.println("Lista: " + j);
+                    n += dao.RelatorioList().get(j).totring();
+                }
+                txtRelatorio.setText(n);
+            } catch (SQLException ex) {
+                Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-//            try {
-//                for (int j = 0; j < dao.RelatorioFiltrado(Box_salas.getSelectionModel().getSelectedItem(), dataInicio.getValue().toString(), dataFinal.getValue().toString()).size(); j++) {
-//                    System.out.println("Lista: " + j);
-//                    n += dao.RelatorioFiltrado(Box_salas.getValue(), dataInicio.getValue().toString(), dataFinal.getValue().toString()).get(j).totring();
-//                }
-//                txtRelatorio.setText(n);
-//            } catch (SQLException ex) {
-//                Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            System.out.println("entrou no else");
+            try {
+                for (int j = 0; j < dao.RelatorioFiltrado(Box_salas.getValue(), inverteData(dataInicio), inverteData(dataFinal)).size(); j++) {
+                    System.out.println("Lista2 : " + j);
+                    n += dao.RelatorioFiltrado(Box_salas.getValue(), inverteData(dataInicio), inverteData(dataFinal)).get(j).totring();
+                }
+                txtRelatorio.setText(n);
+            } catch (SQLException ex) {
+                System.out.println("exeção: " + ex);
+                Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
     }
 
     @FXML
@@ -165,11 +169,22 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
         navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
     }
 
-    public void carregarChaves(){
+    public void carregarChaves() {
         try {
             Box_salas.setItems(cdao.carregarChaves());
         } catch (SQLException ex) {
             Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public String inverteData(DatePicker dataInicio) {
+        String data1 = "";
+        String dia = dataInicio.getValue().toString().substring(8, 10);
+        String mes = dataInicio.getValue().toString().substring(5, 7);
+        String ano = dataInicio.getValue().toString().substring(0, 4);
+        data1 += dia + "/" + mes + "/" + ano;
+//        System.out.println("data1:"+data1);
+        return data1;
+    }
+
 }
