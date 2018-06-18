@@ -299,6 +299,7 @@ public class UserPadraoController extends BaseController implements Initializabl
             cdao.devolver(tabelaChavesEmUso.getSelectionModel().getSelectedItem().getChave().getValue(), dataFormatada);
             DataChaves = cdao.gerarLista();
             tabelaChavesEmUso.setItems(DataChaves);
+            carregarChaves();
 
         } catch (SQLException ex) {
             Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);

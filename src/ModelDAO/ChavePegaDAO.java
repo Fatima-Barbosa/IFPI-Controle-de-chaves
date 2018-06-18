@@ -32,7 +32,7 @@ public class ChavePegaDAO {
     public void adicionar(ChavePega c) {
         connection = new ConnectionFactory().getConnection();
 
-        sql = "insert into chavepega (aluno,chavePega,usuario,horap,horad,datap,ocupado,dataEfetivaD) values (?,?,?,?,?,?,?,?);";
+        sql = "insert into chavepega (aluno,chavePega,usuario,horap,horad,datap,ocupado) values (?,?,?,?,?,?,?);";
         try {
             // prepared statement para inserção
             stmt = connection.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class ChavePegaDAO {
             stmt.setString(5, c.getHorad().getValue());
             stmt.setString(6, c.getDia().getValue());
             stmt.setBoolean(7, true);
-            stmt.setString(8, c.getDataEfetiva().getValue());
+//            stmt.setString(8, c.getDataEfetiva().getValue());
 
             stmt.execute();
 //            stmt.executeQuery();
