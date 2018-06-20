@@ -63,9 +63,9 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnSair" layoutX="892.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnSair" prefHeight="30.0" prefWidth="46.0" style="-fx-background-color: #AB0909;" text="Sair" textFill="#1b0a0a" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <Button fx:id="btnSair" layoutX="892.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnSair" prefHeight="30.0" prefWidth="46.0" style="-fx-background-color: #AB0909;" text="Sair" textFill="#fffbfb" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <font>
-            <Font name="Calibri Bold" size="13.0" />
+            <Font name="Calibri Bold" size="14.0" />
          </font>
       </Button>
       <PasswordField fx:id="txtSenha" layoutX="749.0" layoutY="198.0" prefHeight="25.0" prefWidth="169.0" />

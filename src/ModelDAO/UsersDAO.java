@@ -71,13 +71,13 @@ public class UsersDAO {
         }
     }
 
-    public void remover(String nome) throws SQLException {
+    public void remover(long nome) throws SQLException {
         connection = new ConnectionFactory().getConnection();
 
         sql = "delete from users where id = ?";
         stmt = connection.prepareStatement(sql);
         // seta os valores
-        stmt.setString(1, nome);
+        stmt.setLong(1, nome);
         // executa
         stmt.execute();
         System.out.println("Excluido com sucesso!");

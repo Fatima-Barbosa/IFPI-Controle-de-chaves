@@ -5,7 +5,10 @@ import ModelDAO.OperadorDAO;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,9 +44,9 @@ public class LoginController extends BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //    verificar();
-        assert labelLogin != null : "fx:id=\"labelLoguin\" was not injected: check your FXML file 'loguinSuperUser.fxml'.";
-        assert labelSenha != null : "fx:id=\"labelSenha\" was not injected: check your FXML file 'loguinSuperUser.fxml'.";
-        assert btnEntrarSuper != null : "fx:id=\"btnEntrarSuper\" was not injected: check your FXML file 'loguinSuperUser.fxml'.";
+                assert btnEntrarSuper != null : "fx:id=\"btnEntrarSuper\" was not injected: check your FXML file 'Login.fxml'.";
+        assert labelLogin != null : "fx:id=\"labelLogin\" was not injected: check your FXML file 'Login.fxml'.";
+        assert labelSenha != null : "fx:id=\"labelSenha\" was not injected: check your FXML file 'Login.fxml'.";
     }
 
 //    String loginp = null;
@@ -95,6 +98,30 @@ public class LoginController extends BaseController implements Initializable {
             System.out.println("aqui");
             labelSenha.requestFocus();
 
+        }
+    }
+
+    @FXML
+    private void on_senha(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.ENTER) {
+            switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
+            case "1":
+                navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+                break;
+            case "2":
+                navigate(event, FXMLLoader.load(getClass().getResource("UserPadrao.fxml")));
+                break;
+            case "sn":
+                Alert dialogo1 = new Alert(Alert.AlertType.WARNING);
+                dialogo1.setTitle("Usuário invalido");
+                dialogo1.setContentText("Usuário invalido");
+                dialogo1.showAndWait();
+                break;
+            default:
+                Alert dialogo2 = new Alert(Alert.AlertType.WARNING);
+                dialogo2.setTitle("Usuário invalido");
+                break;
+        }
         }
     }
 

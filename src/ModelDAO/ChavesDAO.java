@@ -135,7 +135,7 @@ public class ChavesDAO {
                     rs.getBoolean("ocupada"))
             );
         }
-//        stmt.close();
+        stmt.close();
         connection.close();
         return Lista;
     }

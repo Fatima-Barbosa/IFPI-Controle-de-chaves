@@ -78,10 +78,11 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
     }
 
     @FXML
-    private void on_Vizualizar(ActionEvent event) {
-        List<ChavePega> Listsa = new ArrayList<>();
-        String n = null;
-//        dataFinal.getValue().toString().isEmpty() && dataInicio.getValue().toString().isEmpty() && 
+    private void on_Vizualizar1(ActionEvent event) {
+//        List<ChavePega> Listsa = new ArrayList<>();
+        
+/*        String n = null;
+        dataFinal.getValue().toString().isEmpty() && dataInicio.getValue().toString().isEmpty() && 
         if (Box_salas.getSelectionModel().isEmpty()) {
             System.out.println("entrou no if");
             try {
@@ -93,8 +94,12 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             } catch (SQLException ex) {
                 Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+        } 
+        else if(Box_salas.getSelectionModel() == null && dataInicio != null && dataFinal != null){
+            System.out.println("entrou no else if");
+        }else {
             System.out.println("entrou no else");
+            System.out.println("box"+Box_salas.getValue()+"datai :"+inverteData(dataInicio)+"dataf: "+inverteData(dataFinal));
             try {
                 for (int j = 0; j < dao.RelatorioFiltrado(Box_salas.getValue(), inverteData(dataInicio), inverteData(dataFinal)).size(); j++) {
                     System.out.println("Lista2 : " + j);
@@ -105,9 +110,17 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
                 System.out.println("exeção: " + ex);
                 Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } 
+        * 
+*/
     }
 
+    @FXML
+    private void on_Vizualizar(ActionEvent event) {
+        List<ChavePega> Listsa = new ArrayList<>();
+        
+    }
+    
     @FXML
     private void on_BoxSalas(ActionEvent event) {
     }

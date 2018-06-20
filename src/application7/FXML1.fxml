@@ -51,16 +51,16 @@
       </Pane>
       <AnchorPane fx:id="anchorPane" prefHeight="553.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;">
          <children>
-            <TabPane layoutY="19.0" prefHeight="534.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f; -fx-border-color: #4f4f4f;" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutY="19.0" prefHeight="553.0" prefWidth="953.0" style="-fx-background-color: #4f4f4f; -fx-border-color: #4f4f4f;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
                   <Tab text="Salas ocupadas">
                      <content>
-                        <TableView fx:id="tabelaChavesUsadas" prefHeight="496.0" prefWidth="819.0">
+                        <TableView fx:id="tabelaChavesUsadas" prefHeight="553.0" prefWidth="956.0">
                            <columns>
                               <TableColumn fx:id="colUser" minWidth="0.0" prefWidth="287.0" text="Usuário" />
                               <TableColumn fx:id="colSalaP" prefWidth="221.0" text="Sala" />
-                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="253.0" text="Aluno" />
-                              <TableColumn fx:id="colHora" prefWidth="182.0" text="Horário de devolução" />
+                              <TableColumn fx:id="colAluno" minWidth="0.0" prefWidth="262.0" text="Aluno" />
+                              <TableColumn fx:id="colHora" prefWidth="181.0" text="Horário de devolução" />
                            </columns>
                         </TableView>
                      </content>

@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,6 +27,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javax.swing.JOptionPane;
 
@@ -39,8 +42,6 @@ public class CadastroFuncionariosController extends BaseController implements In
     private final UsersDAO dao = new UsersDAO();
 
     @FXML
-    private ImageView img_cadFunVoltar;
-    @FXML
     private Button btnVoltar;
     @FXML
     private PasswordField labelSenha;
@@ -50,9 +51,8 @@ public class CadastroFuncionariosController extends BaseController implements In
     private TextField labelNome;
     @FXML
     private TableView<Users> tabelaUsers;
-    @FXML
-    private ImageView imgExcluir;
-    @FXML
+//    private ImageView imgExcluir;
+//    @FXML
     private ImageView imgEditar;
     @FXML
     private JFXButton btnAdicionar;
@@ -66,6 +66,14 @@ public class CadastroFuncionariosController extends BaseController implements In
     private ObservableList<Users> Data
             = FXCollections.observableArrayList();
     int op = 0;
+    @FXML
+    private MenuItem cont_Editar;
+    @FXML
+    private MenuItem cont_Excluir;
+    @FXML
+    private TextField txt_busc;
+    @FXML
+    private Button btn_busc;
 
     private void limparCampos() {
         labelNome.setText("");
@@ -93,20 +101,22 @@ public class CadastroFuncionariosController extends BaseController implements In
         }
 
         tabelaUsers.setItems(Data);
-
         assert tabelaUsers != null : "fx:id=\"tabelaUsers\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert colNome != null : "fx:id=\"colNome\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert colCodigo != null : "fx:id=\"colCodigo\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert colID != null : "fx:id=\"colID\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
+        assert cont_Editar != null : "fx:id=\"cont_Editar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
+        assert cont_Excluir != null : "fx:id=\"cont_Excluir\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert labelNome != null : "fx:id=\"labelNome\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert labelCPF != null : "fx:id=\"labelCPF\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert labelSenha != null : "fx:id=\"labelSenha\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
-        assert img_cadFunVoltar != null : "fx:id=\"img_cadFunVoltar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
-        assert imgExcluir != null : "fx:id=\"imgExcluir\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
+//        assert imgExcluir != null : "fx:id=\"imgExcluir\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert imgEditar != null : "fx:id=\"imgEditar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert btnAdicionar != null : "fx:id=\"btnAdicionar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
-    }
+        assert txt_busc != null : "fx:id=\"txt_busc\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
+        assert btn_busc != null : "fx:id=\"btn_busc\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
+}
     int linha = -1;
 
     @FXML
@@ -127,31 +137,29 @@ public class CadastroFuncionariosController extends BaseController implements In
         }
     }
 
-    @FXML
-    private void OverExcluir(DragEvent event) {
-        System.out.println("Chegou no Ecluir...");
-        if (event.getGestureSource() == tabelaUsers && event.getDragboard().hasString()) {
-            event.acceptTransferModes(TransferMode.MOVE);
-        }
-        event.consume();
-    }
+//    private void OverExcluir(DragEvent event) {
+//        System.out.println("Chegou no Ecluir...");
+//        if (event.getGestureSource() == tabelaUsers && event.getDragboard().hasString()) {
+//            event.acceptTransferModes(TransferMode.MOVE);
+//        }
+//        event.consume();
+//    }
 
-    @FXML
-    private void DroppedExcluir(DragEvent event) throws SQLException {
-        System.out.println("Largou no remover...");
-
-        Dragboard db = event.getDragboard();
-        System.out.println("Arrastando usuario: " + db.getString());
-        boolean sucess = false;
-        if (db.hasString()) {
-            System.out.println("Apagando o usuario: " + db.getString());
-            Data.remove(linha);
-            dao.remover(db.getString());
-            sucess = true;
-        }
-        event.setDropCompleted(sucess);
-        event.consume();
-    }
+//    private void DroppedExcluir(DragEvent event) throws SQLException {
+//        System.out.println("Largou no remover...");
+//
+//        Dragboard db = event.getDragboard();
+//        System.out.println("Arrastando usuario: " + db.getString());
+//        boolean sucess = false;
+//        if (db.hasString()) {
+//            System.out.println("Apagando o usuario: " + db.getString());
+//            Data.remove(linha);
+//            dao.remover(Long.parseLong((db.toString())));
+//            sucess = true;
+//        }
+//        event.setDropCompleted(sucess);
+//        event.consume();
+//    }
 
     @FXML
     private void OverEdit(DragEvent event) {
@@ -255,4 +263,52 @@ public class CadastroFuncionariosController extends BaseController implements In
         tabelaUsers.setItems(Data);
         System.out.println("atualizando....");
     }
+
+    @FXML
+    private void on_cont_Editar(ActionEvent event) {
+            String id = tabelaUsers.getSelectionModel().getSelectedItem().getCpf().getValue();
+            System.out.println("entrou..........");
+            labelNome.setText(tabelaUsers.getSelectionModel().getSelectedItem().getNomeUser().getValue());
+            labelCPF.setText(tabelaUsers.getSelectionModel().getSelectedItem().getCpf().getValue());
+            labelSenha.setText(dao.senha(id));
+            btnAdicionar.setText("Editar");
+            
+            op = 2;
+            
+    }
+
+    @FXML
+    private void on_cont_Excluir(ActionEvent event) {
+        try {
+            dao.remover(tabelaUsers.getSelectionModel().getSelectedItem().getId().getValue());
+            atualizar();
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroFuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void on_busc(ActionEvent event) {
+        try {
+            Data = dao.FiltrarList(txt_busc.getText());
+            tabelaUsers.setItems(Data);
+            System.out.println("atualizando....");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroFuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void on_txt_busc(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Data = dao.FiltrarList(txt_busc.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            tabelaUsers.setItems(Data);
+        }
+    }
+    
 }

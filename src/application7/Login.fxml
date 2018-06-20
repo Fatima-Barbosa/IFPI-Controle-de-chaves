@@ -35,7 +35,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <PasswordField fx:id="labelSenha" layoutX="71.0" layoutY="320.0" prefHeight="30.0" prefWidth="268.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="55.0">
+      <PasswordField fx:id="labelSenha" layoutX="71.0" layoutY="320.0" onKeyPressed="#on_senha" prefHeight="30.0" prefWidth="268.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="55.0">
          <font>
             <Font size="14.0" />
          </font>
