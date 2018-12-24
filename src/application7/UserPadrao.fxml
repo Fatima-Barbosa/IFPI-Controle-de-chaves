@@ -30,19 +30,20 @@
                               <Font name="Calibri" size="18.0" />
                            </font></Label>
                                 <TextField fx:id="txtUser" layoutX="686.0" layoutY="189.0" prefHeight="25.0" prefWidth="179.0" AnchorPane.rightAnchor="204.0" />
-                                <Label layoutX="689.0" layoutY="160.0" text="Usuário*" textFill="#d0cece" AnchorPane.rightAnchor="314.0">
+                                <Label layoutX="686.0" layoutY="160.0" text="Usuário*" textFill="#d0cece" AnchorPane.rightAnchor="317.0">
                            <font>
                               <Font name="Calibri" size="18.0" />
                            </font></Label>
-                                <Label layoutX="880.0" layoutY="160.0" text="Senha*" textFill="#bfbdbd" AnchorPane.rightAnchor="135.0">
+                                <Label layoutX="884.0" layoutY="160.0" text="Senha*" textFill="#bfbdbd" AnchorPane.rightAnchor="131.0">
                            <font>
                               <Font name="Calibri" size="18.0" />
                            </font></Label>
                                 <TableView fx:id="tabelaChavesEmUso" onDragDetected="#detectar" prefHeight="524.0" prefWidth="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="colChave" prefWidth="247.0" text="Chave" />
-                                        <TableColumn fx:id="colUsuario" prefWidth="249.0" text="Usuário" />
-                                        <TableColumn fx:id="colDevolucao" minWidth="0.0" prefWidth="173.0" text="Horário de Devolução" />
+                                        <TableColumn fx:id="colChave" prefWidth="165.0" text="Chave" />
+                                        <TableColumn fx:id="colUsuario" prefWidth="197.00003051757812" text="Usuário" />
+                                        <TableColumn fx:id="colDevolucao" minWidth="0.0" prefWidth="207.0" text="Horário de Devolução" />
+                              <TableColumn prefWidth="99.0" text="Devolver" />
                                     </columns>
                            <contextMenu>
                               <ContextMenu>
@@ -78,7 +79,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <PasswordField fx:id="txtSenha" layoutX="880.0" layoutY="189.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.rightAnchor="15.0" />
+                        <PasswordField fx:id="txtSenha" layoutX="882.0" layoutY="189.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.rightAnchor="13.0" />
                             </children>
                         </AnchorPane>
                     </content>

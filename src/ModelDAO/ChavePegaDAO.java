@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +34,9 @@ public class ChavePegaDAO {
     public void adicionar(ChavePega c) {
         connection = new ConnectionFactory().getConnection();
 
+        Date d = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         sql = "insert into chavepega (aluno,chavePega,usuario,horap,horad,datap,ocupado) values (?,?,?,?,?,?,?);";
         try {
             // prepared statement para inserção
@@ -42,7 +47,7 @@ public class ChavePegaDAO {
             stmt.setObject(3, c.getUser().getValue());
             stmt.setString(4, c.getHorap().getValue());
             stmt.setString(5, c.getHorad().getValue());
-            stmt.setString(6, c.getDia().getValue());
+            stmt.setString(6, dateFormat.format(d));
             stmt.setBoolean(7, true);
 //            stmt.setString(8, c.getDataEfetiva().getValue());
 
@@ -121,58 +126,76 @@ public class ChavePegaDAO {
         return Lista;
     }
 
-    public final List<ChavePega> RelatorioList() throws SQLException {
+    public final List<ChavePega> RelatorioList() {
         connection = new ConnectionFactory().getConnection();
         List<ChavePega> Lista = new ArrayList<>();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chavepega;");
+        try {
+            stmt = connection.prepareStatement("select * from keycontroll.chavepega;");
 
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            ChavePega c = new ChavePega(
-                    rs.getString("chavePega"),
-                    rs.getString("usuario"),
-                    rs.getString("aluno"),
-                    rs.getString("horap"),
-                    rs.getString("horad"),
-                    rs.getString("datap"),
-                    rs.getLong("id"),
-                    rs.getBoolean("ocupado"),
-                    rs.getString("dataEfetivaD")
-            );
-            Lista.add(c);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ChavePega c = new ChavePega(
+                        rs.getString("chavePega"),
+                        rs.getString("usuario"),
+                        rs.getString("aluno"),
+                        rs.getString("horap"),
+                        rs.getString("horad"),
+                        rs.getString("datap"),
+                        rs.getLong("id"),
+                        rs.getBoolean("ocupado"),
+                        rs.getString("dataEfetivaD")
+                );
+                Lista.add(c);
+            }
+            stmt.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavePegaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        stmt.close();
-        connection.close();
 
         return Lista;
     }
 
-    public final List<ChavePega> RelatorioFiltrado(String sala, String data, String dataD) throws SQLException {
+    public final List<ChavePega> RelatorioFiltrado(String sala, String data, String dataD) {
         connection = new ConnectionFactory().getConnection();
         List<ChavePega> Lista = new ArrayList<>();
-
-        stmt = connection.prepareStatement("select * from chavepega where chavePega = ? and datap > ? and dataEfetivaD < ?;");
-        stmt.setString(1, sala);
-        stmt.setString(2, data);
-        stmt.setString(3, dataD);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            ChavePega c = new ChavePega(
-                    rs.getString("chavePega"),
-                    rs.getString("usuario"),
-                    rs.getString("aluno"),
-                    rs.getString("horap"),
-                    rs.getString("horad"),
-                    rs.getString("datap"),
-                    rs.getLong("id"),
-                    rs.getBoolean("ocupado"),
-                    rs.getString("dataEfetivaD")
+        try {
+            stmt = connection.prepareStatement(
+                    "select * from chavePega WHERE chavePega = ? and extract(year from datap) >= ? and extract(month from datap) >= ? \n"
+                    + "and extract(day from datap) >= ? and extract(year from datap) <= ? and extract(month from datap) <= ? \n"
+                    + "and extract(day from datap) <= ?;"
             );
-            Lista.add(c);
+            stmt.setString(1, sala);
+            stmt.setString(2, data.toString().substring(0, 4));
+            stmt.setString(3, data.toString().substring(5, 7));
+            stmt.setString(4, data.toString().substring(8, 10));
+            stmt.setString(5, dataD.substring(0, 4));
+            stmt.setString(6, dataD.substring(5, 7));
+            stmt.setString(7, dataD.substring(8, 10));
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                ChavePega c = new ChavePega(
+                        rs.getString("chavePega"),
+                        rs.getString("usuario"),
+                        rs.getString("aluno"),
+                        rs.getString("horap"),
+                        rs.getString("horad"),
+                        rs.getString("datap"),
+                        rs.getLong("id"),
+                        rs.getBoolean("ocupado"),
+                        rs.getString("dataEfetivaD")
+                );
+                Lista.add(c);
+            }
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("Erro:  " + ex);
         }
-        stmt.close();
-        connection.close();
+
         return Lista;
     }
 

@@ -46,15 +46,15 @@ public class ChavePega {
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
 
-    public ChavePega(String chave, String user, String aluno, String horap, String horad, String dia, Boolean ocupada, String dataEfetiva) {
+    public ChavePega(String chave, String user, String aluno, String horap, String horad, Boolean ocupada) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
         this.aluno = new SimpleStringProperty(aluno);
         this.horap = new SimpleStringProperty(horap);
         this.horad = new SimpleStringProperty(horad);
-        this.dia = new SimpleStringProperty(dia);
+//        this.dia = new SimpleStringProperty(dia);
         this.ocupada = new SimpleBooleanProperty(ocupada);
-        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
+//        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
 
     public ChavePega() {
@@ -155,14 +155,15 @@ public class ChavePega {
     }
 
     public String totring() {
-        return "\n                                                                               \n       "
-                + "\nChave:------------------------------------------------------------------------------------------" + getChave().getValue()
+        return "\n  "
                 + "\nUsuario:----------------------------------------------------------------------------------------" + getUser().getValue()
+                + "\nChave:------------------------------------------------------------------------------------------" + getChave().getValue()
                 + "\nAluno:------------------------------------------------------------------------------------------" + getAluno().getValue()
-                + "\nData:-------------------------------------------------------------------------------------------" + getDia().getValue()
-                + "\nData da devolucao:------------------------------------------------------------------------" + getDataEfetiva().getValue()
-                + "\nHora do emprestimo:-----------------------------------------------------------------------" + getHorap().getValue()
-                + "\nHora da devolução:-------------------------------------------------------------------------" + getHorad().getValue();
+                + "\nData do emprestimo:-----------------------------------------------------------------------------" + getDia().getValue()
+                + "\nHora do emprestimo:-----------------------------------------------------------------------------" + getHorap().getValue()
+                + "\nHora prevista para devolução:-------------------------------------------------------------------" + getHorad().getValue()
+                + "\nData efetiva da devolução:----------------------------------------------------------------------" + getDataEfetiva().getValue();
+
     }
 
 }

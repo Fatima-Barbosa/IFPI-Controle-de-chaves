@@ -18,11 +18,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +63,10 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
     ChavePegaDAO dao = new ChavePegaDAO();
 
     ChavesDAO cdao = new ChavesDAO();
+    @FXML
+    private Button btnRelatorioGeral;
+    @FXML
+    private Button btnSALVAR_relatorioGeral;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,87 +84,92 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
     }
 
     @FXML
-    private void on_Vizualizar1(ActionEvent event) {
-//        List<ChavePega> Listsa = new ArrayList<>();
-        
-/*        String n = null;
-        dataFinal.getValue().toString().isEmpty() && dataInicio.getValue().toString().isEmpty() && 
-        if (Box_salas.getSelectionModel().isEmpty()) {
-            System.out.println("entrou no if");
-            try {
-                for (int j = 0; j < dao.RelatorioList().size(); j++) {
-                    System.out.println("Lista: " + j);
-                    n += dao.RelatorioList().get(j).totring();
-                }
-                txtRelatorio.setText(n);
-            } catch (SQLException ex) {
-                Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } 
-        else if(Box_salas.getSelectionModel() == null && dataInicio != null && dataFinal != null){
-            System.out.println("entrou no else if");
-        }else {
-            System.out.println("entrou no else");
-            System.out.println("box"+Box_salas.getValue()+"datai :"+inverteData(dataInicio)+"dataf: "+inverteData(dataFinal));
-            try {
-                for (int j = 0; j < dao.RelatorioFiltrado(Box_salas.getValue(), inverteData(dataInicio), inverteData(dataFinal)).size(); j++) {
-                    System.out.println("Lista2 : " + j);
-                    n += dao.RelatorioFiltrado(Box_salas.getValue(), inverteData(dataInicio), inverteData(dataFinal)).get(j).totring();
-                }
-                txtRelatorio.setText(n);
-            } catch (SQLException ex) {
-                System.out.println("exeção: " + ex);
-                Logger.getLogger(EspelhoRelatorio_controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } 
-        * 
-*/
-    }
-
-    @FXML
     private void on_Vizualizar(ActionEvent event) {
-        List<ChavePega> Listsa = new ArrayList<>();
+        List<ChavePega> Lista = new ArrayList<>();
+        String n = null;
+        String nada = "Não há registro!";
+        String salas = Box_salas.getValue();
+        String datainicio = dataInicio.getValue().toString();
+        String datafinal = dataFinal.getValue().toString();
+        int tamanho = 0;
+        tamanho = dao.RelatorioFiltrado(salas, datainicio, datafinal).size();
+        System.out.println("tamanho: " + tamanho);
+        for (int j = 0; j < tamanho; j++) {
+
+            if (tamanho > 0) {
+
+                n += dao.RelatorioFiltrado(salas, datainicio, datafinal).get(j).totring();
+
+            } else {
+
+                txtRelatorio.setText(nada);
+            }
+
+        }
+        txtRelatorio.setText(n);
+    }
+
+    @FXML
+    private void on_relatorio_geral(ActionEvent event) {
+        String n = null;
+        String nada = "Não há registro!";
         
-    }
-    
-    @FXML
-    private void on_BoxSalas(ActionEvent event) {
-    }
+        int tamanho = 0;
+        tamanho = dao.RelatorioList().size();
+        System.out.println("tamanho: " + tamanho);
+        for (int j = 0; j < tamanho; j++) {
 
-    @FXML
-    private void on_dataInicio(ActionEvent event) {
-    }
+            if (tamanho > 0) {
 
-    @FXML
-    private void on_dataFinal(ActionEvent event) {
+                n += dao.RelatorioList().get(j).totring();
+
+            } else {
+
+                txtRelatorio.setText(nada);
+            }
+
+        }
+        txtRelatorio.setText(n);
     }
 
     @FXML
     private void on_Salvar(ActionEvent event) {
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy");
         Date date = new Date();
         String Dataformatada = dateFormat.format(date);
+
         Document doc = new Document(PageSize.A4, 30f, 10f, 10f, 10f);
+
         SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+
         Date hora = Calendar.getInstance().getTime();
         String horaformatada = sdf.format(hora);
+
         System.out.println("" + horaformatada);
         Font fontDeLink = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
 
-        try {
-            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio" + Dataformatada + horaformatada + ".pdf"));
-            doc.open();
-            List<ChavePega> cp = new ChavePegaDAO().RelatorioList();
+        String salas = Box_salas.getValue();
+        String datainicio = dataInicio.getValue().toString();
+        String datafinal = dataFinal.getValue().toString();
 
-            doc.add(new Paragraph("                                                           Relatório de Chaves usadas\n       ", fontDeLink));
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/Relatorio"
+                    + Dataformatada + horaformatada + ".pdf"));
+            doc.open();
+            List<ChavePega> cp = new ChavePegaDAO().RelatorioFiltrado(salas, datainicio, datafinal);
+
+            doc.add(new Paragraph("                                                           "
+                    + "Relatório de uso das salas\n       ", fontDeLink));
 
             for (int i = 0; i < cp.size(); i++) {
                 doc.add(new Paragraph("Usuario:-----------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
                 doc.add(new Paragraph("Chave:-------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
                 doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
-                doc.add(new Paragraph("Data:--------------------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
-                doc.add(new Paragraph("Hora:--------------------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
-                doc.add(new Paragraph("Devolução:------------------------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data do emprestimo:------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora do emprestimo:------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora prevista para devolução:--------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
 
@@ -168,13 +179,13 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             a.setHeaderText("Relatorio gerado em: C:/Users/Public/");
             a.show();
 
-        } catch (DocumentException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (DocumentException | FileNotFoundException ex) {
             Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void on_SalvarGeral(ActionEvent event) {
     }
 
     @FXML
@@ -196,7 +207,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
         String mes = dataInicio.getValue().toString().substring(5, 7);
         String ano = dataInicio.getValue().toString().substring(0, 4);
         data1 += dia + "/" + mes + "/" + ano;
-//        System.out.println("data1:"+data1);
+        System.out.println("data1:" + data1);
         return data1;
     }
 

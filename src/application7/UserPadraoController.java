@@ -171,6 +171,7 @@ public class UserPadraoController extends BaseController implements Initializabl
 
     @FXML
     private void pegar(ActionEvent event) {
+        String dataEfetivaDevolucaoNulla = "0000-00-00";
         if (txtUser.getText().equals("") && txtSenha.getText().equals("")) {
             System.out.println("erro");
             Alert dialogo1 = new Alert(Alert.AlertType.ERROR);
@@ -179,13 +180,12 @@ public class UserPadraoController extends BaseController implements Initializabl
             dialogo1.showAndWait();
         } else {
             if (dao.checkLogin(txtUser.getText(), txtSenha.getText())) {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = new Date();
+                
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 Date hora = Calendar.getInstance().getTime();
                 String horaformatada = sdf.format(hora);
+                
 
-                System.out.println("data: " + dateFormat.format(date));
                 System.out.println("Hora: " + horaformatada);
                 ChavePega cp = new ChavePega(
                         labs.getValue(),
@@ -193,9 +193,7 @@ public class UserPadraoController extends BaseController implements Initializabl
                         txtAluno.getText(),
                         horaformatada,
                         txtHora.getValue().toString(),
-                        dateFormat.format(date),
-                        true,
-                        dateFormat.format(date)
+                        true
                 );
 
                 try {
@@ -244,12 +242,12 @@ public class UserPadraoController extends BaseController implements Initializabl
         Dragboard db = event.getDragboard();
         System.out.println("Arrastando chave: " + db.getString());
         boolean sucess = false;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date data = new Date();
         String dataFormatada = dateFormat.format(data);
         if (db.hasString()) {
             System.out.println("Devolvendo o chave: " + db.getString());
-            //DataChaves.remove(linha);
+            DataChaves.remove(linha);
             cdao.devolver(db.getString(), dataFormatada);
             sucess = true;
             DataChaves = cdao.gerarLista();
@@ -292,7 +290,7 @@ public class UserPadraoController extends BaseController implements Initializabl
 
     @FXML
     private void devolver(ActionEvent event) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date data = new Date();
         String dataFormatada = dateFormat.format(data);
         try {

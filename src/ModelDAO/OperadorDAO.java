@@ -1,6 +1,9 @@
 package ModelDAO;
 
 import Classes.Operador;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -32,9 +35,21 @@ public class OperadorDAO {
                 + " values(?,?,?,?);";
         try {
 
+//            MessageDigest md = MessageDigest.getInstance("SHA-256");
+//            byte messageDigest[] = md.digest(o.getSenha().getValue().getBytes("UTF-8"));
+//            
+//            StringBuilder sb = new StringBuilder();
+//            
+//            for(byte b: messageDigest){
+//                sb.append(String.format("%02X", 0xFF & b));
+//                
+//            }
+//            String senhaHex = sb.toString();
+            
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, o.getNome().getValue());
             stmt.setString(2, o.getLogin().getValue());
+            //stmt.setString(3, senhaHex);
             stmt.setString(3, o.getSenha().getValue());
             stmt.setString(4, o.getTipo().getValue());
             stmt.execute();
@@ -46,6 +61,11 @@ public class OperadorDAO {
             Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("erro no adicionar, caiu no catch!");
         }
+//        catch (NoSuchAlgorithmException ex) {
+//            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (UnsupportedEncodingException ex) {
+//            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 
