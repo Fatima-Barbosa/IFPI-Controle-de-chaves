@@ -2,6 +2,7 @@ package application7;
 
 import Classes.Operador;
 import ModelDAO.OperadorDAO;
+import com.jfoenix.controls.JFXButton;
 import static java.awt.Color.GREEN;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +24,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 
@@ -67,6 +69,10 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
     private MenuItem CtextExcluir;
     @FXML
     private MenuItem ctextEditar;
+    @FXML
+    private TextField txt_busc;
+    @FXML
+    private JFXButton btn_buscar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -169,6 +175,14 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
         txtLogin.setText("");
         txtSenha.setText("");
         BoxNivel.setValue("");
+    }
+
+    @FXML
+    private void on_buscTXT(KeyEvent event) {
+    }
+
+    @FXML
+    private void on_buscButon(ActionEvent event) {
     }
 
 }

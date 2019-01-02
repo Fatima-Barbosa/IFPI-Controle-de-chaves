@@ -25,6 +25,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 //import javafx.scene.input.MouseEvent;
 
@@ -73,6 +75,10 @@ public class ChavesController extends BaseController implements Initializable {
     private MenuItem contextEditar;
     @FXML
     private MenuItem contextExcluir;
+    @FXML
+    private JFXButton btnPesquisar;
+    @FXML
+    private TextField txtPesquisar;
 
     private void limparCampos() {
         labelSala.setText("");
@@ -108,7 +114,7 @@ public class ChavesController extends BaseController implements Initializable {
             keys k = new keys(
                     labelSala.getText(),
                     labelDescricao.getText(),
-//                    false
+                    //                    false
                     tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
             );
             dao.update(k);
@@ -231,12 +237,12 @@ public class ChavesController extends BaseController implements Initializable {
     @FXML
     private void ContextEdit(ActionEvent event) {
         keys k = new keys(
-                    labelSala.getText(),
-                    labelDescricao.getText(),
-//                    false
-                    tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
-            );
-            dao.update(k);
+                labelSala.getText(),
+                labelDescricao.getText(),
+                //                    false
+                tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
+        );
+        dao.update(k);
     }
 
     @FXML
@@ -249,8 +255,7 @@ public class ChavesController extends BaseController implements Initializable {
         }
     }
 
-    
-    public void atualizarTabela(){
+    public void atualizarTabela() {
         try {
             Data = dao.gerarLista();
         } catch (SQLException ex) {
@@ -258,5 +263,28 @@ public class ChavesController extends BaseController implements Initializable {
         }
 
         tabelaChave.setItems(Data);
+    }
+
+    @FXML
+    private void on_pesquisar(ActionEvent event) {
+        try {
+            Data = dao.filtrarList(txtPesquisar.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tabelaChave.setItems(Data);
+    }
+
+    @FXML
+    private void on_Pesquisar_Enter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                Data = dao.filtrarList(txtPesquisar.getText());
+                System.out.println(txtPesquisar.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            tabelaChave.setItems(Data);
+        }
     }
 }

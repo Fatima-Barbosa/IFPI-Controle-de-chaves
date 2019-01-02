@@ -85,52 +85,56 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
 
     @FXML
     private void on_Vizualizar(ActionEvent event) {
-        List<ChavePega> Lista = new ArrayList<>();
-        String n = null;
+        String n = "";
         String nada = "Não há registro!";
         String salas = Box_salas.getValue();
         String datainicio = dataInicio.getValue().toString();
         String datafinal = dataFinal.getValue().toString();
-        int tamanho = 0;
-        tamanho = dao.RelatorioFiltrado(salas, datainicio, datafinal).size();
-        System.out.println("tamanho: " + tamanho);
-        for (int j = 0; j < tamanho; j++) {
 
-            if (tamanho > 0) {
+        if (salas == null) {
+            System.out.println("salas = 0 ");
+        } else if (datafinal == null && datainicio == null) {
+            System.out.println("datas vazias");
+        } else {
+
+            int tamanho = 0;
+            tamanho = dao.RelatorioFiltrado(salas, datainicio, datafinal).size();
+
+            if (tamanho <= 0) {
+                System.out.println("blá");
+                n += nada;
+            }
+
+            for (int j = 0; j < tamanho; j++) {
 
                 n += dao.RelatorioFiltrado(salas, datainicio, datafinal).get(j).totring();
 
-            } else {
-
-                txtRelatorio.setText(nada);
             }
-
+            txtRelatorio.setText(n);
         }
-        txtRelatorio.setText(n);
     }
 
     @FXML
     private void on_relatorio_geral(ActionEvent event) {
-        String n = null;
+        String n = "";
         String nada = "Não há registro!";
-        
+
         int tamanho = 0;
         tamanho = dao.RelatorioList().size();
-        System.out.println("tamanho: " + tamanho);
-        for (int j = 0; j < tamanho; j++) {
 
-            if (tamanho > 0) {
+        if (tamanho <= 0) {
+            System.out.println("blá");
+            n += nada;
+        }
 
-                n += dao.RelatorioList().get(j).totring();
+        for (int j = 0; j <= tamanho; j++) {
 
-            } else {
-
-                txtRelatorio.setText(nada);
-            }
+            n += dao.RelatorioList().get(j).totring();
 
         }
         txtRelatorio.setText(n);
     }
+// salvando o relatório por chaves
 
     @FXML
     private void on_Salvar(ActionEvent event) {
@@ -163,13 +167,13 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
                     + "Relatório de uso das salas\n       ", fontDeLink));
 
             for (int i = 0; i < cp.size(); i++) {
-                doc.add(new Paragraph("Usuario:-----------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
-                doc.add(new Paragraph("Chave:-------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
+                doc.add(new Paragraph("Usuario:--------------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
+                doc.add(new Paragraph("Chave:----------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
                 doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data do emprestimo:------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
                 doc.add(new Paragraph("Hora do emprestimo:------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
-                doc.add(new Paragraph("Hora prevista para devolução:--------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
-                doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora prevista para devolução:-------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getDataEfetiva().getValue(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
 
@@ -183,9 +187,52 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+//Salvando o relatório geral 
 
     @FXML
     private void on_SalvarGeral(ActionEvent event) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyy");
+        Date date = new Date();
+        String Dataformatada = dateFormat.format(date);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmmss");
+        Date hora = Calendar.getInstance().getTime();
+        String horaformatada = sdf.format(hora);
+
+        Document doc = new Document(PageSize.A4, 30f, 10f, 10f, 10f);
+
+        Font fontDeLink = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.BLACK);
+
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream("C:/Users/Public/RelatorioGeral"
+                    + Dataformatada + horaformatada + ".pdf"));
+
+            doc.open();
+            List<ChavePega> cp = new ChavePegaDAO().RelatorioList();
+
+            doc.add(new Paragraph("                                                           "
+                    + "Relatório geral\n       ", fontDeLink));
+
+            for (int i = 0; i < cp.size(); i++) {
+                doc.add(new Paragraph("Usuario:--------------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
+                doc.add(new Paragraph("Chave:----------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
+                doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data do emprestimo:------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora do emprestimo:------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
+                doc.add(new Paragraph("Hora prevista para devolução:-------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
+                doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getDataEfetiva().getValue(), fontDeLink));
+                doc.add(new Paragraph("                                                "));
+            }
+
+            doc.close();
+
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setHeaderText("Relatorio gerado em: C:/Users/Public/");
+            a.show();
+
+        } catch (DocumentException | FileNotFoundException ex) {
+            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML

@@ -162,8 +162,9 @@ public class ChavesDAO {
         ObservableList<keys> Lista
                 = FXCollections.observableArrayList();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chaves where sala like ?;");
+        stmt = connection.prepareStatement("select * from keycontroll.chaves where sala like ? or descricao like ?;");
         stmt.setString(1, "%" + n + "%");
+        stmt.setString(2, "%" + n + "%");
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Lista.add(new keys(
