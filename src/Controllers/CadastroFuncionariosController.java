@@ -1,4 +1,4 @@
-package application7;
+package Controllers;
 
 import Classes.Users;
 import ModelDAO.UsersDAO;
@@ -84,7 +84,7 @@ public class CadastroFuncionariosController extends BaseController implements In
     @FXML
     void voltarbtn(ActionEvent event) throws IOException {
         System.out.println("TESTE!");
-        navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     @Override

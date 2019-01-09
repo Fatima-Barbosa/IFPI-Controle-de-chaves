@@ -1,4 +1,4 @@
-package application7;
+package Controllers;
 
 import Classes.ChavePega;
 import Classes.Users;
@@ -19,11 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,7 +33,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Fátima
  */
-public class FXML1Controller extends BaseController implements Initializable {
+public class MenuController extends BaseController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -130,7 +126,7 @@ public class FXML1Controller extends BaseController implements Initializable {
             try {
                 Data = keysDao.filtrarList(buscKey.getText());
             } catch (SQLException ex) {
-                Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
             tabelaChaves.setItems(Data);
         }
@@ -141,14 +137,14 @@ public class FXML1Controller extends BaseController implements Initializable {
         try {
             Data = keysDao.filtrarList(buscKey.getText());
         } catch (SQLException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tabelaChaves.setItems(Data);
     }
 
     @FXML
     void onRelatorios(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("EspelhoRelatorio.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/EspelhoRelatorio.fxml")));
     }
 
     @FXML
@@ -156,7 +152,7 @@ public class FXML1Controller extends BaseController implements Initializable {
         try {
             Data2 = userDao.FiltrarList(UserBusc.getText());
         } catch (SQLException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tabelaUsuarios.setItems(Data2);
     }
@@ -167,7 +163,7 @@ public class FXML1Controller extends BaseController implements Initializable {
             try {
                 Data2 = userDao.FiltrarList(UserBusc.getText());
             } catch (SQLException ex) {
-                Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
             }
             tabelaUsuarios.setItems(Data2);
         }
@@ -175,7 +171,7 @@ public class FXML1Controller extends BaseController implements Initializable {
 
     @FXML
     void ONKeys(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("Chaves.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Chaves.fxml")));
     }
 
     void ONconfig(ActionEvent event) {
@@ -186,17 +182,17 @@ public class FXML1Controller extends BaseController implements Initializable {
     void ONoperadores(ActionEvent event) throws IOException {
 //        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml"));
 //        anchorPane.getChildren().setAll(a);
-        navigate(event, FXMLLoader.load(getClass().getResource("Tela_cad_operadores.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Tela_cad_operadores.fxml")));
     }
 
     @FXML
     void ONusuarios(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("CadastroFuncionarios.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/CadastroFuncionarios.fxml")));
     }
 
     @FXML
     void onSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("Login.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
     }
 
     @Override
@@ -234,7 +230,7 @@ public class FXML1Controller extends BaseController implements Initializable {
         try {
             Datacp = cdao.gerarLista();
         } catch (SQLException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         tabelaChavesUsadas.setItems(Datacp);
@@ -263,40 +259,6 @@ public class FXML1Controller extends BaseController implements Initializable {
         assert collNome != null : "fx:id=\"collNome\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert collCode != null : "fx:id=\"collCode\" was not injected: check your FXML file 'FXML1.fxml'.";
         assert collID != null : "fx:id=\"collID\" was not injected: check your FXML file 'FXML1.fxml'.";
-    }
-
-    @FXML
-    private void onApagarDados(ActionEvent event) {
-        boolean r = false;
-        String n;
-
-        Alert dialogo1 = new Alert(AlertType.CONFIRMATION);
-        dialogo1.setTitle("Atenção");
-        dialogo1.setHeaderText("Deseja realmente apagar todo o historico?");
-        dialogo1.getButtonTypes().add(ButtonType.YES);
-        ButtonType btn = new ButtonType("Sim", ButtonBar.ButtonData.YES);
-        ButtonType btn1 = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
-        dialogo1.getButtonTypes().setAll(btn, btn1);
-//        dialogo1.showAndWait().ifPresent(b -> {
-//            if(b == btn){
-//                //r = true;
-////                n = "";
-//            }
-//        });
-        r = dialogo1.showAndWait().get().equals(btn);
-        System.out.println(""+r);
-        //.getClass().equals(btn);
-        //System.out.println(""+n);
-        if (r == true) {
-            cdao.removerDados();
-            Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
-
-            dialogo.setTitle("Dados excluidos");
-            dialogo.setHeaderText("Operaçao bem sucedida!");
-            dialogo.setContentText("Todos os registros de chaves pegas foram excluidos!");
-            dialogo.showAndWait();
-        }
-
     }
 
 }

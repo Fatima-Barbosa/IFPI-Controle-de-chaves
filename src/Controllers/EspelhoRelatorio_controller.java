@@ -1,7 +1,6 @@
-package application7;
+package Controllers;
 
 import Classes.ChavePega;
-import Classes.keys;
 import ModelDAO.ChavePegaDAO;
 import ModelDAO.ChavesDAO;
 import com.itextpdf.text.BaseColor;
@@ -16,15 +15,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,14 +95,15 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             tamanho = dao.RelatorioFiltrado(salas, datainicio, datafinal).size();
 
             if (tamanho <= 0) {
-                System.out.println("blá");
+                System.out.println("tamanho da lista = " + tamanho);
                 n += nada;
-            }
+            } else {
 
-            for (int j = 0; j < tamanho; j++) {
+                for (int j = 0; j < tamanho; j++) {
 
-                n += dao.RelatorioFiltrado(salas, datainicio, datafinal).get(j).totring();
+                    n += dao.RelatorioFiltrado(salas, datainicio, datafinal).get(j).totring();
 
+                }
             }
             txtRelatorio.setText(n);
         }
@@ -125,13 +120,14 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
         if (tamanho <= 0) {
             System.out.println("blá");
             n += nada;
+        } else {
+            for (int k = 0; k < tamanho; k++) {
+
+                n += dao.RelatorioList().get(k).totring();
+
+            }
         }
 
-        for (int j = 0; j <= tamanho; j++) {
-
-            n += dao.RelatorioList().get(j).totring();
-
-        }
         txtRelatorio.setText(n);
     }
 // salvando o relatório por chaves
@@ -169,11 +165,13 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             for (int i = 0; i < cp.size(); i++) {
                 doc.add(new Paragraph("Usuario:--------------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
                 doc.add(new Paragraph("Chave:----------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
+                doc.add(new Paragraph("ID da chave:-------------------------------------------------" + cp.get(i).getId(), fontDeLink));
                 doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data do emprestimo:------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
                 doc.add(new Paragraph("Hora do emprestimo:------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
                 doc.add(new Paragraph("Hora prevista para devolução:-------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getDataEfetiva().getValue(), fontDeLink));
+                doc.add(new Paragraph("Ocupada:-----------------------------------------------------" + cp.get(i).getOcupada().getValue(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
 
@@ -184,7 +182,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             a.show();
 
         } catch (DocumentException | FileNotFoundException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 //Salvando o relatório geral 
@@ -216,11 +214,13 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             for (int i = 0; i < cp.size(); i++) {
                 doc.add(new Paragraph("Usuario:--------------------------------------------------------" + cp.get(i).getUser().getValue(), fontDeLink));
                 doc.add(new Paragraph("Chave:----------------------------------------------------------" + cp.get(i).getChave().getValue(), fontDeLink));
+                doc.add(new Paragraph("ID da chave:-------------------------------------------------" + cp.get(i).getId(), fontDeLink));
                 doc.add(new Paragraph("Aluno:-------------------------------------------------------" + cp.get(i).getAluno().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data do emprestimo:------------------------------------------" + cp.get(i).getDia().getValue(), fontDeLink));
                 doc.add(new Paragraph("Hora do emprestimo:------------------------------------------" + cp.get(i).getHorap().getValue(), fontDeLink));
                 doc.add(new Paragraph("Hora prevista para devolução:-------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getDataEfetiva().getValue(), fontDeLink));
+                doc.add(new Paragraph("Ocupada:-----------------------------------------------------" + cp.get(i).getOcupada().getValue(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
 
@@ -231,7 +231,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
             a.show();
 
         } catch (DocumentException | FileNotFoundException ex) {
-            Logger.getLogger(FXML1Controller.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

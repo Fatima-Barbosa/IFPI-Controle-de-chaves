@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -37,7 +38,10 @@ public class UsersDAO {
             // seta os valores
             stmt.setString(1, u.getNomeUser().getValue());
             stmt.setString(2, u.getCpf().getValue());
-            stmt.setString(3, u.getSenha().getValue());
+
+            String encoding = Base64.getEncoder().encodeToString(u.getSenha().getValue().getBytes());
+            //passando senha criptografada
+            stmt.setString(3, encoding);
             stmt.execute();
 
             System.out.println("Adicionado com sucesso!");
@@ -59,7 +63,10 @@ public class UsersDAO {
             stmt = connection.prepareStatement("UPDATE keycontroll.users SET nomeUsers = ?, cpf = ?, senha = ? WHERE id = ?");
             stmt.setString(1, c.getNomeUser().getValue());
             stmt.setString(2, c.getCpf().getValue());
-            stmt.setString(3, c.getSenha().getValue());
+
+            String encoding = Base64.getEncoder().encodeToString(c.getSenha().getValue().getBytes());
+            //Passando a senha atuaizada com criptográfia
+            stmt.setString(3, encoding);
             stmt.setString(4, c.getId().getValue().toString());
 
             stmt.executeUpdate();
@@ -135,7 +142,10 @@ public class UsersDAO {
         try {
             stmt = connection.prepareStatement("select * from users WHERE nomeUsers = ? and senha = ?;");
             stmt.setString(1, login);
-            stmt.setString(2, senha);
+
+            String encoding = Base64.getEncoder().encodeToString(senha.getBytes());
+
+            stmt.setString(2, encoding);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

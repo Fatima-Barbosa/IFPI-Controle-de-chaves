@@ -1,4 +1,4 @@
-package application7;
+package Controllers;
 
 import ModelDAO.ChavePegaDAO;
 import ModelDAO.OperadorDAO;
@@ -106,10 +106,10 @@ public class LoginController extends BaseController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
             case "1":
-                navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+                navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
                 break;
             case "2":
-                navigate(event, FXMLLoader.load(getClass().getResource("UserPadrao.fxml")));
+                navigate(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
                 break;
             case "sn":
                 Alert dialogo1 = new Alert(Alert.AlertType.WARNING);

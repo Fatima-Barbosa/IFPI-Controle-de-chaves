@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="1069.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.ChavesController">
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="1069.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChavesController">
     <children>
           <TableView fx:id="tabelaChave" onDragDetected="#Detectar" prefHeight="518.0" prefWidth="567.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="0.0">
               <columns>

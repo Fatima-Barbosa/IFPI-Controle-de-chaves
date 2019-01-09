@@ -14,14 +14,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application7.Tela_cad_operadores_Controller">
+<AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Tela_cad_operadores_Controller">
    <children>
       <TableView fx:id="tabelaOperadores" prefHeight="503.0" prefWidth="514.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="431.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="ColNome" prefWidth="181.0" text="Nome" />
           <TableColumn fx:id="ColLogin" prefWidth="174.0" text="Login" />
-            <TableColumn fx:id="ColNivel" prefWidth="81.0" text="Nível" />
-            <TableColumn fx:id="ColID" prefWidth="77.0" text="ID" />
+            <TableColumn fx:id="ColNivel" prefWidth="95.0" text="Nível" />
+            <TableColumn fx:id="ColID" prefWidth="63.0" text="ID" />
         </columns>
          <contextMenu>
             <ContextMenu>
@@ -44,7 +44,7 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnSalvar" layoutX="749.0" layoutY="242.0" mnemonicParsing="false" onAction="#OnSalvar" prefHeight="28.0" prefWidth="169.0" style="-fx-background-color: #0D9CFA;" text="Salvar" textFill="#e7f0ff" AnchorPane.rightAnchor="27.0">
+      <Button fx:id="btnSalvar" layoutX="749.0" layoutY="242.0" mnemonicParsing="false" onAction="#OnSalvar" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #0D9CFA;" text="Salvar" textFill="#e7f0ff" AnchorPane.rightAnchor="27.0">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
@@ -54,12 +54,12 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="546.0" layoutY="14.0" text="Operadores" textFill="#fff9f9" AnchorPane.topAnchor="14.0">
+      <Label layoutX="546.0" layoutY="14.0" text="Operadores" textFill="#fff9f9" AnchorPane.rightAnchor="291.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font name="Calibri Bold" size="22.0" />
          </font>
       </Label>
-      <ComboBox fx:id="BoxNivel" layoutX="749.0" layoutY="136.0" prefHeight="25.0" prefWidth="169.0" AnchorPane.rightAnchor="27.0" />
+      <ComboBox fx:id="BoxNivel" layoutX="749.0" layoutY="135.0" prefHeight="25.0" prefWidth="169.0" AnchorPane.rightAnchor="27.0" />
       <Label layoutX="749.0" layoutY="102.0" text="Nível de visão" textFill="#fff9f9" AnchorPane.rightAnchor="92.0">
          <font>
             <Font name="Calibri Bold" size="18.0" />
@@ -70,14 +70,14 @@
             <Font name="Calibri Bold" size="14.0" />
          </font>
       </Button>
-      <PasswordField fx:id="txtSenha" layoutX="749.0" layoutY="198.0" prefHeight="25.0" prefWidth="169.0" />
-      <TextField fx:id="txt_busc" layoutX="315.0" layoutY="509.0" onKeyPressed="#on_buscTXT" />
-      <JFXButton fx:id="btn_buscar" layoutX="473.0" layoutY="508.0" onAction="#on_buscButon" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #0D9CFA;" text=" " textFill="WHITE">
+      <PasswordField fx:id="txtSenha" layoutX="749.0" layoutY="198.0" prefHeight="25.0" prefWidth="169.0" AnchorPane.rightAnchor="27.0" />
+      <TextField fx:id="txt_busc" layoutX="315.0" layoutY="509.0" onKeyPressed="#on_buscTXT" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="481.0" />
+      <JFXButton fx:id="btn_buscar" layoutX="473.0" layoutY="508.0" onAction="#on_buscButon" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #0D9CFA;" text=" " textFill="WHITE" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="432.0">
          <graphic>
             <FontAwesomeIcon fill="WHITE" iconName="SEARCH" size="1.2em" />
          </graphic>
       </JFXButton>
-      <Label layoutX="230.0" layoutY="510.0" text="Pesquisar" textFill="WHITE">
+      <Label layoutX="230.0" layoutY="510.0" text="Pesquisar" textFill="WHITE" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="642.0">
          <font>
             <Font name="Calibri Bold" size="18.0" />
          </font>

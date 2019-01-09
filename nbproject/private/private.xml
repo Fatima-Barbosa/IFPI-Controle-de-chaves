@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/ModelDAO/OperadorDAO.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/application7/Application7.java</file>
             <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/application7/EspelhoRelatorio_controller.java</file>
             <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/Classes/ChavePega.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/application7/FXML1Controller.java</file>
+            <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/application7/Tela_cad_operadores_Controller.java</file>
             <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/ModelDAO/ChavePegaDAO.java</file>
-            <file>file:/C:/Users/Fátima/Desktop/Application7_1/src/ModelDAO/UsersDAO.java</file>
         </group>
     </open-files>
 </project-private>

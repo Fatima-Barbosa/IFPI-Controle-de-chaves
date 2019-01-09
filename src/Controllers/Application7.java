@@ -1,4 +1,4 @@
-package application7;
+package Controllers;
 
 import de.jensd.fx.glyphs.GlyphsDude;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconName;
@@ -18,12 +18,12 @@ public class Application7 extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/View/Login.fxml"));
 
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setTitle("Sistema de Cotrole de chaves");
+        stage.setTitle("Sis. Controle de acesso a salas e laboratórios");
         stage.setResizable(false);
         stage.show();
         //..\imagens\edit-property.png

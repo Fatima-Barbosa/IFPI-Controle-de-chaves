@@ -1,4 +1,4 @@
-package application7;
+package Controllers;
 
 import Classes.ChavePega;
 import Classes.Users;
@@ -20,7 +20,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -279,7 +278,7 @@ public class UserPadraoController extends BaseController implements Initializabl
 
     @FXML
     private void onSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("Login.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
     }
 
     public void limparCampos() {

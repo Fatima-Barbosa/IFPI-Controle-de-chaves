@@ -1,4 +1,4 @@
-package application7;
+package Controllers;
 
 import java.io.IOException;
 import javafx.event.Event;
