@@ -61,13 +61,6 @@
               <font>
                   <Font size="13.0" />
               </font>
-         <graphic>
-                <ImageView fitHeight="25.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@circled-left-2.png" />
-                    </image>
-                </ImageView>
-         </graphic>
           </JFXButton>
       <JFXButton fx:id="btnPesquisar" layoutX="529.0" layoutY="525.0" onAction="#on_pesquisar" style="-fx-background-color: #00BFFF;" text=" " AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="503.0">
          <graphic>

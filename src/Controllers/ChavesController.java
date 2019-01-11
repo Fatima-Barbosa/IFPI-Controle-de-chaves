@@ -82,7 +82,7 @@ public class ChavesController extends BaseController implements Initializable {
 
     private void limparCampos() {
         labelSala.setText("");
-        labelSala.setText("");
+        labelDescricao.setText("");
     }
 
     @FXML
@@ -133,7 +133,7 @@ public class ChavesController extends BaseController implements Initializable {
 
     @FXML
     void ONVoltar(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     @FXML
@@ -236,13 +236,10 @@ public class ChavesController extends BaseController implements Initializable {
 
     @FXML
     private void ContextEdit(ActionEvent event) {
-        keys k = new keys(
-                labelSala.getText(),
-                labelDescricao.getText(),
-                //                    false
-                tabelaChave.getSelectionModel().getSelectedItem().getPega().getValue()
-        );
-        dao.update(k);
+        labelSala.setText(tabelaChave.getSelectionModel().getSelectedItem().getSala().getValue());
+        labelDescricao.setText(tabelaChave.getSelectionModel().getSelectedItem().getDescricao().getValue());
+        op = 1;
+        btnSalvar.setText("Editar");
     }
 
     @FXML

@@ -36,6 +36,9 @@ public class Operador {
         this.tipo = new SimpleStringProperty(tipo);        
         this.id = new ReadOnlyLongWrapper(id);
     }
+
+    public Operador() {
+    }
     
     public SimpleStringProperty getNome() {
         return nome;

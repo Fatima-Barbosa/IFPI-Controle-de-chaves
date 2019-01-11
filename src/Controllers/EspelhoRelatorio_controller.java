@@ -237,7 +237,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
 
     @FXML
     private void on_Sair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     public void carregarChaves() {

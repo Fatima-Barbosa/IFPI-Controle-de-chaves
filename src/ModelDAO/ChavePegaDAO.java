@@ -37,7 +37,7 @@ public class ChavePegaDAO {
         Date d = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        sql = "insert into chavepega (aluno,chavePega,usuario,horap,horad,datap,ocupado) values (?,?,?,?,?,?,?);";
+        sql = "insert into chavepega (aluno,chavePega,usuario,operadorID,horap,horad,datap,ocupado) values (?,?,?,?,?,?,?,?);";
         try {
             // prepared statement para inserção
             stmt = connection.prepareStatement(sql);
@@ -45,14 +45,13 @@ public class ChavePegaDAO {
             stmt.setString(1, c.getAluno().getValue());
             stmt.setObject(2, c.getChave().getValue());
             stmt.setObject(3, c.getUser().getValue());
-            stmt.setString(4, c.getHorap().getValue());
-            stmt.setString(5, c.getHorad().getValue());
-            stmt.setString(6, dateFormat.format(d));
-            stmt.setBoolean(7, true);
-//            stmt.setString(8, c.getDataEfetiva().getValue());
+            stmt.setLong(4, c.getOperador().longValue());
+            stmt.setString(5, c.getHorap().getValue());
+            stmt.setString(6, c.getHorad().getValue());
+            stmt.setString(7, dateFormat.format(d));
+            stmt.setBoolean(8, true);
 
             stmt.execute();
-//            stmt.executeQuery();
             stmt.close();
             connection.close();
             System.out.println("Voce pegou");
@@ -111,6 +110,7 @@ public class ChavePegaDAO {
             ChavePega c = new ChavePega(
                     rs.getString("chavePega"),
                     rs.getString("usuario"),
+                    rs.getLong("operadorID"),
                     rs.getString("aluno"),
                     rs.getString("horap"),
                     rs.getString("horad"),
@@ -138,6 +138,7 @@ public class ChavePegaDAO {
                 ChavePega c = new ChavePega(
                         rs.getString("chavePega"),
                         rs.getString("usuario"),
+                        rs.getLong("operadorID"),
                         rs.getString("aluno"),
                         rs.getString("horap"),
                         rs.getString("horad"),
@@ -180,6 +181,7 @@ public class ChavePegaDAO {
                 ChavePega c = new ChavePega(
                         rs.getString("chavePega"),
                         rs.getString("usuario"),
+                        rs.getLong("operadorID"),
                         rs.getString("aluno"),
                         rs.getString("horap"),
                         rs.getString("horad"),

@@ -193,6 +193,30 @@ public class OperadorDAO {
             Logger.getLogger(ChavesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public long RetornarID(String login, String senha){
+        connection = new ConnectionFactory().getConnection();
+        long id = 0;
+        try {
+            
+            stmt = connection.prepareStatement("select * from operador where login = ? and senha = ?");
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {                
+                id = rs.getInt("id");
+            }
+            stmt.close();
+            connection.close();
+            System.out.println("login: "+login
+                                +"Senha: "+senha
+                                +"id: "+id);
+        } catch (SQLException e) {
+        }
+        
+        return id;
+    }
 
     public Connection getConnection() {
         return connection;

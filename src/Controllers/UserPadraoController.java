@@ -48,6 +48,7 @@ public class UserPadraoController extends BaseController implements Initializabl
     UsersDAO dao = new UsersDAO();
     ChavePega c = new ChavePega();
     ChavePegaDAO cdao = new ChavePegaDAO();
+    LoginController lg = new LoginController();
 
     @FXML
     private TableView<Users> tabelaViewUsers;
@@ -184,11 +185,12 @@ public class UserPadraoController extends BaseController implements Initializabl
                 Date hora = Calendar.getInstance().getTime();
                 String horaformatada = sdf.format(hora);
                 
-
+                System.out.println("login controller id: "+lg.getId());
                 System.out.println("Hora: " + horaformatada);
                 ChavePega cp = new ChavePega(
                         labs.getValue(),
                         txtUser.getText(),
+                        lg.getId(),
                         txtAluno.getText(),
                         horaformatada,
                         txtHora.getValue().toString(),

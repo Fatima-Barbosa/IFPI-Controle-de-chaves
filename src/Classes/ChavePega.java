@@ -12,6 +12,8 @@ public class ChavePega {
 
     private keys k;
     private Users u;
+    private Operador o;
+    private SimpleLongProperty operador;
     private SimpleStringProperty user;
     private SimpleStringProperty chave;
     private SimpleStringProperty aluno;
@@ -23,9 +25,10 @@ public class ChavePega {
 
     private SimpleLongProperty id;
 
-    public ChavePega(keys k, Users u, String aluno, String horap, String horad, String dia, long id, String dataEfetiva) {
+    public ChavePega(keys k, Users u, Operador o, String aluno, String horap, String horad, String dia, long id, String dataEfetiva) {
         this.k = new keys();
         this.u = new Users();
+        this.o = new Operador();
         this.aluno = new SimpleStringProperty(aluno);
         this.horap = new SimpleStringProperty(horap);
         this.horad = new SimpleStringProperty(horad);
@@ -34,9 +37,10 @@ public class ChavePega {
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
 
-    public ChavePega(String chave, String user, String aluno, String horap, String horad, String dia, long id, Boolean ocupada, String dataEfetiva) {
+    public ChavePega(String chave, String user, long operador, String aluno, String horap, String horad, String dia, long id, Boolean ocupada, String dataEfetiva) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
+        this.operador = new SimpleLongProperty(operador);
         this.aluno = new SimpleStringProperty(aluno);
         this.horap = new SimpleStringProperty(horap);
         this.horad = new SimpleStringProperty(horad);
@@ -46,9 +50,10 @@ public class ChavePega {
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
     }
 
-    public ChavePega(String chave, String user, String aluno, String horap, String horad, Boolean ocupada) {
+    public ChavePega(String chave, String user, long operador, String aluno, String horap, String horad, Boolean ocupada) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
+        this.operador = new SimpleLongProperty(operador);
         this.aluno = new SimpleStringProperty(aluno);
         this.horap = new SimpleStringProperty(horap);
         this.horad = new SimpleStringProperty(horad);
@@ -154,6 +159,15 @@ public class ChavePega {
         this.dataEfetiva = dataEfetiva;
     }
 
+    public SimpleLongProperty getOperador() {
+        return operador;
+    }
+
+    public void setOperador(SimpleLongProperty operador) {
+        this.operador = operador;
+    }
+
+    
     public String totring() {
         return "\n  "
                 + "\nUsuario:----------------------------------------------------------------------------------------" + getUser().getValue()

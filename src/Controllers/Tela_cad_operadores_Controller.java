@@ -140,7 +140,7 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
 
     @FXML
     private void OnSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("FXML1.fxml")));
+        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     @FXML
