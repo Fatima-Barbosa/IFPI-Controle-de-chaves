@@ -42,14 +42,17 @@ import javafx.scene.input.TransferMode;
  *
  * @author Fátima
  */
-public class UserPadraoController extends BaseController implements Initializable {
+public class UserPadraoController extends LoginController implements Initializable{
 
     Users u = new Users();
     UsersDAO dao = new UsersDAO();
     ChavePega c = new ChavePega();
     ChavePegaDAO cdao = new ChavePegaDAO();
+    
     LoginController lg = new LoginController();
+    
 
+    
     @FXML
     private TableView<Users> tabelaViewUsers;
 
@@ -190,7 +193,7 @@ public class UserPadraoController extends BaseController implements Initializabl
                 ChavePega cp = new ChavePega(
                         labs.getValue(),
                         txtUser.getText(),
-                        lg.getId(),
+                        getId(),
                         txtAluno.getText(),
                         horaformatada,
                         txtHora.getValue().toString(),
@@ -280,7 +283,7 @@ public class UserPadraoController extends BaseController implements Initializabl
 
     @FXML
     private void onSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
     }
 
     public void limparCampos() {

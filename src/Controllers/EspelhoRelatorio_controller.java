@@ -37,7 +37,7 @@ import javafx.scene.control.TextArea;
  *
  * @author Fátima
  */
-public class EspelhoRelatorio_controller extends BaseController implements Initializable {
+public class EspelhoRelatorio_controller extends LoginController implements Initializable {
 
     @FXML
     private TextArea txtRelatorio;
@@ -172,6 +172,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
                 doc.add(new Paragraph("Hora prevista para devolução:-------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getDataEfetiva().getValue(), fontDeLink));
                 doc.add(new Paragraph("Ocupada:-----------------------------------------------------" + cp.get(i).getOcupada().getValue(), fontDeLink));
+                doc.add(new Paragraph("ID do Operador:----------------------------------------------" + cp.get(i).getOperador().getValue().toString(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
 
@@ -221,6 +222,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
                 doc.add(new Paragraph("Hora prevista para devolução:-------------------------------" + cp.get(i).getHorad().getValue(), fontDeLink));
                 doc.add(new Paragraph("Data efetiva da devolução:-----------------------------------" + cp.get(i).getDataEfetiva().getValue(), fontDeLink));
                 doc.add(new Paragraph("Ocupada:-----------------------------------------------------" + cp.get(i).getOcupada().getValue(), fontDeLink));
+                doc.add(new Paragraph("ID do Operador:----------------------------------------------" + cp.get(i).getOperador().getValue().toString(), fontDeLink));
                 doc.add(new Paragraph("                                                "));
             }
 
@@ -237,7 +239,7 @@ public class EspelhoRelatorio_controller extends BaseController implements Initi
 
     @FXML
     private void on_Sair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     public void carregarChaves() {

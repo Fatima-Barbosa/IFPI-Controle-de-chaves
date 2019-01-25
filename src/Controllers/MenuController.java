@@ -33,7 +33,7 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Fátima
  */
-public class MenuController extends BaseController implements Initializable {
+public class MenuController extends LoginController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -144,7 +144,7 @@ public class MenuController extends BaseController implements Initializable {
 
     @FXML
     void onRelatorios(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/EspelhoRelatorio.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/EspelhoRelatorio.fxml")));
     }
 
     @FXML
@@ -171,7 +171,7 @@ public class MenuController extends BaseController implements Initializable {
 
     @FXML
     void ONKeys(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Chaves.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Chaves.fxml")));
     }
 
     void ONconfig(ActionEvent event) {
@@ -182,17 +182,17 @@ public class MenuController extends BaseController implements Initializable {
     void ONoperadores(ActionEvent event) throws IOException {
 //        AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("tela_cad_operadores.fxml"));
 //        anchorPane.getChildren().setAll(a);
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Tela_cad_operadores.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Tela_cad_operadores.fxml")));
     }
 
     @FXML
     void ONusuarios(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/CadastroFuncionarios.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/CadastroFuncionarios.fxml")));
     }
 
     @FXML
     void onSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
     }
 
     @Override

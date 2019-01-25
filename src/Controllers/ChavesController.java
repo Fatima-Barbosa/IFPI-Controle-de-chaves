@@ -34,7 +34,7 @@ import javafx.scene.input.TransferMode;
  *
  * @author Fátima
  */
-public class ChavesController extends BaseController implements Initializable {
+public class ChavesController extends LoginController implements Initializable {
 
     private final ChavesDAO dao = new ChavesDAO();
 
@@ -133,7 +133,7 @@ public class ChavesController extends BaseController implements Initializable {
 
     @FXML
     void ONVoltar(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     @FXML

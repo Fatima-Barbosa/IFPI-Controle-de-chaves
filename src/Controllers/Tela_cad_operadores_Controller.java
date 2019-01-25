@@ -33,7 +33,7 @@ import javafx.scene.paint.Color;
  *
  * @author Fátima
  */
-public class Tela_cad_operadores_Controller extends BaseController implements Initializable {
+public class Tela_cad_operadores_Controller extends LoginController implements Initializable {
 
     OperadorDAO dao = new OperadorDAO();
 
@@ -140,7 +140,7 @@ public class Tela_cad_operadores_Controller extends BaseController implements In
 
     @FXML
     private void OnSair(ActionEvent event) throws IOException {
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     @FXML

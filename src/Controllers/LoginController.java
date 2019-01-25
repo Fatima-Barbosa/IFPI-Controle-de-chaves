@@ -13,25 +13,30 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author Fátima
  */
-public class LoginController extends BaseController implements Initializable {
+public class LoginController implements Initializable{
 
     ChavePegaDAO daoCP = new ChavePegaDAO();
     OperadorDAO odao = new OperadorDAO();
 
-    long id;
+    public static long id;
     
     @FXML
     private TextField labelLogin;
@@ -43,8 +48,12 @@ public class LoginController extends BaseController implements Initializable {
     private JFXButton btnEntrarSuper;
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. 
+     * @param url
+     * @param rb
      */
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -59,11 +68,11 @@ public class LoginController extends BaseController implements Initializable {
         
         switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
             case "1":
-                navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
                 break;
             case "2":
                 setId(odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
-                navigate(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
+                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
                 break;
             case "sn":
                 Alert dialogo1 = new Alert(Alert.AlertType.WARNING);
@@ -93,11 +102,12 @@ public class LoginController extends BaseController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
             case "1":
-                navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
                 break;
             case "2":
+                System.out.println("id: "+odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
                 setId(odao.RetornarID(labelLogin.getText(), labelSenha.getText()));                
-                navigate(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
+                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
                 break;
             case "sn":
                 Alert dialogo1 = new Alert(Alert.AlertType.WARNING);
@@ -112,6 +122,10 @@ public class LoginController extends BaseController implements Initializable {
         }
         }
     }
+    
+    public long retormarid(){
+        return id;
+    }
 
     public long getId() {
         return id;
@@ -119,6 +133,24 @@ public class LoginController extends BaseController implements Initializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void navigateTeste(Event event, Parent pageParent) throws IOException {
+       
+        //Creating new scene
+        Scene scene = new Scene(pageParent);
+        
+        //get current stage
+        Stage appStage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        
+        //Hide old stage
+        appStage.hide(); // Optional
+        
+        //Set stage with new Scene
+        appStage.setScene(scene);
+        
+        //Show up the stage
+        appStage.show();
     }
     
 }

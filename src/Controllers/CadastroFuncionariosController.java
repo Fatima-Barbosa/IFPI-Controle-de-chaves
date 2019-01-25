@@ -37,7 +37,7 @@ import javax.swing.JOptionPane;
  *
  * @author Fátima
  */
-public class CadastroFuncionariosController extends BaseController implements Initializable {
+public class CadastroFuncionariosController extends LoginController implements Initializable {
 
     private final UsersDAO dao = new UsersDAO();
 
@@ -84,7 +84,7 @@ public class CadastroFuncionariosController extends BaseController implements In
     @FXML
     void voltarbtn(ActionEvent event) throws IOException {
         System.out.println("TESTE!");
-        navigate(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     @Override

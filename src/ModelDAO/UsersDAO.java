@@ -1,6 +1,8 @@
 package ModelDAO;
 
 import Classes.Users;
+import com.jfoenix.controls.JFXDialog;
+import java.awt.Dialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 
 /**
  *
@@ -51,6 +55,10 @@ public class UsersDAO {
             connection.close();
 
         } catch (SQLException ex) {
+            Alert dialog = new Alert(Alert.AlertType.WARNING);
+            dialog.setHeaderText("Atenção");
+            dialog.setContentText("Usuario invalido ou já existente!");
+            dialog.showAndWait();
             System.out.println("erro no adicionar dao");
             throw new RuntimeException(ex);
         }
