@@ -3,7 +3,6 @@ package Controllers;
 import Classes.Operador;
 import ModelDAO.OperadorDAO;
 import com.jfoenix.controls.JFXButton;
-import static java.awt.Color.GREEN;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -24,9 +23,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -169,8 +167,8 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
         // btnSalvar.setBackground(GREEN);
 
     }
-    
-    public void limparCampos(){
+
+    public void limparCampos() {
         txtNome.setText("");
         txtLogin.setText("");
         txtSenha.setText("");
@@ -179,10 +177,16 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
 
     @FXML
     private void on_buscTXT(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            Data = dao.gerarListaDeBusca(txt_busc.getText());
+            tabelaOperadores.setItems(Data);
+        }
     }
 
     @FXML
     private void on_buscButon(ActionEvent event) {
+        Data = dao.gerarListaDeBusca(txt_busc.getText());
+        tabelaOperadores.setItems(Data);
     }
 
 }

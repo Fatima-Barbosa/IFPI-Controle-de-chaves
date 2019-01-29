@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
 
 /**
  *
@@ -45,11 +47,9 @@ public class OperadorDAO {
 //                
 //            }
 //            String senhaHex = sb.toString();
-            
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, o.getNome().getValue());
             stmt.setString(2, o.getLogin().getValue());
-            //stmt.setString(3, senhaHex);
             stmt.setString(3, o.getSenha().getValue());
             stmt.setString(4, o.getTipo().getValue());
             stmt.execute();
@@ -190,32 +190,63 @@ public class OperadorDAO {
             stmt.close();
             System.out.println("Usuário atualizado!\n");
         } catch (SQLException ex) {
-            Logger.getLogger(ChavesDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Dialog dialogo = new Alert(Alert.AlertType.WARNING);
+            dialogo.setHeaderText("Atenção");
+            dialogo.setContentText("O usuário já existe!"
+                    + "\nTente outro");
+            dialogo.setTitle("Erro");
+            dialogo.show();
         }
     }
-    
-    public long RetornarID(String login, String senha){
+
+    public long RetornarID(String login, String senha) {
         connection = new ConnectionFactory().getConnection();
         long id = 0;
         try {
-            
+
             stmt = connection.prepareStatement("select * from operador where login = ? and senha = ?");
             stmt.setString(1, login);
             stmt.setString(2, senha);
             ResultSet rs = stmt.executeQuery();
-            
-            while (rs.next()) {                
+
+            while (rs.next()) {
                 id = rs.getInt("id");
             }
             stmt.close();
             connection.close();
-            System.out.println("login: "+login
-                                +"Senha: "+senha
-                                +"id: "+id);
+            System.out.println("login: " + login
+                    + "Senha: " + senha
+                    + "id: " + id);
         } catch (SQLException e) {
         }
-        
+
         return id;
+    }
+
+    public final ObservableList<Operador> gerarListaDeBusca(String str) {
+        connection = new ConnectionFactory().getConnection();
+        ObservableList<Operador> Lista
+                = FXCollections.observableArrayList();
+        try {
+            stmt = connection.prepareStatement("select * from keycontroll.operador where nomeCompleto like ? or login like ? order by nomeCompleto;");
+            stmt.setString(1, "%" + str +"%");
+            stmt.setString(2, "%" + str +"%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Lista.add(new Operador(
+                        rs.getString("nomeCompleto"),
+                        rs.getString("login"),
+                        rs.getString("nivel"),
+                        rs.getLong("id")
+                )
+                );
+            }
+            stmt.close();
+            connection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Lista;
     }
 
     public Connection getConnection() {
