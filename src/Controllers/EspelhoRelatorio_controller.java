@@ -82,8 +82,8 @@ public class EspelhoRelatorio_controller extends LoginController implements Init
         String n = "";
         String nada = "Não há registro!";
         String salas = Box_salas.getValue();
-        String datainicio = dataInicio.getValue().toString();
-        String datafinal = dataFinal.getValue().toString();
+        String datainicio = "" + dataInicio.getValue().toString();
+        String datafinal = "" + dataFinal.getValue().toString();
 
         if (salas == null) {
             System.out.println("salas = 0 ");

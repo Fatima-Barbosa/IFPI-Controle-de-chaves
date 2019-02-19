@@ -13,7 +13,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -31,7 +30,7 @@ import javafx.scene.input.KeyEvent;
  *
  * @author Fátima
  */
-public class Tela_cad_operadores_Controller extends LoginController implements Initializable {
+public class Tela_cad_operadores_Controller implements Initializable {
 
     OperadorDAO dao = new OperadorDAO();
 
@@ -55,8 +54,6 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
     private PasswordField txtSenha;
     @FXML
     private ComboBox<String> BoxNivel;
-    @FXML
-    private Button btnSair;
 
     private ObservableList<Operador> Data
             = FXCollections.observableArrayList();
@@ -72,6 +69,11 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
     @FXML
     private JFXButton btn_buscar;
 
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         encherCombobox();
@@ -91,8 +93,6 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
         assert btnSalvar != null : "fx:id=\"btnSalvar\" was not injected: check your FXML file 'tela_cad_operadores.fxml'.";
         assert txtSenha != null : "fx:id=\"txtSenha\" was not injected: check your FXML file 'tela_cad_operadores.fxml'.";
         assert BoxNivel != null : "fx:id=\"BoxNivel\" was not injected: check your FXML file 'tela_cad_operadores.fxml'.";
-        assert btnSair != null : "fx:id=\"btnSair\" was not injected: check your FXML file 'tela_cad_operadores.fxml'.";
-
     }
 
     public void encherCombobox() {
@@ -137,11 +137,6 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
     }
 
     @FXML
-    private void OnSair(ActionEvent event) throws IOException {
-        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
-    }
-
-    @FXML
     private void ConTextEcluir(ActionEvent event) {
         int id = tabelaOperadores.getSelectionModel().getSelectedItem().getId().intValue();
         try {
@@ -178,6 +173,10 @@ public class Tela_cad_operadores_Controller extends LoginController implements I
     @FXML
     private void on_buscTXT(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
+//            if(txt_busc. == Number.class){
+//                System.out.println("numero");
+//            }
+//                
             Data = dao.gerarListaDeBusca(txt_busc.getText());
             tabelaOperadores.setItems(Data);
         }

@@ -164,17 +164,26 @@ public class ChavePegaDAO {
         List<ChavePega> Lista = new ArrayList<>();
         try {
             stmt = connection.prepareStatement(
-                    "select * from chavePega WHERE chavePega = ? and extract(year from datap) >= ? and extract(month from datap) >= ? \n"
-                    + "and extract(day from datap) >= ? and extract(year from datap) <= ? and extract(month from datap) <= ? \n"
-                    + "and extract(day from datap) <= ?;"
+                    "select * from chavePega WHERE chavePega = ? "
+                    + "and (extract(year from datap) >= ? and extract(year from datap) <= ?) "
+                    + "and (extract(month from datap) >= ? or extract(month from datap) <= ?) "
+                    + "and (extract(day from datap) >= ? or extract(day from datap) <= ?);"
             );
             stmt.setString(1, sala);
-            stmt.setString(2, data.toString().substring(0, 4));
-            stmt.setString(3, data.toString().substring(5, 7));
-            stmt.setString(4, data.toString().substring(8, 10));
-            stmt.setString(5, dataD.substring(0, 4));
-            stmt.setString(6, dataD.substring(5, 7));
+            stmt.setString(2, data.substring(0, 4));
+            stmt.setString(4, data.substring(5, 7));
+            stmt.setString(6, data.substring(8, 10));
+            stmt.setString(3, dataD.substring(0, 4));
+            stmt.setString(5, dataD.substring(5, 7));
             stmt.setString(7, dataD.substring(8, 10));
+            
+            System.out.println("sala: "+sala+"\ndatas: "+data.substring(0, 4)
+                                +"  "+data.substring(5, 7)
+                                +"  "+data.substring(8, 10)
+                                +"  "+dataD.substring(0, 4)
+                                +"  "+dataD.substring(5, 7)
+                                +"  "+dataD.substring(8, 10)
+            );
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -197,7 +206,7 @@ public class ChavePegaDAO {
         } catch (SQLException ex) {
             System.out.println("Erro:  " + ex);
         }
-
+        System.out.println(""+Lista.toString());
         return Lista;
     }
 

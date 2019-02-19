@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="945.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Tela_cad_operadores_Controller">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1022.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Tela_cad_operadores_Controller">
    <children>
       <TableView fx:id="tabelaOperadores" prefHeight="503.0" prefWidth="514.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="431.0" AnchorPane.topAnchor="0.0">
         <columns>
@@ -65,11 +65,6 @@
             <Font name="Calibri Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnSair" layoutX="892.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnSair" prefHeight="30.0" prefWidth="46.0" style="-fx-background-color: #AB0909;" text="Sair" textFill="#fffbfb" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
-         <font>
-            <Font name="Calibri Bold" size="14.0" />
-         </font>
-      </Button>
       <PasswordField fx:id="txtSenha" layoutX="749.0" layoutY="198.0" prefHeight="25.0" prefWidth="169.0" AnchorPane.rightAnchor="27.0" />
       <TextField fx:id="txt_busc" layoutX="315.0" layoutY="509.0" onKeyPressed="#on_buscTXT" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="481.0" />
       <JFXButton fx:id="btn_buscar" layoutX="473.0" layoutY="508.0" onAction="#on_buscButon" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #0D9CFA;" text=" " textFill="WHITE" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="432.0">

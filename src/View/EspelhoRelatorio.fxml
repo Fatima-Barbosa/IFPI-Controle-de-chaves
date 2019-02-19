@@ -9,19 +9,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="1069.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EspelhoRelatorio_controller">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1022.0" style="-fx-background-color: #4f4f4f;" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EspelhoRelatorio_controller">
    <children>
-      <TextArea fx:id="txtRelatorio" editable="false" layoutX="11.0" layoutY="44.0" prefHeight="497.0" prefWidth="796.0">
+      <TextArea fx:id="txtRelatorio" editable="false" layoutX="11.0" layoutY="44.0" prefHeight="581.0" prefWidth="787.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font></TextArea>
-      <ComboBox fx:id="Box_salas" layoutX="838.0" layoutY="122.0" prefHeight="25.0" prefWidth="188.0" />
-      <Label layoutX="838.0" layoutY="54.0" text="Filtros:" textFill="#ebebeb">
+      <ComboBox fx:id="Box_salas" layoutX="819.0" layoutY="113.0" prefHeight="25.0" prefWidth="188.0" />
+      <Label layoutX="821.0" layoutY="46.0" text="Filtros:" textFill="#ebebeb">
          <font>
             <Font name="Calibri Bold" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="bntSalvar" layoutX="995.0" layoutY="302.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #00EE76;" textFill="WHITE">
+      <Button fx:id="bntSalvar" layoutX="969.0" layoutY="302.0" mnemonicParsing="false" onAction="#on_Salvar" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #00EE76;" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
@@ -29,7 +29,7 @@
             <FontAwesomeIcon fill="#f8f8f8" iconName="DOWNLOAD" size="1.1em" />
          </graphic>
       </Button>
-      <Button fx:id="bntVisualizar" layoutX="842.0" layoutY="302.0" mnemonicParsing="false" onAction="#on_Vizualizar" prefHeight="30.0" prefWidth="148.0" style="-fx-background-color: #1E90FF;" text="Viaualizar" textFill="WHITE">
+      <Button fx:id="bntVisualizar" layoutX="819.0" layoutY="302.0" mnemonicParsing="false" onAction="#on_Vizualizar" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #1E90FF;" text="Viaualizar" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
@@ -39,34 +39,34 @@
             <Font name="Calibri Bold" size="19.0" />
          </font>
       </Label>
-      <DatePicker fx:id="dataInicio" layoutX="840.0" layoutY="181.0" prefHeight="25.0" prefWidth="188.0" />
-      <DatePicker fx:id="dataFinal" layoutX="840.0" layoutY="245.0" prefHeight="25.0" prefWidth="188.0" />
-      <Label layoutX="838.0" layoutY="153.0" text="Data início" textFill="#ebebeb">
+      <DatePicker fx:id="dataInicio" layoutX="818.0" layoutY="184.0" prefHeight="25.0" prefWidth="188.0" />
+      <DatePicker fx:id="dataFinal" layoutX="819.0" layoutY="247.0" prefHeight="25.0" prefWidth="188.0" />
+      <Label layoutX="820.0" layoutY="147.0" text="Data início" textFill="#ebebeb">
          <font>
             <Font name="Calibri Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="840.0" layoutY="216.0" text="Data final" textFill="#ebebeb">
+      <Label layoutX="818.0" layoutY="216.0" text="Data final" textFill="#ebebeb">
          <font>
             <Font name="Calibri Bold" size="19.0" />
          </font>
       </Label>
-      <Label layoutX="838.0" layoutY="91.0" text="Sala" textFill="#ebebeb">
+      <Label layoutX="820.0" layoutY="86.0" text="Sala" textFill="#ebebeb">
          <font>
             <Font name="Calibri Bold" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="bntSair" layoutX="958.0" layoutY="511.0" mnemonicParsing="false" onAction="#on_Sair" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: #CD3333;" text="Voltar" textFill="WHITE">
+      <Button fx:id="bntSair" layoutX="943.0" layoutY="528.0" mnemonicParsing="false" onAction="#on_Sair" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: #CD3333;" text="Voltar" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnRelatorioGeral" layoutX="843.0" layoutY="350.0" mnemonicParsing="false" onAction="#on_relatorio_geral" prefHeight="30.0" prefWidth="148.0" style="-fx-background-color: #da6028;" text="Relatório Geral" textFill="WHITE">
+      <Button fx:id="btnRelatorioGeral" layoutX="819.0" layoutY="349.0" mnemonicParsing="false" onAction="#on_relatorio_geral" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #da6028;" text="Relatório Geral" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnSALVAR_relatorioGeral" layoutX="995.0" layoutY="349.0" mnemonicParsing="false" onAction="#on_SalvarGeral" prefHeight="30.0" prefWidth="42.0" style="-fx-background-color: #00EE76;">
+      <Button fx:id="btnSALVAR_relatorioGeral" layoutX="968.0" layoutY="349.0" mnemonicParsing="false" onAction="#on_SalvarGeral" prefHeight="30.0" prefWidth="42.0" style="-fx-background-color: #00EE76;">
          <graphic>
             <FontAwesomeIcon fill="#f8f8f8" iconName="DOWNLOAD" size="1.3em" />
          </graphic>
