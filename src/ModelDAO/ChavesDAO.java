@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -40,7 +41,10 @@ public class ChavesDAO {
             stmt.setBoolean(3, k.getPega().getValue());
             stmt.execute();
 
-            System.out.println("Adicionado com sucesso!");
+            javafx.scene.control.Dialog dialogo = new Alert(Alert.AlertType.INFORMATION);
+            dialogo.setHeaderText("Operação realizada!");
+            dialogo.setTitle("Informação");
+            dialogo.show();
 
             stmt.close();
 
@@ -57,7 +61,7 @@ public class ChavesDAO {
         connection = new ConnectionFactory().getConnection();
 
         try {
-            stmt = connection.prepareStatement("UPDATE keycontroll.chaves SET sala = ?, descricao = ?, ocupada = ? WHERE sala = ?;");
+            stmt = connection.prepareStatement("UPDATE chaves SET sala = ?, descricao = ?, ocupada = ? WHERE sala = ?;");
             stmt.setString(4, c.getSala().getValue());
             stmt.setString(1, c.getSala().getValue());
             stmt.setString(2, c.getDescricao().getValue());
@@ -76,14 +80,13 @@ public class ChavesDAO {
         connection = new ConnectionFactory().getConnection();
 
         try {
-            stmt = connection.prepareStatement("UPDATE keycontroll.chaves SET ocupada = true WHERE sala = ?;");
+            stmt = connection.prepareStatement("UPDATE chaves SET ocupada = true WHERE sala = ?;");
             stmt.setString(1, c);
             //  stmt.setBoolean(1, c.getPega().getValue());
 
             stmt.executeUpdate();
             connection.close();
             stmt.close();
-            System.out.println("Atualizado!\n");
         } catch (SQLException ex) {
             Logger.getLogger(ChavesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,7 +96,7 @@ public class ChavesDAO {
         connection = new ConnectionFactory().getConnection();
 
         try {
-            stmt = connection.prepareStatement("UPDATE keycontroll.chaves SET ocupada = false WHERE sala = ?;");
+            stmt = connection.prepareStatement("UPDATE chaves SET ocupada = false WHERE sala = ?;");
             stmt.setString(1, c);
             //  stmt.setBoolean(1, c.getPega().getValue());
             stmt.executeUpdate();
@@ -115,7 +118,6 @@ public class ChavesDAO {
         stmt.setString(1, sala);
         // executa
         stmt.execute();
-        System.out.println("Excluido com sucesso!");
         stmt.close();
 
     }
@@ -125,7 +127,7 @@ public class ChavesDAO {
         ObservableList<keys> Lista
                 = FXCollections.observableArrayList();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chaves;");
+        stmt = connection.prepareStatement("select * from chaves;");
 //
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -145,7 +147,7 @@ public class ChavesDAO {
         ObservableList<String> Lista
                 = FXCollections.observableArrayList();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chaves;");
+        stmt = connection.prepareStatement("select * from chaves;");
 //
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -162,7 +164,7 @@ public class ChavesDAO {
         ObservableList<keys> Lista
                 = FXCollections.observableArrayList();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chaves where sala like ? or descricao like ?;");
+        stmt = connection.prepareStatement("select * from chaves where sala like ? or descricao like ?;");
         stmt.setString(1, "%" + n + "%");
         stmt.setString(2, "%" + n + "%");
         ResultSet rs = stmt.executeQuery();
@@ -197,7 +199,6 @@ public class ChavesDAO {
         stmt.setLong(1, id);
         // executa
         stmt.execute();
-        System.out.println("Excluido com sucesso!");
         stmt.close();
 
     }

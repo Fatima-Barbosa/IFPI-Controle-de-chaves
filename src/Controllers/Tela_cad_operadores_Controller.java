@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
@@ -142,6 +143,11 @@ public class Tela_cad_operadores_Controller implements Initializable {
         try {
             dao.remover(id);
             atualizarTabel();
+            Dialog dialogo = new Alert(Alert.AlertType.INFORMATION);
+            dialogo.setHeaderText("Operação realizada!");
+            dialogo.setContentText("Usuário excluido!");
+            dialogo.setTitle("Informação");
+            dialogo.show();  
         } catch (SQLException ex) {
             Logger.getLogger(Tela_cad_operadores_Controller.class.getName()).log(Level.SEVERE, null, ex);
         }

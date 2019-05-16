@@ -47,8 +47,11 @@ public class UsersDAO {
             //passando senha criptografada
             stmt.setString(3, encoding);
             stmt.execute();
-
-            System.out.println("Adicionado com sucesso!");
+            
+            javafx.scene.control.Dialog dialogo = new Alert(Alert.AlertType.INFORMATION);
+            dialogo.setHeaderText("Operação realizada!");
+            dialogo.setTitle("Informação");
+            dialogo.show();  
 
             stmt.close();
 
@@ -68,7 +71,7 @@ public class UsersDAO {
         connection = new ConnectionFactory().getConnection();
 
         try {
-            stmt = connection.prepareStatement("UPDATE keycontroll.users SET nomeUsers = ?, cpf = ?, senha = ? WHERE id = ?");
+            stmt = connection.prepareStatement("UPDATE users SET nomeUsers = ?, cpf = ?, senha = ? WHERE id = ?");
             stmt.setString(1, c.getNomeUser().getValue());
             stmt.setString(2, c.getCpf().getValue());
 
@@ -80,7 +83,10 @@ public class UsersDAO {
             stmt.executeUpdate();
             connection.close();
             stmt.close();
-            System.out.println("Usuário atualizado!\n");
+            javafx.scene.control.Dialog dialogo = new Alert(Alert.AlertType.INFORMATION);
+            dialogo.setHeaderText("Operação realizada!");
+            dialogo.setTitle("Informação");
+            dialogo.show();
         } catch (SQLException ex) {
             Logger.getLogger(ChavesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,7 +111,7 @@ public class UsersDAO {
         connection = new ConnectionFactory().getConnection();
         ObservableList<Users> Lista
                 = FXCollections.observableArrayList();
-        stmt = connection.prepareStatement("select * from keycontroll.users order by nomeUsers;");
+        stmt = connection.prepareStatement("select * from users order by nomeUsers;");
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {

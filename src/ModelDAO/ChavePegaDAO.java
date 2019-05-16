@@ -102,7 +102,7 @@ public class ChavePegaDAO {
         ObservableList<ChavePega> Lista
                 = FXCollections.observableArrayList();
 
-        stmt = connection.prepareStatement("select * from keycontroll.chavepega where ocupado = true;");
+        stmt = connection.prepareStatement("select * from chavepega where ocupado = true;");
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -131,7 +131,7 @@ public class ChavePegaDAO {
         List<ChavePega> Lista = new ArrayList<>();
 
         try {
-            stmt = connection.prepareStatement("select * from keycontroll.chavepega;");
+            stmt = connection.prepareStatement("select * from chavepega;");
 
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

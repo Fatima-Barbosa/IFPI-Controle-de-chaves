@@ -56,7 +56,7 @@ public class OperadorDAO {
         connection = new ConnectionFactory().getConnection();
         ObservableList<Operador> Lista
                 = FXCollections.observableArrayList();
-        stmt = connection.prepareStatement("select * from keycontroll.operador order by nomeCompleto;");
+        stmt = connection.prepareStatement("select * from operador order by nomeCompleto;");
 
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
@@ -83,7 +83,7 @@ public class OperadorDAO {
         // executa
         stmt.execute();
         stmt.close();
-        connection.close();
+        connection.close();        
 
     }
 
@@ -118,7 +118,7 @@ public class OperadorDAO {
         connection = new ConnectionFactory().getConnection();
         boolean check = false;
         String strcodificado1 = Base64.getEncoder().encodeToString(senha.getBytes());
-        System.out.println("senha cript: "+senha+"\n"+strcodificado1);
+//        System.out.println("senha cript: "+senha+"\n"+strcodificado1);
         try {
             String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
             stmt = connection.prepareStatement("select * from operador WHERE login =? and senha = ?;");
@@ -165,7 +165,7 @@ public class OperadorDAO {
 
         try {
             String strcodificado = Base64.getEncoder().encodeToString(c.getSenha().getValue().getBytes());
-            stmt = connection.prepareStatement("UPDATE keycontroll.operador SET nomeCompleto = ?, login = ?, senha = ?, nivel =? WHERE id = ?");
+            stmt = connection.prepareStatement("UPDATE operador SET nomeCompleto = ?, login = ?, senha = ?, nivel =? WHERE id = ?");
             stmt.setString(1, c.getNome().getValue());
             stmt.setString(2, c.getLogin().getValue());
             stmt.setString(3, strcodificado);
@@ -224,7 +224,7 @@ public class OperadorDAO {
         ObservableList<Operador> Lista
                 = FXCollections.observableArrayList();
         try {
-            stmt = connection.prepareStatement("select * from keycontroll.operador where nomeCompleto like ? or login like ? order by nomeCompleto;");
+            stmt = connection.prepareStatement("select * from operador where nomeCompleto like ? or login like ? order by nomeCompleto;");
             stmt.setString(1, "%" + str +"%");
             stmt.setString(2, "%" + str +"%");
             ResultSet rs = stmt.executeQuery();
