@@ -1,8 +1,13 @@
 package Classes;
 
+import Controllers.UserPadraoController;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -24,6 +29,8 @@ public class ChavePega {
     private SimpleStringProperty dataEfetiva;
 
     private SimpleLongProperty id;
+    
+    Button button = new Button("");
 
     public ChavePega(keys k, Users u, Operador o, String aluno, String horap, String horad, String dia, long id, String dataEfetiva) {
         this.k = new keys();
@@ -48,18 +55,61 @@ public class ChavePega {
         this.id = new SimpleLongProperty(id);
         this.ocupada = new SimpleBooleanProperty(ocupada);
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
+        this.button = new Button("Devolver");
+        
+        ObservableList<ChavePega> cps = UserPadraoController.tabelaChavesEmUso2.getSelectionModel().getSelectedItems();
+        button.setOnAction(e->{
+            for (ChavePega cp : cps) {
+                System.out.println("aqui");
+                if (cp.getButton()==button) {
+                    System.out.println("olá");
+                }
+                
+            }
+        });
+        
     }
-
-    public ChavePega(String chave, String user, long operador, String aluno, String horap, String horad, Boolean ocupada) {
+    
+    public ChavePega(String chave, String user, long operador, String aluno, String horap, String horad, String dia, long id, Boolean ocupada, String dataEfetiva, Button button) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
         this.operador = new SimpleLongProperty(operador);
         this.aluno = new SimpleStringProperty(aluno);
         this.horap = new SimpleStringProperty(horap);
         this.horad = new SimpleStringProperty(horad);
-//        this.dia = new SimpleStringProperty(dia);
+        this.dia = new SimpleStringProperty(dia);
+        this.id = new SimpleLongProperty(id);
         this.ocupada = new SimpleBooleanProperty(ocupada);
-//        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
+        this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
+        this.button = new Button("Devolver");
+        
+        button.setOnAction(e->{
+            for (ChavePega cp : UserPadraoController.DataChaves) {
+                if (cp.getButton()==button) {
+                    System.out.println("olá");
+                }
+                
+            }
+        });
+    }
+
+    public ChavePega(String chave, String user, long operador, String aluno, String horap, String horad, Boolean ocupada, Button button) {
+        this.chave = new SimpleStringProperty(chave);
+        this.user = new SimpleStringProperty(user);
+        this.operador = new SimpleLongProperty(operador);
+        this.aluno = new SimpleStringProperty(aluno);
+        this.horap = new SimpleStringProperty(horap);
+        this.horad = new SimpleStringProperty(horad);
+        this.ocupada = new SimpleBooleanProperty(ocupada);
+        this.button = new Button("Devolver");
+        
+        button.setOnAction(e->{
+            for (ChavePega cp : UserPadraoController.DataChaves) {
+                if (cp.getButton()==button) {
+                    System.out.println("Chave correspondente "+cp.getChave());
+                }                
+            }
+        });
     }
 
     public ChavePega() {
@@ -167,6 +217,13 @@ public class ChavePega {
         this.operador = operador;
     }
 
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
     
     public String totring() {
         return "\n  "

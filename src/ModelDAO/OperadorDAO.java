@@ -1,13 +1,11 @@
 package ModelDAO;
 
 import Classes.Operador;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -36,36 +34,21 @@ public class OperadorDAO {
                 + "(nomeCompleto, login, senha, nivel)"
                 + " values(?,?,?,?);";
         try {
-
-//            MessageDigest md = MessageDigest.getInstance("SHA-256");
-//            byte messageDigest[] = md.digest(o.getSenha().getValue().getBytes("UTF-8"));
-//            
-//            StringBuilder sb = new StringBuilder();
-//            
-//            for(byte b: messageDigest){
-//                sb.append(String.format("%02X", 0xFF & b));
-//                
-//            }
-//            String senhaHex = sb.toString();
+            String codificado = Base64.getEncoder().encodeToString(o.getSenha().getValue().getBytes());
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, o.getNome().getValue());
             stmt.setString(2, o.getLogin().getValue());
-            stmt.setString(3, o.getSenha().getValue());
+            stmt.setString(3, codificado);
             stmt.setString(4, o.getTipo().getValue());
             stmt.execute();
-            System.out.println("Adicionado com sucesso! ;>");
+//            System.out.println("Adicionado com sucesso! ;>");
             stmt.close();
             connection.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erro no adicionar, caiu no catch!");
+//            System.out.println("erro no adicionar, caiu no catch!");
         }
-//        catch (NoSuchAlgorithmException ex) {
-//            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (UnsupportedEncodingException ex) {
-//            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
     }
 
@@ -99,7 +82,6 @@ public class OperadorDAO {
         stmt.setLong(1, nome);
         // executa
         stmt.execute();
-        System.out.println("Excluido com sucesso!");
         stmt.close();
         connection.close();
 
@@ -110,10 +92,12 @@ public class OperadorDAO {
         if (VerificaLogin(login, senha)) {
             connection = new ConnectionFactory().getConnection();
 
-            try {
+            try{
+                String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
+
                 stmt = connection.prepareStatement("select * from operador WHERE login =? and senha = ?;");
                 stmt.setString(1, login);
-                stmt.setString(2, senha);
+                stmt.setString(2, strcodificado);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
@@ -133,10 +117,13 @@ public class OperadorDAO {
     public final boolean VerificaLogin(String login, String senha) {
         connection = new ConnectionFactory().getConnection();
         boolean check = false;
+        String strcodificado1 = Base64.getEncoder().encodeToString(senha.getBytes());
+        System.out.println("senha cript: "+senha+"\n"+strcodificado1);
         try {
+            String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
             stmt = connection.prepareStatement("select * from operador WHERE login =? and senha = ?;");
             stmt.setString(1, login);
-            stmt.setString(2, senha);
+            stmt.setString(2, strcodificado1);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -177,10 +164,11 @@ public class OperadorDAO {
         connection = new ConnectionFactory().getConnection();
 
         try {
+            String strcodificado = Base64.getEncoder().encodeToString(c.getSenha().getValue().getBytes());
             stmt = connection.prepareStatement("UPDATE keycontroll.operador SET nomeCompleto = ?, login = ?, senha = ?, nivel =? WHERE id = ?");
             stmt.setString(1, c.getNome().getValue());
             stmt.setString(2, c.getLogin().getValue());
-            stmt.setString(3, c.getSenha().getValue());
+            stmt.setString(3, strcodificado);
             stmt.setString(4, c.getTipo().getValue());
 
             stmt.setString(5, c.getId().getValue().toString());
@@ -188,7 +176,14 @@ public class OperadorDAO {
             stmt.executeUpdate();
             connection.close();
             stmt.close();
-            System.out.println("Usuário atualizado!\n");
+//            System.out.println("Usuário atualizado!\n");
+            
+            Dialog dialogo = new Alert(Alert.AlertType.INFORMATION);
+            dialogo.setHeaderText("Operação realizada!");
+            dialogo.setContentText("Usuário atualizado!");
+            dialogo.setTitle("Informação");
+            dialogo.show();            
+            
         } catch (SQLException ex) {
             Dialog dialogo = new Alert(Alert.AlertType.WARNING);
             dialogo.setHeaderText("Atenção");
@@ -196,6 +191,7 @@ public class OperadorDAO {
                     + "\nTente outro");
             dialogo.setTitle("Erro");
             dialogo.show();
+            
         }
     }
 
@@ -203,10 +199,10 @@ public class OperadorDAO {
         connection = new ConnectionFactory().getConnection();
         long id = 0;
         try {
-
+            String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
             stmt = connection.prepareStatement("select * from operador where login = ? and senha = ?");
             stmt.setString(1, login);
-            stmt.setString(2, senha);
+            stmt.setString(2, strcodificado);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -244,7 +240,6 @@ public class OperadorDAO {
             stmt.close();
             connection.close();
         } catch (SQLException ex) {
-            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return Lista;
     }

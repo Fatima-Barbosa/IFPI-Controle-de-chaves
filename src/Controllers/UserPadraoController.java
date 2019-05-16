@@ -28,6 +28,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -51,14 +53,10 @@ public class UserPadraoController extends LoginController implements Initializab
     
     LoginController lg = new LoginController();
     
-
-    
     @FXML
     private TableView<Users> tabelaViewUsers;
-
     @FXML
     private TableColumn<Users, String> colUsers;
-
     @FXML
     private TableColumn<Users, String> colCode;
 
@@ -67,17 +65,22 @@ public class UserPadraoController extends LoginController implements Initializab
     private ObservableList<Users> Data
             = FXCollections.observableArrayList();
 
-    private ObservableList<ChavePega> DataChaves
+    public static ObservableList<ChavePega> DataChaves
             = FXCollections.observableArrayList();
 
     @FXML
     private TableView<ChavePega> tabelaChavesEmUso;
+    
+    public static TableView<ChavePega> tabelaChavesEmUso2;
+    
     @FXML
     private TableColumn<ChavePega, String> colChave;
     @FXML
     private TableColumn<ChavePega, String> colUsuario;
     @FXML
     private TableColumn<ChavePega, String> colDevolucao;
+    @FXML
+    private TableColumn<ChavePega, Button> colBTNdevolver;
     @FXML
     private TextField txtbusc;
     @FXML
@@ -98,18 +101,27 @@ public class UserPadraoController extends LoginController implements Initializab
     private Button btnSair;
     @FXML
     private MenuItem conDevolver;
+    
+    public static ObservableList<ChavePega> list;    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Users
         colUsers.setCellValueFactory(cellData -> cellData.getValue().getNomeUser());
         colCode.setCellValueFactory(cellData -> cellData.getValue().getCpf());
-
+        
+        //Keys
         colChave.setCellValueFactory(cellData -> cellData.getValue().getChave());
         colUsuario.setCellValueFactory(cellData -> cellData.getValue().getUser());
         colDevolucao.setCellValueFactory(cellData -> cellData.getValue().getHorad());
-
+//        colBTNdevolver.setCellValueFactory(new PropertyValueFactory<>("Button"));
+        cols();
+        
+        tabelaChavesEmUso2 = tabelaChavesEmUso;
+        
+        //Carregamento
         try {
+//            list=cdao.gerarLista();
             Data = dao.gerarLista();
         } catch (SQLException ex) {
             Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,11 +136,13 @@ public class UserPadraoController extends LoginController implements Initializab
         tabelaViewUsers.setItems(Data);
         tabelaChavesEmUso.setItems(DataChaves);
         carregarChaves();
+        
         assert txtUser != null : "fx:id=\"txtUser\" was not injected: check your FXML file 'teste.fxml'.";
         assert tabelaChavesEmUso != null : "fx:id=\"tabelaChavesEmUso\" was not injected: check your FXML file 'teste.fxml'.";
         assert colChave != null : "fx:id=\"colChave\" was not injected: check your FXML file 'teste.fxml'.";
         assert colUsuario != null : "fx:id=\"colUsuario\" was not injected: check your FXML file 'teste.fxml'.";
         assert colDevolucao != null : "fx:id=\"colDevolucao\" was not injected: check your FXML file 'teste.fxml'.";
+        assert colBTNdevolver != null : "fx:id=\"colBTNdevolver\" was not injected: check your FXML file 'UserPadrao.fxml'.";
         assert txtAluno != null : "fx:id=\"txtAluno\" was not injected: check your FXML file 'teste.fxml'.";
         assert labs != null : "fx:id=\"labs\" was not injected: check your FXML file 'teste.fxml'.";
         assert txtHora != null : "fx:id=\"txtHora\" was not injected: check your FXML file 'teste.fxml'.";
@@ -142,6 +156,17 @@ public class UserPadraoController extends LoginController implements Initializab
         assert colCode != null : "fx:id=\"colCode\" was not injected: check your FXML file 'teste.fxml'.";
     }
 
+    
+    private void cols(){
+        Button button = new Button();
+//        colBTNdevolver.setCellFactory(TextFieldTableCell.forTableColumn());
+        
+//        colBTNdevolver.setOnEditCommit(e -> {
+//            e.getTableView().getItems().get(e.getTablePosition().getRow()).setButton(e.getNewValue());
+//        });
+        tabelaChavesEmUso.setEditable(true);
+    }
+    
     @FXML
     private void clikBusc(KeyEvent event) {
         /*
@@ -176,7 +201,6 @@ public class UserPadraoController extends LoginController implements Initializab
     private void pegar(ActionEvent event) {
         String dataEfetivaDevolucaoNulla = "0000-00-00";
         if (txtUser.getText().equals("") && txtSenha.getText().equals("")) {
-            System.out.println("erro");
             Alert dialogo1 = new Alert(Alert.AlertType.ERROR);
             dialogo1.setTitle("Erro");
             dialogo1.setContentText("Campos vazios!");
@@ -188,8 +212,6 @@ public class UserPadraoController extends LoginController implements Initializab
                 Date hora = Calendar.getInstance().getTime();
                 String horaformatada = sdf.format(hora);
                 
-                System.out.println("login controller id: "+lg.getId());
-                System.out.println("Hora: " + horaformatada);
                 ChavePega cp = new ChavePega(
                         labs.getValue(),
                         txtUser.getText(),
@@ -197,7 +219,8 @@ public class UserPadraoController extends LoginController implements Initializab
                         txtAluno.getText(),
                         horaformatada,
                         txtHora.getValue().toString(),
-                        true
+                        true,
+                        new Button("Devolver")
                 );
 
                 try {
@@ -294,6 +317,21 @@ public class UserPadraoController extends LoginController implements Initializab
 
     @FXML
     private void devolver(ActionEvent event) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date data = new Date();
+        String dataFormatada = dateFormat.format(data);
+        try {
+            cdao.devolver(tabelaChavesEmUso.getSelectionModel().getSelectedItem().getChave().getValue(), dataFormatada);
+            DataChaves = cdao.gerarLista();
+            tabelaChavesEmUso.setItems(DataChaves);
+            carregarChaves();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void devolverButton(ActionEvent event) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date data = new Date();
         String dataFormatada = dateFormat.format(data);

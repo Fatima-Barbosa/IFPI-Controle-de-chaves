@@ -56,11 +56,6 @@
             <Font name="Calibri Bold" size="19.0" />
          </font>
       </Label>
-      <Button fx:id="bntSair" layoutX="943.0" layoutY="528.0" mnemonicParsing="false" onAction="#on_Sair" prefHeight="30.0" prefWidth="68.0" style="-fx-background-color: #CD3333;" text="Voltar" textFill="WHITE">
-         <font>
-            <Font name="Calibri Bold" size="16.0" />
-         </font>
-      </Button>
       <Button fx:id="btnRelatorioGeral" layoutX="819.0" layoutY="349.0" mnemonicParsing="false" onAction="#on_relatorio_geral" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #da6028;" text="Relatório Geral" textFill="WHITE">
          <font>
             <Font name="Calibri Bold" size="16.0" />

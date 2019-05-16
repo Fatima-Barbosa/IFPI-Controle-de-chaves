@@ -12,8 +12,7 @@ public class ConnectionFactory {
     public Connection getConnection(){
         try {
             return DriverManager.getConnection(
-                    //"jdbc:mysql://localhost:3306/keycontroll", "root", "root"
-                    "jdbc:mysql://localhost:3306/keycontroll?zeroDateTimeBehavior=convertToNull", "root", "root"
+                    "jdbc:mysql://localhost:3306/bdifpi?zeroDateTimeBehavior=convertToNull", "root", "root"
             );
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

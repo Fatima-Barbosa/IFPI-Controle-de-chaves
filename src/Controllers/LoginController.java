@@ -5,13 +5,8 @@ import ModelDAO.OperadorDAO;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Base64;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -26,11 +21,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Fátima
- */
 public class LoginController implements Initializable{
 
     ChavePegaDAO daoCP = new ChavePegaDAO();
@@ -58,7 +48,7 @@ public class LoginController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //    verificar();
-                assert btnEntrarSuper != null : "fx:id=\"btnEntrarSuper\" was not injected: check your FXML file 'Login.fxml'.";
+        assert btnEntrarSuper != null : "fx:id=\"btnEntrarSuper\" was not injected: check your FXML file 'Login.fxml'.";
         assert labelLogin != null : "fx:id=\"labelLogin\" was not injected: check your FXML file 'Login.fxml'.";
         assert labelSenha != null : "fx:id=\"labelSenha\" was not injected: check your FXML file 'Login.fxml'.";
     }
@@ -66,9 +56,11 @@ public class LoginController implements Initializable{
     @FXML
     private void entrar(ActionEvent event) throws IOException {
         
-        switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
+        String strcodificado = Base64.getEncoder().encodeToString(labelSenha.getText().getBytes());
+        
+        switch (odao.checkLogin(labelLogin.getText(), strcodificado)) {
             case "1":
-                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
                 break;
             case "2":
                 setId(odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
@@ -81,6 +73,7 @@ public class LoginController implements Initializable{
                 dialogo1.showAndWait();
                 break;
             default:
+                
                 Alert dialogo2 = new Alert(Alert.AlertType.WARNING);
                 dialogo2.setTitle("Usuário invalido");
                 break;
@@ -91,7 +84,6 @@ public class LoginController implements Initializable{
     @FXML
     private void mover(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
-            System.out.println("aqui");
             labelSenha.requestFocus();
 
         }
@@ -105,7 +97,7 @@ public class LoginController implements Initializable{
                 navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
                 break;
             case "2":
-                System.out.println("id: "+odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
+//                System.out.println("id: "+odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
                 setId(odao.RetornarID(labelLogin.getText(), labelSenha.getText()));                
                 navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
                 break;

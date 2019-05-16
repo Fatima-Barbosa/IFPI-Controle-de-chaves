@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -54,11 +56,9 @@ public class ChavePegaDAO {
             stmt.execute();
             stmt.close();
             connection.close();
-            System.out.println("Voce pegou");
             chave.OcuparChave(c.getChave().getValue());
 
         } catch (SQLException ex) {
-            System.out.println("erro no adicionar dao: " + ex);
             throw new RuntimeException(ex);
         }
     }
@@ -80,7 +80,6 @@ public class ChavePegaDAO {
         }
 
         chave.DevolverChave(c);
-        System.out.println("devolvida");
     }
 
     public void removerDados() {
@@ -117,7 +116,8 @@ public class ChavePegaDAO {
                     rs.getString("datap"),
                     rs.getLong("id"),
                     rs.getBoolean("ocupado"),
-                    rs.getString("dataEfetivaD")
+                    rs.getString("dataEfetivaD"),
+                    new Button()
             );
             Lista.add(c);
         }
@@ -205,6 +205,10 @@ public class ChavePegaDAO {
             connection.close();
         } catch (SQLException ex) {
             System.out.println("Erro:  " + ex);
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setHeaderText("Erro");
+            a.setContentText("Preencha todos os campos!");
+            a.show();
         }
         System.out.println(""+Lista.toString());
         return Lista;

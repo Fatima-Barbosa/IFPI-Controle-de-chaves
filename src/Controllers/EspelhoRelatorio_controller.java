@@ -51,8 +51,6 @@ public class EspelhoRelatorio_controller extends LoginController implements Init
     private DatePicker dataInicio;
     @FXML
     private DatePicker dataFinal;
-    @FXML
-    private Button bntSair;
 
     ChavePegaDAO dao = new ChavePegaDAO();
 
@@ -65,7 +63,6 @@ public class EspelhoRelatorio_controller extends LoginController implements Init
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
         carregarChaves();
         assert txtRelatorio != null : "fx:id=\"txtRelatorio\" was not injected: check your FXML file 'EspelhoRelatorio.fxml'.";
         assert Box_salas != null : "fx:id=\"Box_salas\" was not injected: check your FXML file 'EspelhoRelatorio.fxml'.";
@@ -73,14 +70,13 @@ public class EspelhoRelatorio_controller extends LoginController implements Init
         assert bntVisualizar != null : "fx:id=\"bntVisualizar\" was not injected: check your FXML file 'EspelhoRelatorio.fxml'.";
         assert dataInicio != null : "fx:id=\"dataInicio\" was not injected: check your FXML file 'EspelhoRelatorio.fxml'.";
         assert dataFinal != null : "fx:id=\"dataFinal\" was not injected: check your FXML file 'EspelhoRelatorio.fxml'.";
-        assert bntSair != null : "fx:id=\"bntSair\" was not injected: check your FXML file 'EspelhoRelatorio.fxml'.";
-
     }
 
     @FXML
     private void on_Vizualizar(ActionEvent event) {
         String n = "";
         String nada = "Não há registro!";
+        
         String salas = Box_salas.getValue();
         String datainicio = "" + dataInicio.getValue().toString();
         String datafinal = "" + dataFinal.getValue().toString();
@@ -235,11 +231,6 @@ public class EspelhoRelatorio_controller extends LoginController implements Init
         } catch (DocumentException | FileNotFoundException ex) {
             Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    @FXML
-    private void on_Sair(ActionEvent event) throws IOException {
-        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
     }
 
     public void carregarChaves() {

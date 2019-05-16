@@ -43,7 +43,7 @@
                                         <TableColumn fx:id="colChave" prefWidth="165.0" text="Chave" />
                                         <TableColumn fx:id="colUsuario" prefWidth="197.00003051757812" text="Usuário" />
                                         <TableColumn fx:id="colDevolucao" minWidth="0.0" prefWidth="207.0" text="Horário de Devolução" />
-                              <TableColumn prefWidth="99.0" text="Devolver" />
+                              <TableColumn fx:id="colBTNdevolver" prefWidth="99.0" text="Devolver" />
                                     </columns>
                            <contextMenu>
                               <ContextMenu>
