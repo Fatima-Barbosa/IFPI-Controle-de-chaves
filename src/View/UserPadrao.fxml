@@ -29,7 +29,7 @@
                            <font>
                               <Font name="Calibri" size="18.0" />
                            </font></Label>
-                                <TextField fx:id="txtUser" layoutX="686.0" layoutY="189.0" prefHeight="25.0" prefWidth="179.0" AnchorPane.rightAnchor="204.0" />
+                                <TextField fx:id="txtUser" layoutX="686.0" layoutY="189.0" onKeyPressed="#txtUser_action" prefHeight="25.0" prefWidth="179.0" AnchorPane.rightAnchor="204.0" />
                                 <Label layoutX="686.0" layoutY="160.0" text="Usuário*" textFill="#d0cece" AnchorPane.rightAnchor="317.0">
                            <font>
                               <Font name="Calibri" size="18.0" />
@@ -53,7 +53,7 @@
                               </ContextMenu>
                            </contextMenu>
                                 </TableView>
-                                <TextField fx:id="txtAluno" layoutX="686.0" layoutY="264.0" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="203.0" />
+                                <TextField fx:id="txtAluno" layoutX="686.0" layoutY="264.0" onKeyPressed="#txtaluno_keyPressed" prefHeight="25.0" prefWidth="180.0" AnchorPane.rightAnchor="203.0" />
                                 <Label layoutX="686.0" layoutY="238.0" text="Matrícula" textFill="#d3cece" AnchorPane.rightAnchor="312.0">
                            <font>
                               <Font name="Calibri" size="18.0" />
@@ -68,7 +68,7 @@
                            <font>
                               <Font name="Calibri" size="16.0" />
                            </font></Button>
-                        <ComboBox fx:id="labs" layoutX="686.0" layoutY="112.0" prefHeight="25.0" prefWidth="178.0" AnchorPane.rightAnchor="205.0" />
+                        <ComboBox fx:id="labs" layoutX="686.0" layoutY="112.0" onAction="#ComboBox_clicked" onMouseReleased="#teste" prefHeight="25.0" prefWidth="178.0" AnchorPane.rightAnchor="205.0" />
                         <JFXTimePicker fx:id="txtHora" layoutX="880.0" layoutY="111.0" prefHeight="27.0" prefWidth="175.0" style="-fx-background-color: #FFFF;" AnchorPane.rightAnchor="13.0" />
                         <ImageView fx:id="imgDevolver" fitHeight="132.0" fitWidth="138.0" layoutX="814.0" layoutY="315.0" onDragDropped="#imgDroppDevolver" onDragOver="#imgOverDevolver" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="123.0">
                            <image>
@@ -79,7 +79,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Button>
-                        <PasswordField fx:id="txtSenha" layoutX="882.0" layoutY="189.0" prefHeight="25.0" prefWidth="174.0" AnchorPane.rightAnchor="13.0" />
+                        <PasswordField fx:id="txtSenha" layoutX="882.0" layoutY="189.0" onKeyPressed="#txtSenha_keyPressed" prefHeight="25.0" prefWidth="174.0" AnchorPane.rightAnchor="13.0" />
                             </children>
                         </AnchorPane>
                     </content>

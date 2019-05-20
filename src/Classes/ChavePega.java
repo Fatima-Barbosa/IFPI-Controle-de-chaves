@@ -1,12 +1,19 @@
 package Classes;
 
 import Controllers.UserPadraoController;
+import static Controllers.UserPadraoController.list;
+import ModelDAO.ChavePegaDAO;
+import static com.itextpdf.text.pdf.PdfFileSpecification.url;
+import java.net.URL;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.scene.control.Button;
 
 /**
@@ -29,8 +36,16 @@ public class ChavePega {
     private SimpleStringProperty dataEfetiva;
 
     private SimpleLongProperty id;
-    
+
     Button button = new Button("");
+
+    ChavePegaDAO cdao = new ChavePegaDAO();
+    UserPadraoController uc = new UserPadraoController();
+
+    //Pegando a data
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date data = new Date();
+    String dataFormatada = dateFormat.format(data);
 
     public ChavePega(keys k, Users u, Operador o, String aluno, String horap, String horad, String dia, long id, String dataEfetiva) {
         this.k = new keys();
@@ -55,21 +70,26 @@ public class ChavePega {
         this.id = new SimpleLongProperty(id);
         this.ocupada = new SimpleBooleanProperty(ocupada);
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
-        this.button = new Button("Devolver");
-        
-        ObservableList<ChavePega> cps = UserPadraoController.tabelaChavesEmUso2.getSelectionModel().getSelectedItems();
-        button.setOnAction(e->{
-            for (ChavePega cp : cps) {
-                System.out.println("aqui");
-                if (cp.getButton()==button) {
-                    System.out.println("olá");
+        this.button = button;
+
+        button.setOnAction(e -> {
+            for (ChavePega cp : UserPadraoController.DataChaves) {
+                if (cp.getButton() == button) {
+                    cdao.devolver(cp.getChave().getValue(), dataFormatada);
+                    UserPadraoController.DataChaves.remove(cp);
+                    uc.labs.setValue(cp.getChave().getValue());
+                    try {
+                        UserPadraoController.list = cdao.FiltrarList();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ChavePega.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
                 }
-                
             }
         });
-        
+
     }
-    
+
     public ChavePega(String chave, String user, long operador, String aluno, String horap, String horad, String dia, long id, Boolean ocupada, String dataEfetiva, Button button) {
         this.chave = new SimpleStringProperty(chave);
         this.user = new SimpleStringProperty(user);
@@ -81,14 +101,21 @@ public class ChavePega {
         this.id = new SimpleLongProperty(id);
         this.ocupada = new SimpleBooleanProperty(ocupada);
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
-        this.button = new Button("Devolver");
-        
-        button.setOnAction(e->{
+        this.button = button;
+
+        button.setOnAction(e -> {
             for (ChavePega cp : UserPadraoController.DataChaves) {
-                if (cp.getButton()==button) {
-                    System.out.println("olá");
+                if (cp.getButton() == button) {
+                    cdao.devolver(cp.getChave().getValue(), dataFormatada);
+                    UserPadraoController.DataChaves.remove(cp);
+                    try {
+                        UserPadraoController.list = cdao.FiltrarList();
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ChavePega.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
                 }
-                
             }
         });
     }
@@ -101,19 +128,29 @@ public class ChavePega {
         this.horap = new SimpleStringProperty(horap);
         this.horad = new SimpleStringProperty(horad);
         this.ocupada = new SimpleBooleanProperty(ocupada);
-        this.button = new Button("Devolver");
-        
-        button.setOnAction(e->{
+        this.button = button;
+        button.setOnAction(e -> {
             for (ChavePega cp : UserPadraoController.DataChaves) {
-                if (cp.getButton()==button) {
-                    System.out.println("Chave correspondente "+cp.getChave());
-                }                
+                if (cp.getButton() == button) {
+                    cdao.devolver(cp.getChave().getValue(), dataFormatada);
+                    UserPadraoController.DataChaves.remove(cp);
+                    try {
+                        UserPadraoController.list = cdao.FiltrarList();
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ChavePega.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                }
             }
         });
     }
 
-    public ChavePega() {
+    public ChavePega(Button button) {
+        this.button = new Button("button");
+    }
 
+    public ChavePega() {
     }
 
     public Users getU() {
@@ -224,7 +261,7 @@ public class ChavePega {
     public void setButton(Button button) {
         this.button = button;
     }
-    
+
     public String totring() {
         return "\n  "
                 + "\nUsuario:----------------------------------------------------------------------------------------" + getUser().getValue()

@@ -53,11 +53,6 @@
             <Font name="Calibri Bold" size="17.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnVoltar" layoutX="977.0" layoutY="514.0" onAction="#voltarbtn" prefHeight="33.0" prefWidth="57.0" style="-fx-background-color: #AB0909;" text="Sair" textFill="#ddd9d9" AnchorPane.bottomAnchor="9.0">
-         <font>
-            <Font name="Calibri Bold" size="14.0" />
-         </font>
-      </JFXButton>
       <ImageView fx:id="imgEditar" fitHeight="67.0" fitWidth="67.0" layoutX="967.0" layoutY="256.0" onDragDropped="#DroppedEdit" onDragOver="#OverEdit" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="35.0">
          <image>
             <Image url="@../imagens/edit-property.png" />

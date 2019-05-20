@@ -21,13 +21,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
     ChavePegaDAO daoCP = new ChavePegaDAO();
     OperadorDAO odao = new OperadorDAO();
 
     public static long id;
-    
+
     @FXML
     private TextField labelLogin;
 
@@ -38,12 +38,11 @@ public class LoginController implements Initializable{
     private JFXButton btnEntrarSuper;
 
     /**
-     * Initializes the controller class. 
+     * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -55,9 +54,9 @@ public class LoginController implements Initializable{
 
     @FXML
     private void entrar(ActionEvent event) throws IOException {
-        
+
         String strcodificado = Base64.getEncoder().encodeToString(labelSenha.getText().getBytes());
-        
+
         switch (odao.checkLogin(labelLogin.getText(), strcodificado)) {
             case "1":
                 navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Login.fxml")));
@@ -73,7 +72,7 @@ public class LoginController implements Initializable{
                 dialogo1.showAndWait();
                 break;
             default:
-                
+
                 Alert dialogo2 = new Alert(Alert.AlertType.WARNING);
                 dialogo2.setTitle("Usuário invalido");
                 break;
@@ -91,35 +90,36 @@ public class LoginController implements Initializable{
 
     @FXML
     private void on_senha(KeyEvent event) throws IOException {
+        String strcodificado = Base64.getEncoder().encodeToString(labelSenha.getText().getBytes());
+
         if (event.getCode() == KeyCode.ENTER) {
-            switch (odao.checkLogin(labelLogin.getText(), labelSenha.getText())) {
-            case "1":
-                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
-                break;
-            case "2":
-//                System.out.println("id: "+odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
-                setId(odao.RetornarID(labelLogin.getText(), labelSenha.getText()));                
-                navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
-                break;
-            case "sn":
-                Alert dialogo1 = new Alert(Alert.AlertType.WARNING);
-                dialogo1.setTitle("Usuário invalido");
-                dialogo1.setContentText("Usuário invalido");
-                dialogo1.showAndWait();
-                break;
-            default:
-                Alert dialogo2 = new Alert(Alert.AlertType.WARNING);
-                dialogo2.setTitle("Usuário invalido");
-                break;
-        }
+            switch (odao.checkLogin(labelLogin.getText(), strcodificado)) {
+                case "1":
+                    navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
+                    break;
+                case "2":
+                    setId(odao.RetornarID(labelLogin.getText(), labelSenha.getText()));
+                    navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/UserPadrao.fxml")));
+                    break;
+                case "sn":
+                    Alert dialogo1 = new Alert(Alert.AlertType.WARNING);
+                    dialogo1.setTitle("Usuário invalido");
+                    dialogo1.setContentText("Usuário invalido");
+                    dialogo1.showAndWait();
+                    break;
+                default:
+                    Alert dialogo2 = new Alert(Alert.AlertType.WARNING);
+                    dialogo2.setTitle("Usuário invalido");
+                    break;
+            }
         }
     }
-    
-    public long retormarid(){
+
+    public long retormarid() {
         return id;
     }
 
-    public long getId() {
+    public long getIdLG() {
         return id;
     }
 
@@ -128,21 +128,21 @@ public class LoginController implements Initializable{
     }
 
     public void navigateTeste(Event event, Parent pageParent) throws IOException {
-       
+
         //Creating new scene
         Scene scene = new Scene(pageParent);
-        
+
         //get current stage
-        Stage appStage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        
+        Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         //Hide old stage
         appStage.hide(); // Optional
-        
+
         //Set stage with new Scene
         appStage.setScene(scene);
-        
+
         //Show up the stage
         appStage.show();
     }
-    
+
 }

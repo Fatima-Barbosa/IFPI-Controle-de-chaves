@@ -57,11 +57,6 @@
                   <Font name="Calibri Bold" size="18.0" />
               </font>
           </Label>
-          <JFXButton fx:id="btnVoltar" layoutX="941.0" layoutY="519.0" onAction="#ONVoltar" prefHeight="30.0" prefWidth="97.0" text="Voltar" textFill="#fcfcfc" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="31.0">
-              <font>
-                  <Font size="13.0" />
-              </font>
-          </JFXButton>
       <JFXButton fx:id="btnPesquisar" layoutX="529.0" layoutY="525.0" onAction="#on_pesquisar" style="-fx-background-color: #00BFFF;" text=" " AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="503.0">
          <graphic>
             <FontAwesomeIcon fill="WHITE" iconName="SEARCH" size="1.2em" />

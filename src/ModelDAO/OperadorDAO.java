@@ -83,7 +83,7 @@ public class OperadorDAO {
         // executa
         stmt.execute();
         stmt.close();
-        connection.close();        
+        connection.close();
 
     }
 
@@ -92,12 +92,12 @@ public class OperadorDAO {
         if (VerificaLogin(login, senha)) {
             connection = new ConnectionFactory().getConnection();
 
-            try{
-                String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
+            try {
+                //String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
 
                 stmt = connection.prepareStatement("select * from operador WHERE login =? and senha = ?;");
                 stmt.setString(1, login);
-                stmt.setString(2, strcodificado);
+                stmt.setString(2, senha);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
@@ -117,13 +117,13 @@ public class OperadorDAO {
     public final boolean VerificaLogin(String login, String senha) {
         connection = new ConnectionFactory().getConnection();
         boolean check = false;
-        String strcodificado1 = Base64.getEncoder().encodeToString(senha.getBytes());
+        //String strcodificado1 = Base64.getEncoder().encodeToString(senha.getBytes());
 //        System.out.println("senha cript: "+senha+"\n"+strcodificado1);
         try {
-            String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
+            //String strcodificado = Base64.getEncoder().encodeToString(senha.getBytes());
             stmt = connection.prepareStatement("select * from operador WHERE login =? and senha = ?;");
             stmt.setString(1, login);
-            stmt.setString(2, strcodificado1);
+            stmt.setString(2, senha);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -177,13 +177,13 @@ public class OperadorDAO {
             connection.close();
             stmt.close();
 //            System.out.println("Usuário atualizado!\n");
-            
+
             Dialog dialogo = new Alert(Alert.AlertType.INFORMATION);
             dialogo.setHeaderText("Operação realizada!");
             dialogo.setContentText("Usuário atualizado!");
             dialogo.setTitle("Informação");
-            dialogo.show();            
-            
+            dialogo.show();
+
         } catch (SQLException ex) {
             Dialog dialogo = new Alert(Alert.AlertType.WARNING);
             dialogo.setHeaderText("Atenção");
@@ -191,7 +191,7 @@ public class OperadorDAO {
                     + "\nTente outro");
             dialogo.setTitle("Erro");
             dialogo.show();
-            
+
         }
     }
 
@@ -210,9 +210,6 @@ public class OperadorDAO {
             }
             stmt.close();
             connection.close();
-            System.out.println("login: " + login
-                    + "Senha: " + senha
-                    + "id: " + id);
         } catch (SQLException e) {
         }
 
@@ -225,8 +222,8 @@ public class OperadorDAO {
                 = FXCollections.observableArrayList();
         try {
             stmt = connection.prepareStatement("select * from operador where nomeCompleto like ? or login like ? order by nomeCompleto;");
-            stmt.setString(1, "%" + str +"%");
-            stmt.setString(2, "%" + str +"%");
+            stmt.setString(1, "%" + str + "%");
+            stmt.setString(2, "%" + str + "%");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Lista.add(new Operador(

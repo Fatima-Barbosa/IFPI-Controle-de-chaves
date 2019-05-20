@@ -42,8 +42,6 @@ public class CadastroFuncionariosController implements Initializable {
     private final UsersDAO dao = new UsersDAO();
 
     @FXML
-    private Button btnVoltar;
-    @FXML
     private PasswordField labelSenha;
     @FXML
     private TextField labelCPF;
@@ -51,8 +49,6 @@ public class CadastroFuncionariosController implements Initializable {
     private TextField labelNome;
     @FXML
     private TableView<Users> tabelaUsers;
-//    private ImageView imgExcluir;
-//    @FXML
     private ImageView imgEditar;
     @FXML
     private JFXButton btnAdicionar;
@@ -81,12 +77,6 @@ public class CadastroFuncionariosController implements Initializable {
         labelSenha.setText("");
     }
 
-    @FXML
-    void voltarbtn(ActionEvent event) throws IOException {
-        System.out.println("TESTE!");
-//        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -110,13 +100,12 @@ public class CadastroFuncionariosController implements Initializable {
         assert labelNome != null : "fx:id=\"labelNome\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert labelCPF != null : "fx:id=\"labelCPF\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert labelSenha != null : "fx:id=\"labelSenha\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
-        assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
 //        assert imgExcluir != null : "fx:id=\"imgExcluir\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert imgEditar != null : "fx:id=\"imgEditar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert btnAdicionar != null : "fx:id=\"btnAdicionar\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert txt_busc != null : "fx:id=\"txt_busc\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
         assert btn_busc != null : "fx:id=\"btn_busc\" was not injected: check your FXML file 'CadastroFuncionarios.fxml'.";
-}
+    }
     int linha = -1;
 
     @FXML
@@ -144,7 +133,6 @@ public class CadastroFuncionariosController implements Initializable {
 //        }
 //        event.consume();
 //    }
-
 //    private void DroppedExcluir(DragEvent event) throws SQLException {
 //        System.out.println("Largou no remover...");
 //
@@ -160,7 +148,6 @@ public class CadastroFuncionariosController implements Initializable {
 //        event.setDropCompleted(sucess);
 //        event.consume();
 //    }
-
     @FXML
     private void OverEdit(DragEvent event) {
         System.out.println("Chegou no Editar...");
@@ -207,10 +194,10 @@ public class CadastroFuncionariosController implements Initializable {
             dao.update(k);
             Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
 
-                dialogo.setTitle("Status da operação");
-                dialogo.setHeaderText("Operaçao bem sucedida!");
-                dialogo.setContentText("Atualizado com sucesso!");
-                dialogo.showAndWait();
+            dialogo.setTitle("Status da operação");
+            dialogo.setHeaderText("Operaçao bem sucedida!");
+            dialogo.setContentText("Atualizado com sucesso!");
+            dialogo.showAndWait();
             atualizar();
             try {
                 Data = dao.gerarLista();
@@ -266,15 +253,15 @@ public class CadastroFuncionariosController implements Initializable {
 
     @FXML
     private void on_cont_Editar(ActionEvent event) {
-            String id = tabelaUsers.getSelectionModel().getSelectedItem().getCpf().getValue();
-            System.out.println("entrou..........");
-            labelNome.setText(tabelaUsers.getSelectionModel().getSelectedItem().getNomeUser().getValue());
-            labelCPF.setText(tabelaUsers.getSelectionModel().getSelectedItem().getCpf().getValue());
-            labelSenha.setText(dao.senha(id));
-            btnAdicionar.setText("Editar");
-            
-            op = 2;
-            
+        String id = tabelaUsers.getSelectionModel().getSelectedItem().getCpf().getValue();
+        System.out.println("entrou..........");
+        labelNome.setText(tabelaUsers.getSelectionModel().getSelectedItem().getNomeUser().getValue());
+        labelCPF.setText(tabelaUsers.getSelectionModel().getSelectedItem().getCpf().getValue());
+        labelSenha.setText(dao.senha(id));
+        btnAdicionar.setText("Editar");
+
+        op = 2;
+
     }
 
     @FXML
@@ -293,7 +280,7 @@ public class CadastroFuncionariosController implements Initializable {
             Data = dao.FiltrarList(txt_busc.getText());
             tabelaUsers.setItems(Data);
             System.out.println("atualizando....");
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CadastroFuncionariosController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -310,5 +297,5 @@ public class CadastroFuncionariosController implements Initializable {
             tabelaUsers.setItems(Data);
         }
     }
-    
+
 }

@@ -29,7 +29,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -44,15 +43,15 @@ import javafx.scene.input.TransferMode;
  *
  * @author Fátima
  */
-public class UserPadraoController extends LoginController implements Initializable{
+public class UserPadraoController extends LoginController implements Initializable {
 
     Users u = new Users();
     UsersDAO dao = new UsersDAO();
-    ChavePega c = new ChavePega();
+//    ChavePega c = new ChavePega();
     ChavePegaDAO cdao = new ChavePegaDAO();
-    
+
     LoginController lg = new LoginController();
-    
+
     @FXML
     private TableView<Users> tabelaViewUsers;
     @FXML
@@ -65,14 +64,11 @@ public class UserPadraoController extends LoginController implements Initializab
     private ObservableList<Users> Data
             = FXCollections.observableArrayList();
 
-    public static ObservableList<ChavePega> DataChaves
-            = FXCollections.observableArrayList();
+    public static ObservableList<ChavePega> DataChaves = FXCollections.observableArrayList();
 
     @FXML
-    private TableView<ChavePega> tabelaChavesEmUso;
-    
-    public static TableView<ChavePega> tabelaChavesEmUso2;
-    
+    public TableView<ChavePega> tabelaChavesEmUso;
+
     @FXML
     private TableColumn<ChavePega, String> colChave;
     @FXML
@@ -88,7 +84,7 @@ public class UserPadraoController extends LoginController implements Initializab
     @FXML
     private TextField txtUser;
     @FXML
-    private ComboBox<String> labs;
+    public ComboBox<String> labs;
     @FXML
     private PasswordField txtSenha;
     @FXML
@@ -101,42 +97,33 @@ public class UserPadraoController extends LoginController implements Initializab
     private Button btnSair;
     @FXML
     private MenuItem conDevolver;
-    
-    public static ObservableList<ChavePega> list;    
+
+    public static ObservableList<String> list = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         // Users
         colUsers.setCellValueFactory(cellData -> cellData.getValue().getNomeUser());
         colCode.setCellValueFactory(cellData -> cellData.getValue().getCpf());
-        
+
         //Keys
         colChave.setCellValueFactory(cellData -> cellData.getValue().getChave());
         colUsuario.setCellValueFactory(cellData -> cellData.getValue().getUser());
         colDevolucao.setCellValueFactory(cellData -> cellData.getValue().getHorad());
-//        colBTNdevolver.setCellValueFactory(new PropertyValueFactory<>("Button"));
+        colBTNdevolver.setCellValueFactory(new PropertyValueFactory<>("button"));
         cols();
-        
-        tabelaChavesEmUso2 = tabelaChavesEmUso;
-        
-        //Carregamento
+
         try {
-//            list=cdao.gerarLista();
             Data = dao.gerarLista();
         } catch (SQLException ex) {
             Logger.getLogger(ChavesController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        try {
-            DataChaves = cdao.gerarLista();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        tabelaViewUsers.setItems(Data);
-        tabelaChavesEmUso.setItems(DataChaves);
         carregarChaves();
-        
+        tabelaViewUsers.setItems(Data);
+        labs.setItems(list);
+
         assert txtUser != null : "fx:id=\"txtUser\" was not injected: check your FXML file 'teste.fxml'.";
         assert tabelaChavesEmUso != null : "fx:id=\"tabelaChavesEmUso\" was not injected: check your FXML file 'teste.fxml'.";
         assert colChave != null : "fx:id=\"colChave\" was not injected: check your FXML file 'teste.fxml'.";
@@ -156,25 +143,27 @@ public class UserPadraoController extends LoginController implements Initializab
         assert colCode != null : "fx:id=\"colCode\" was not injected: check your FXML file 'teste.fxml'.";
     }
 
-    
-    private void cols(){
-        Button button = new Button();
-//        colBTNdevolver.setCellFactory(TextFieldTableCell.forTableColumn());
-        
-//        colBTNdevolver.setOnEditCommit(e -> {
-//            e.getTableView().getItems().get(e.getTablePosition().getRow()).setButton(e.getNewValue());
-//        });
+    private void cols() {
+        carregamento();
+        colBTNdevolver.setOnEditCommit(e -> {
+            e.getTableView().getItems().get(e.getTablePosition().getRow()).setButton(e.getNewValue());
+        });
         tabelaChavesEmUso.setEditable(true);
     }
-    
+
+    public void carregamento() {
+        //Carregamento        
+        try {
+            DataChaves = cdao.gerarLista();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tabelaChavesEmUso.setItems(DataChaves);
+    }
+
     @FXML
     private void clikBusc(KeyEvent event) {
-        /*
-        event.getEventType(VK_ENTER);
-        KeyCode key = event.getCode().ENTER;
-        KeyEvent.KEY_PRESSED.equals(KeyCode.ENTER)
-        KeyCode e = event.getCode();
-         */
+
         if (event.getCode() == KeyCode.ENTER) {
             try {
                 Data = dao.FiltrarList(txtbusc.getText());
@@ -198,7 +187,7 @@ public class UserPadraoController extends LoginController implements Initializab
     }
 
     @FXML
-    private void pegar(ActionEvent event) {
+    private void pegar() {
         String dataEfetivaDevolucaoNulla = "0000-00-00";
         if (txtUser.getText().equals("") && txtSenha.getText().equals("")) {
             Alert dialogo1 = new Alert(Alert.AlertType.ERROR);
@@ -207,15 +196,15 @@ public class UserPadraoController extends LoginController implements Initializab
             dialogo1.showAndWait();
         } else {
             if (dao.checkLogin(txtUser.getText(), txtSenha.getText())) {
-                
+
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 Date hora = Calendar.getInstance().getTime();
                 String horaformatada = sdf.format(hora);
-                
+
                 ChavePega cp = new ChavePega(
                         labs.getValue(),
                         txtUser.getText(),
-                        getId(),
+                        getIdLG(),
                         txtAluno.getText(),
                         horaformatada,
                         txtHora.getValue().toString(),
@@ -229,7 +218,10 @@ public class UserPadraoController extends LoginController implements Initializab
                     carregarChaves();
                     DataChaves = cdao.gerarLista();
                 } catch (SQLException ex) {
-                    Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
+                    Alert dialogo1 = new Alert(Alert.AlertType.ERROR);
+                    dialogo1.setTitle("Erro");
+                    dialogo1.setContentText("Algo deu errado, tente novamente!");
+                    dialogo1.showAndWait();
                 }
                 tabelaChavesEmUso.setItems(DataChaves);
             } else {
@@ -238,23 +230,20 @@ public class UserPadraoController extends LoginController implements Initializab
                 dialogo1.setContentText("Usuario ou senha ivalida!");
                 dialogo1.showAndWait();
             }
-
         }
     }
 
     public void carregarChaves() {
-        System.out.println("Entrou");
-
         try {
-            labs.setItems(cdao.FiltrarList());
+            list = cdao.FiltrarList();
         } catch (SQLException ex) {
             Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        labs.setItems(list);
     }
 
     @FXML
-    private void imgOverDevolver(DragEvent event) {
+    private void imgOverDevolver(DragEvent event) { // Esse metodo é responsavel pela acao do drag drop 
         System.out.println("Chegou no Devolver...");
         if (event.getGestureSource() == tabelaChavesEmUso && event.getDragboard().hasString()) {
             event.acceptTransferModes(TransferMode.MOVE);
@@ -263,7 +252,7 @@ public class UserPadraoController extends LoginController implements Initializab
     }
 
     @FXML
-    private void imgDroppDevolver(DragEvent event) throws SQLException {
+    private void imgDroppDevolver(DragEvent event) throws SQLException {// Esse metodo é responsavel pela acao do drag drop 
         System.out.println("Largou no Devolver...");
 
         Dragboard db = event.getDragboard();
@@ -287,7 +276,7 @@ public class UserPadraoController extends LoginController implements Initializab
     int linha = -1;
 
     @FXML
-    private void detectar(MouseEvent event) {
+    private void detectar(MouseEvent event) {// Esse metodo é responsavel pela acao do drag drop 
         linha = tabelaChavesEmUso.getSelectionModel().getSelectedIndex();
         System.out.println("Linha: " + linha);
         System.out.println("Começando a arrastar...");
@@ -330,8 +319,8 @@ public class UserPadraoController extends LoginController implements Initializab
             Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private void devolverButton(ActionEvent event) {
+
+    public void devolverButton(ActionEvent event) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date data = new Date();
         String dataFormatada = dateFormat.format(data);
@@ -345,4 +334,49 @@ public class UserPadraoController extends LoginController implements Initializab
             Logger.getLogger(UserPadraoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void ComboBox_clicked(ActionEvent event) {
+        carregarChaves();
+    }
+
+    public ComboBox<String> getLabs() {
+        return labs;
+    }
+
+    public void setLabs(ObservableList<String> labs) {
+        this.labs.setItems(labs);
+    }
+
+    public UserPadraoController() {
+    }
+
+    @FXML
+    private void txtUser_action(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txtSenha.requestFocus();
+        }
+    }
+
+    @FXML
+    private void txtSenha_keyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            txtAluno.requestFocus();
+        }
+    }
+
+    @FXML
+    private void txtaluno_keyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            pegar();
+        }
+    }
+
+    @FXML
+    private void teste(MouseEvent event) {
+        if(event.getEventType() == MouseEvent.MOUSE_RELEASED){
+            carregarChaves();
+        }
+    }
+
 }

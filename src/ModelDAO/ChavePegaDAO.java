@@ -117,7 +117,7 @@ public class ChavePegaDAO {
                     rs.getLong("id"),
                     rs.getBoolean("ocupado"),
                     rs.getString("dataEfetivaD"),
-                    new Button()
+                    new Button("Devolver")
             );
             Lista.add(c);
         }
@@ -214,7 +214,7 @@ public class ChavePegaDAO {
         return Lista;
     }
 
-    public final ObservableList<String> FiltrarList() throws SQLException {
+    public ObservableList<String> FiltrarList() throws SQLException {
         connection = new ConnectionFactory().getConnection();
         ObservableList<String> Lista
                 = FXCollections.observableArrayList();

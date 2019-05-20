@@ -60,9 +60,6 @@ public class ChavesController extends LoginController implements Initializable {
     private JFXButton btnSalvar;
 
     @FXML
-    private JFXButton btnVoltar;
-
-    @FXML
     private ImageView imgEditar;
 
     @FXML
@@ -108,7 +105,6 @@ public class ChavesController extends LoginController implements Initializable {
 
                 tabelaChave.setItems(Data);
                 limparCampos();
-                System.out.println("uuuhh");
             }
         } else if (op == 1) {
             keys k = new keys(
@@ -131,10 +127,6 @@ public class ChavesController extends LoginController implements Initializable {
 
     }
 
-    @FXML
-    void ONVoltar(ActionEvent event) throws IOException {
-        navigateTeste(event, FXMLLoader.load(getClass().getResource("/View/Menu.fxml")));
-    }
 
     @FXML
     void OverExcluir(DragEvent event) {
@@ -186,7 +178,6 @@ public class ChavesController extends LoginController implements Initializable {
         assert labelSala != null : "fx:id=\"labelSala\" was not injected: check your FXML file 'Chaves.fxml'.";
         assert labelDescricao != null : "fx:id=\"labelDescricao\" was not injected: check your FXML file 'Chaves.fxml'.";
         assert btnSalvar != null : "fx:id=\"btnSalvar\" was not injected: check your FXML file 'Chaves.fxml'.";
-        assert btnVoltar != null : "fx:id=\"btnVoltar\" was not injected: check your FXML file 'Chaves.fxml'.";
         assert imgExcluir != null : "fx:id=\"imgExcluir\" was not injected: check your FXML file 'Chaves.fxml'.";
         assert imgEditar != null : "fx:id=\"imgEditar\" was not injected: check your FXML file 'Chaves.fxml'.";
     }
