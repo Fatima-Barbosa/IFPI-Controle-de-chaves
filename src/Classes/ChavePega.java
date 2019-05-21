@@ -71,7 +71,7 @@ public class ChavePega {
         this.ocupada = new SimpleBooleanProperty(ocupada);
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
         this.button = button;
-
+//add ação ao botão, este botão deve aparecer na tabela da interface do usuário padrão, para facilitar a usabilidade
         button.setOnAction(e -> {
             for (ChavePega cp : UserPadraoController.DataChaves) {
                 if (cp.getButton() == button) {
@@ -102,7 +102,7 @@ public class ChavePega {
         this.ocupada = new SimpleBooleanProperty(ocupada);
         this.dataEfetiva = new SimpleStringProperty(dataEfetiva);
         this.button = button;
-
+//add ação ao botão, este botão deve aparecer na tabela da interface do usuário padrão, para facilitar a usabilidade
         button.setOnAction(e -> {
             for (ChavePega cp : UserPadraoController.DataChaves) {
                 if (cp.getButton() == button) {
@@ -129,6 +129,7 @@ public class ChavePega {
         this.horad = new SimpleStringProperty(horad);
         this.ocupada = new SimpleBooleanProperty(ocupada);
         this.button = button;
+ //add ação ao botão, este botão deve aparecer na tabela da interface do usuário padrão, para facilitar a usabilidade
         button.setOnAction(e -> {
             for (ChavePega cp : UserPadraoController.DataChaves) {
                 if (cp.getButton() == button) {
